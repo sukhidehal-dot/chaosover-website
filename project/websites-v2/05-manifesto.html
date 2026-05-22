@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · Manifesto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="co.css" rel="stylesheet">
+<style>
+  /* Manifesto — alternating dark/light slabs, single-column statements,
+     reads like a confident declaration. */
+  .slab { padding: 140px 40px; }
+  .slab.bone { background: var(--bone); color: var(--ink); }
+  .slab.bone .mono { color: rgba(14,14,12,.6); }
+  .slab.bone .lime-bg { background: var(--ink); color: var(--lime); padding: 0 .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .slab.ink { background: var(--ink); color: var(--bone); }
+  .slab.ink .lime-bg { background: var(--lime); color: var(--ink); padding: 0 .1em; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .meta-strip { padding: 14px 40px; background: var(--ink); color: var(--dim); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
+  .meta-strip .lime { color: var(--lime); }
+
+  /* Hero */
+  .hero-slab { padding: 60px 40px 100px; min-height: 96vh; display: flex; flex-direction: column; justify-content: space-between; }
+  .hero-eyebrow { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--dim); }
+  .hero-title { font-size: clamp(110px, 18vw, 320px); line-height: 0.82; }
+  .hero-tag { font-family: 'Big Shoulders Display'; font-weight: 700; font-size: clamp(28px, 3.4vw, 56px); line-height: 1.12; letter-spacing: -0.015em; max-width: 800px; }
+  .hero-tag .lime { color: var(--lime); }
+  .hero-bottom { display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+  .hero-tag-anchor { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+
+  /* Manifesto numbered statements */
+  .stmt { margin-bottom: 80px; display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: baseline; }
+  .stmt:last-child { margin-bottom: 0; }
+  .stmt .num { font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 0.22em; }
+  .stmt .num.bone { color: var(--lime); }
+  .stmt .num.ink-bg { color: var(--ink); opacity: 0.5; }
+  .stmt h2 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(40px, 5vw, 76px); line-height: 0.95; letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .stmt p { font-size: 19px; line-height: 1.55; max-width: 720px; }
+
+  /* Big declarative slab */
+  .declarative h2 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(64px, 11vw, 200px); line-height: 0.86; letter-spacing: -0.02em;
+  }
+  .declarative h2 .dot { color: var(--lime); }
+  .declarative .body { margin-top: 40px; font-size: 22px; line-height: 1.5; max-width: 760px; }
+  .declarative .body .lime-bg { background: var(--lime); color: var(--ink); padding: 0 .1em; }
+
+  /* Services as numbered chapters */
+  .chapter {
+    display: grid; grid-template-columns: 160px 1fr 200px; gap: 40px; align-items: start;
+    padding: 60px 0; border-top: 1px solid rgba(14,14,12,.18);
+  }
+  .chapter:last-of-type { border-bottom: 1px solid rgba(14,14,12,.18); }
+  .chapter .no { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 96px; letter-spacing: -0.025em; line-height: 0.85; opacity: 0.18; }
+  .chapter h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(36px, 4vw, 56px); letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 14px; }
+  .chapter .meta { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(14,14,12,.55); margin-bottom: 18px; }
+  .chapter p { font-size: 17px; line-height: 1.55; max-width: 580px; }
+  .chapter .price {
+    text-align: right;
+    font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 36px; letter-spacing: -0.02em;
+  }
+  .chapter .price small { display: block; margin-top: 8px; font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(14,14,12,.55); font-weight: 400; }
+
+  /* End slab */
+  .end-slab { text-align: center; }
+  .end-slab h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(84px, 14vw, 280px); line-height: 0.84; letter-spacing: -0.02em; }
+  .end-slab h2 .dot { color: var(--lime); }
+  .end-slab .btn { display: inline-block; margin-top: 48px; padding: 22px 38px; background: var(--lime); color: var(--ink); font-family: 'JetBrains Mono'; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; }
+  .end-slab .colophon { margin-top: 80px; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+</style>
+</head>
+<body>
+
+<div class="meta-strip">
+  <div style="display: flex; justify-content: space-between;">
+    <div><span class="lime">CO / 01</span> · A manifesto</div>
+    <div>From chaos · a commercial engine</div>
+    <div>hello@chaosover.co</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="slab ink hero-slab">
+  <div class="container">
+    <div class="hero-eyebrow">CO/01 · Manifesto · February 2026</div>
+  </div>
+  <div class="container">
+    <h1 class="display hero-title">
+      <span class="co-wordmark"><span class="strike-line">CHAOS</span><br/>OVER<span class="dot">.</span></span>
+    </h1>
+  </div>
+  <div class="container">
+    <div class="hero-bottom">
+      <p class="hero-tag">A practice for founder-led B2B owners trading hustle for <span class="lime">a commercial engine</span> that compounds.</p>
+      <div class="hero-tag-anchor">↓ The manifesto</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPOSITION — bone slab, three numbered statements -->
+<section class="slab bone">
+  <div class="container">
+    <div class="mono" style="margin-bottom: 60px;">[ The Manifesto ]</div>
+
+    <div class="stmt">
+      <div class="num ink-bg">01</div>
+      <div>
+        <h2>The pipeline isn't broken. The <span class="lime-bg">picture</span> is.</h2>
+        <p>Most founder-led B2B companies don't have a pipeline problem. They have a clarity problem. The offer is fuzzy, the pricing is reactive, and the team is busy without the business compounding.</p>
+      </div>
+    </div>
+
+    <div class="stmt">
+      <div class="num ink-bg">02</div>
+      <div>
+        <h2>Strategy is an <span class="lime-bg">operating system</span>, not a slide deck.</h2>
+        <p>Decks don't build engines. Cadence, role-clarity, and architecture do. We diagnose what's actually broken, sharpen the wedge, and stand up the system that makes growth a habit instead of a heroic act.</p>
+      </div>
+    </div>
+
+    <div class="stmt">
+      <div class="num ink-bg">03</div>
+      <div>
+        <h2>Done is <span class="lime-bg">done</span>. We leave.</h2>
+        <p>We don't sell retainers. We sell installation. Three engagements — diagnostic, strategy, engine build — sequenced or standalone. Your team runs the engine. We measure leverage gained, not hours delivered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECLARATIVE -->
+<section class="slab ink declarative">
+  <div class="container">
+    <h2 class="display">From chaos<span class="dot">,</span><br/>a commercial<br/>engine<span class="dot">.</span></h2>
+    <p class="body">If the founder is the bottleneck and the business is busy but not compounding, we're the right call. If you're hunting for a flashier brand or another framework, we're not. <span class="lime-bg">We install the operating system. Then we go.</span></p>
+  </div>
+</section>
+
+<!-- SERVICES as chapters -->
+<section class="slab bone">
+  <div class="container">
+    <div class="mono" style="margin-bottom: 24px;">[ The Engagements ]</div>
+    <h2 class="display" style="font-size: clamp(56px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 40px;">Three chapters.</h2>
+
+    <div class="chapter">
+      <div class="no">01</div>
+      <div>
+        <h3>Diagnostic</h3>
+        <div class="meta">4 weeks · Fixed fee</div>
+        <p>A deep audit of your commercial engine. We talk to your customers, ex-customers, and the deals you lost. You leave with one map and three highest-leverage moves. About a third of clients stop here and run the playbook themselves.</p>
+      </div>
+      <div class="price">£18k<small>From — fixed</small></div>
+    </div>
+
+    <div class="chapter">
+      <div class="no">02</div>
+      <div>
+        <h3>Strategy &amp; Positioning</h3>
+        <div class="meta">8 weeks · Fixed fee</div>
+        <p>Sharpen the wedge. Re-architect the offer ladder, narrative, and pricing model. Land the version of your business that the right customers actually want to buy — at the price you actually want to charge.</p>
+      </div>
+      <div class="price">£42k<small>From — fixed</small></div>
+    </div>
+
+    <div class="chapter">
+      <div class="no">03</div>
+      <div>
+        <h3>Engine Build</h3>
+        <div class="meta">12 weeks + 90 days coaching</div>
+        <p>Stand up the operating system. Pipeline, playbooks, dashboards, cadence. Your team runs it; we sit in the room until it sticks, then we leave. Includes 90 days of embedded coaching.</p>
+      </div>
+      <div class="price">£85k<small>From — fixed</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- END -->
+<section class="slab ink end-slab">
+  <div class="container">
+    <h2 class="display">Get over it<span class="dot">.</span></h2>
+    <a class="btn" href="mailto:hello@chaosover.co">Open the file →</a>
+    <div class="colophon">Written, edited &amp; signed · Chaos Over Ltd · 02/2026 · London</div>
+  </div>
+</section>
+
+<div class="meta-foot">
+  <div>© 2026 Chaos Over Ltd</div>
+  <div>chaosover.co · hello@chaosover.co</div>
+  <div>End of manifesto</div>
+</div>
+
+</body>
+</html>

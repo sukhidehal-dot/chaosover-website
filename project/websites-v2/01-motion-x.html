@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · Motion w/ Parallax X</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="co.css" rel="stylesheet">
+<style>
+  /* ──────────── PARALLAX X-CROSS FIELD ──────────── */
+  .x-field {
+    position: fixed; inset: 0; pointer-events: none;
+    z-index: 0; overflow: hidden;
+  }
+  .x {
+    position: absolute; will-change: transform;
+    color: var(--lime);
+  }
+  .x svg { display: block; }
+  /* depth tiers */
+  .x.far    { opacity: 0.10; filter: blur(6px); }
+  .x.mid    { opacity: 0.22; filter: blur(2px); }
+  .x.near   { opacity: 0.45; filter: blur(0.5px); }
+  .x.front  { opacity: 0.85; }
+
+  /* Layout — content sits above the X field */
+  .stage { position: relative; z-index: 1; }
+  section { padding: 100px 40px; position: relative; }
+  .grid { max-width: 1280px; margin: 0 auto; }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(14,14,12,0.65);
+    backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 40px;
+  }
+  .nav .logo { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 20px; letter-spacing: -0.02em; }
+  .nav .logo .dot { color: var(--lime); }
+  .nav ul { list-style: none; display: flex; gap: 28px; }
+  .nav a.link { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+  .nav a.link:hover { opacity: 1; }
+  .nav .cta {
+    padding: 9px 14px; border: 1px solid var(--bone); border-radius: 999px;
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .nav .cta:hover { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+
+  /* Hero */
+  .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: space-between; padding-top: 120px; }
+  .hero .top-meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .hero .top-meta .fn-tag { font-size: 22px; }
+  .hero .top-meta .right { text-align: right; }
+  .hero .title { font-size: clamp(110px, 18vw, 320px); margin: 8vh 0; }
+  .hero-bottom {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+  }
+  .hero .tag {
+    font-family: 'Big Shoulders Display'; font-weight: 800;
+    font-size: clamp(20px, 1.6vw, 26px); line-height: 1.25; letter-spacing: -0.005em;
+    max-width: 540px;
+  }
+  .hero .tag .lime { color: var(--lime); }
+  .hero .scroll-cue {
+    text-align: right; font-family: 'JetBrains Mono';
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--dim);
+  }
+  .hero .scroll-cue .arrow { color: var(--lime); animation: bob 1.6s ease-in-out infinite; display: inline-block; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* Proposition */
+  .prop { padding-top: 60px; padding-bottom: 60px; }
+  .prop .label { color: var(--lime); margin-bottom: 32px; }
+  .prop h2 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(56px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.02em;
+    max-width: 1080px;
+  }
+  .prop h2 .lime-bg { background: var(--lime); color: var(--ink); padding: 0 .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .prop .body {
+    margin-top: 48px; max-width: 720px;
+    font-size: 19px; line-height: 1.55; color: var(--dim);
+  }
+
+  /* Services */
+  .services { padding-top: 120px; }
+  .services-head {
+    display: flex; justify-content: space-between; align-items: end; gap: 60px;
+    border-bottom: 2px solid var(--bone); padding-bottom: 24px; margin-bottom: 0;
+  }
+  .services-head h2 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(56px, 8vw, 120px); line-height: 0.86; letter-spacing: -0.02em;
+  }
+  .services-head h2 .dot { color: var(--lime); }
+  .service {
+    display: grid; grid-template-columns: 80px 1fr 1.4fr 80px; gap: 40px; align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    padding: 36px 0;
+    transition: padding .35s, background .35s;
+    position: relative;
+  }
+  .service:hover { padding: 48px 0; background: linear-gradient(90deg, transparent, rgba(200,255,61,.06), transparent); }
+  .service::before {
+    content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--lime);
+    transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.7,0,.2,1);
+  }
+  .service:hover::before { transform: scaleX(1); }
+  .service .num {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; opacity: 0.5;
+  }
+  .service h3 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px); line-height: 0.9; letter-spacing: -0.02em;
+  }
+  .service h3 small { display: block; font-size: 11px; opacity: 0.55; letter-spacing: 0.22em; font-family: 'JetBrains Mono'; text-transform: uppercase; font-weight: 400; margin-top: 10px; }
+  .service .desc { font-size: 16px; line-height: 1.55; color: var(--dim); }
+  .service .cta { text-align: right; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .service .cta .arrow { color: var(--lime); transition: transform .25s; display: inline-block; }
+  .service:hover .cta .arrow { transform: translateX(6px); }
+
+  /* CTA */
+  .end {
+    padding: 180px 40px; text-align: center; position: relative;
+  }
+  .end h2 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(80px, 14vw, 240px); line-height: 0.84; letter-spacing: -0.02em;
+  }
+  .end h2 .dot { color: var(--lime); }
+  .end .btn {
+    display: inline-block; margin-top: 56px;
+    padding: 22px 36px; background: var(--lime); color: var(--ink);
+    font-family: 'JetBrains Mono'; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase;
+    border-radius: 999px; transition: transform .25s;
+  }
+  .end .btn:hover { transform: translateY(-3px); }
+
+  /* Reveal */
+  [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+  [data-reveal].in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Parallax X field -->
+<div class="x-field" id="xfield"></div>
+
+<div class="stage">
+
+  <!-- TOP META STRIP -->
+  <div class="meta-strip">
+    <div><span class="lime">CO / 01</span> · File — Commercial Engine</div>
+    <div>Issue Nº01 · 2026</div>
+    <div>An intelligent practice for founder-led B2B</div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="logo">Chaos Over<span class="dot">.</span></div>
+      <ul>
+        <li><a class="link" href="#proposition">Proposition</a></li>
+        <li><a class="link" href="#services">Services</a></li>
+        <li><a class="link" href="#method">Method</a></li>
+        <li><a class="link" href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="cta">Book a diagnostic →</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="grid">
+      <div class="top-meta">
+        <div class="fn-tag">fn(chaos) →</div>
+        <div></div>
+        <div class="right mono">EST. 2026 · UK</div>
+      </div>
+    </div>
+    <div class="grid">
+      <h1 class="display title">
+        <span class="co-wordmark"><span class="strike-line">CHAOS</span><br/>OVER<span class="dot">.</span></span>
+      </h1>
+    </div>
+    <div class="grid">
+      <div class="hero-bottom">
+        <p class="tag">From chaos, <span class="lime">a commercial engine</span>. We help founder-led B2B owners trade hustle for a system that compounds.</p>
+        <div class="scroll-cue"><span class="arrow">↓</span>&nbsp;&nbsp;Scroll to read the file</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="prop" id="proposition">
+    <div class="grid" data-reveal>
+      <div class="mono label">[ 01 · Proposition ]</div>
+      <h2>We don't sell <span class="lime-bg">advice</span>. We install <span class="lime-bg">systems</span>.</h2>
+      <p class="body">Most founder-led B2B companies don't have a pipeline problem — they have a clarity problem. The offer is fuzzy, the pricing is reactive, and growth depends on the founder being in every conversation. We diagnose what's actually broken, sharpen the wedge, and stand up the operating system that makes growth a habit instead of a heroic act.</p>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="grid">
+      <div class="services-head" data-reveal>
+        <h2>Three<br/>services<span class="dot">.</span></h2>
+        <div class="mono" style="opacity: 0.5;">Sequenced or standalone</div>
+      </div>
+      <div class="service-list">
+        <a class="service" href="#">
+          <div class="num">[ 02.01 ]</div>
+          <h3>Diagnostic<small>04 weeks · From £18k</small></h3>
+          <p class="desc">A deep audit of your commercial engine. We talk to your customers, ex-customers, and the deals you lost. You leave with one map and three highest-leverage moves.</p>
+          <div class="cta">View <span class="arrow">→</span></div>
+        </a>
+        <a class="service" href="#">
+          <div class="num">[ 02.02 ]</div>
+          <h3>Strategy &amp; Positioning<small>08 weeks · From £42k</small></h3>
+          <p class="desc">Sharpen the wedge. Re-architect the offer ladder, narrative, and pricing model. Land the version of your business customers actually want to buy.</p>
+          <div class="cta">View <span class="arrow">→</span></div>
+        </a>
+        <a class="service" href="#">
+          <div class="num">[ 02.03 ]</div>
+          <h3>Engine Build<small>12 weeks · From £85k</small></h3>
+          <p class="desc">Stand up the operating system. Pipeline, playbooks, dashboards, cadence. Your team runs it; we sit in the room until it sticks, then we leave.</p>
+          <div class="cta">View <span class="arrow">→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="end" id="contact">
+    <div data-reveal>
+      <h2 class="display">Get over it<span class="dot">.</span></h2>
+      <a class="btn" href="mailto:hello@chaosover.co">Book a diagnostic →</a>
+    </div>
+  </section>
+
+  <div class="meta-foot">
+    <div>© 2026 Chaos Over Ltd</div>
+    <div>chaosover.co · hello@chaosover.co</div>
+    <div>From chaos · A commercial engine</div>
+  </div>
+
+</div>
+
+<script>
+  // ───── PARALLAX X FIELD ─────
+  // Build N x-crosses across depth tiers. Update transforms on scroll + mouse.
+  const xfield = document.getElementById('xfield');
+  const TIERS = [
+    { cls: 'far',   count: 22, sizeMin: 14, sizeMax: 32, speed: 0.05 },
+    { cls: 'mid',   count: 16, sizeMin: 28, sizeMax: 64, speed: 0.18 },
+    { cls: 'near',  count: 10, sizeMin: 56, sizeMax: 120, speed: 0.42 },
+    { cls: 'front', count: 4,  sizeMin: 100, sizeMax: 220, speed: 0.85 },
+  ];
+  const rand = (a, b) => Math.random() * (b - a) + a;
+  // SVG X (two thick strokes)
+  const xSvg = (size, weight = 0.18) => `<svg width="${size}" height="${size}" viewBox="0 0 100 100">
+    <line x1="14" y1="14" x2="86" y2="86" stroke="currentColor" stroke-width="${weight*100}" stroke-linecap="round" />
+    <line x1="86" y1="14" x2="14" y2="86" stroke="currentColor" stroke-width="${weight*100}" stroke-linecap="round" />
+  </svg>`;
+  const xCrosses = [];
+  TIERS.forEach(tier => {
+    for (let i = 0; i < tier.count; i++) {
+      const el = document.createElement('div');
+      el.className = `x ${tier.cls}`;
+      const size = rand(tier.sizeMin, tier.sizeMax);
+      el.innerHTML = xSvg(size, 0.16 + Math.random() * 0.08);
+      el.style.left = rand(-5, 105) + 'vw';
+      // distribute across page height in vh units; we transform with scroll-aware Y.
+      const yVh = rand(0, 600); // page is ~6 viewports tall
+      el.dataset.y = yVh;
+      el.dataset.speed = tier.speed;
+      el.dataset.rot = rand(-30, 30);
+      el.style.top = yVh + 'vh';
+      el.style.transform = `rotate(${el.dataset.rot}deg)`;
+      xfield.appendChild(el);
+      xCrosses.push(el);
+    }
+  });
+
+  let mouseX = 0, mouseY = 0, scrollY = 0;
+  let lastScroll = 0;
+  window.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / window.innerWidth - 0.5);
+    mouseY = (e.clientY / window.innerHeight - 0.5);
+  });
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+
+  function tick() {
+    xCrosses.forEach(el => {
+      const speed = parseFloat(el.dataset.speed);
+      const yBase = parseFloat(el.dataset.y);
+      const rot = parseFloat(el.dataset.rot);
+      // scroll-based vertical drift
+      const dy = -scrollY * speed;
+      // mouse parallax — front layers move more
+      const mx = mouseX * 24 * speed;
+      const my = mouseY * 18 * speed;
+      el.style.transform = `translate3d(${mx}px, ${dy + my}px, 0) rotate(${rot + scrollY*speed*0.02}deg)`;
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // ───── REVEAL ─────
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

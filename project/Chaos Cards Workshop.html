@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaos Cards — Live Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Chaos Over — soft/cream theme (matches 01-avinyr.html) */
+  --ink: #1c1822;
+  --ink-soft: rgba(28,24,34,0.65);
+  --ink-dim: rgba(28,24,34,0.45);
+  --bone: #f4eee2;
+  --bone-2: #ede5d4;
+  --bone-3: #e3dac4;
+  --lime: #c8ff3d;
+  --line: rgba(28,24,34,0.14);
+  --line-strong: rgba(28,24,34,0.22);
+
+  /* Legacy aliases so existing rules keep working */
+  --black: var(--bone);
+  --surface: rgba(237, 229, 212, 0.6);
+  --surface2: rgba(237, 229, 212, 0.95);
+  --border: var(--line);
+  --offwhite: var(--ink);
+  --muted: var(--ink-soft);
+
+  /* Six diagnostic categories — warmed to sit on cream */
+  --red:       #c43c2a;
+  --orange:    #d97a2c;
+  --teal:      #1f7a7a;
+  --gold:      #9c7c2a;
+  --purple:    #5a3590;
+  --green:     #2a6645;
+  --cat-proposition: #c43c2a;
+  --cat-pipeline:    #d97a2c;
+  --cat-people:      #1f7a7a;
+  --cat-proof:       #9c7c2a;
+  --cat-position:    #5a3590;
+  --cat-pace:        #2a6645;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Petal gradient ground — fixed, oversized, parallaxes on scroll */
+.grad-bg {
+  position: fixed;
+  inset: -20vh -5vw -20vh -5vw;
+  width: 110vw;
+  height: 140vh;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(110% 90% at 95% 5%, #e6dcf3 0%, rgba(230,220,243,0) 60%),
+    radial-gradient(110% 90% at 5% 95%, #fbe2e9 0%, rgba(251,226,233,0) 60%),
+    var(--bone);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Lime fill highlight — gradient-clipped so the block sits behind the visual letterforms only */
+.lime-fill {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%, transparent 16%,
+    var(--lime) 16%, var(--lime) 92%,
+    transparent 92%, transparent 100%
+  );
+  color: var(--ink); padding: 0 .12em;
+  box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
+
+/* Locked CO wordmark with the diagonal lime strike */
+.co-wordmark { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; line-height: 0.84; letter-spacing: -0.02em; color: var(--ink); }
+.co-wordmark .strike-line { position: relative; display: inline-block; }
+.co-wordmark .strike-line::after {
+  content: ''; position: absolute; left: -6%; right: -6%; top: 72%;
+  height: 0.04em; background: var(--lime);
+  transform: translateY(-50%) rotate(-39deg);
+  transform-origin: center;
+}
+.co-wordmark .dot { color: var(--lime); }
+
+/* ─── SCREENS ─── */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ─── WELCOME SCREEN ─── */
+#screen-welcome {
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+#screen-welcome::before {
+  content: 'CHAOS';
+  position: absolute;
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 40vw;
+  color: rgba(28,24,34,0.035);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.welcome-inner {
+  max-width: 640px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-lockup {
+  margin-bottom: 48px;
+}
+
+.logo-main {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 64px;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  color: var(--ink);
+}
+.logo-main .lime-fill { padding: 0 .08em; }
+
+.logo-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+  margin-top: 14px;
+}
+
+.welcome-copy {
+  font-size: 17px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  font-weight: 400;
+  margin-bottom: 48px;
+  max-width: 560px;
+}
+.welcome-copy strong { color: var(--ink); font-weight: 600; }
+
+/* Role picker */
+.role-picker {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.role-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 24px 20px;
+  background: rgba(237, 229, 212, 0.6);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: background .2s, border-color .2s, transform .2s;
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.role-btn:hover { border-color: var(--ink); background: rgba(237, 229, 212, 0.95); transform: translateY(-2px); }
+.role-btn.selected { border-color: var(--ink); background: var(--ink); color: var(--bone); }
+.role-btn.selected .role-num { color: var(--lime); }
+.role-btn.selected .role-desc { color: rgba(244,238,226,0.7); }
+
+.role-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+  display: block;
+}
+.role-icon { display: none; } /* emoji icons replaced by num/label pattern */
+.role-label {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.role-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* Form */
+.reg-form { display: flex; flex-direction: column; gap: 18px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field-group { display: flex; flex-direction: column; gap: 8px; }
+
+.field-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.field-input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--ink);
+  border-radius: 0;
+  padding: 10px 0;
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  transition: border-color 0.2s;
+  outline: none;
+  width: 100%;
+}
+
+.field-input:focus { border-color: var(--lime); border-bottom-width: 2px; }
+.field-input::placeholder { color: var(--ink-dim); }
+
+.session-code-wrap {
+  background: rgba(237, 229, 212, 0.9);
+  border: 1px solid var(--line);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.session-code-display {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  flex: 1;
+}
+.session-code-display::after {
+  content: '.';
+  color: var(--lime);
+}
+
+.copy-btn {
+  background: var(--ink);
+  border: 0;
+  color: var(--bone);
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: background .2s, color .2s;
+}
+.copy-btn:hover { background: var(--lime); color: var(--ink); }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--ink-soft);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 8px 0;
+}
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* CTAs — match Chaos Over .btn-ink / .btn-outline pattern */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--bone);
+  border: 0;
+  border-radius: 999px;
+  padding: 18px 32px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s, color .2s, transform .2s;
+  width: 100%;
+  margin-top: 12px;
+}
+.btn-primary:hover { background: var(--lime); color: var(--ink); transform: translateY(-2px); }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 16px 30px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  width: 100%;
+  margin-top: 8px;
+}
+.btn-ghost:hover { background: var(--ink); color: var(--bone); }
+
+/* ─── LOBBY SCREEN ─── */
+#screen-lobby { padding: 0; }
+
+.lobby-header {
+  padding: 28px 48px;
+  border-bottom: 1.5px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(249,243,234,0.7);
+  backdrop-filter: blur(12px);
+}
+
+.lobby-title {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.lobby-title::after { content: '.'; color: var(--lime); }
+
+.session-pill {
+  background: rgba(237, 229, 212, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.session-pill strong {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+
+.lobby-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  overflow: hidden;
+}
+
+.lobby-main { padding: 48px 48px 64px; }
+
+.lobby-section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.lobby-section-title::before { content: '▌ '; color: var(--lime); -webkit-text-stroke: 0.4px var(--ink); }
+
+.participants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.participant-card {
+  background: rgba(237, 229, 212, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 22px;
+  position: relative;
+  animation: slideIn 0.3s ease;
+  transition: border-color .2s, transform .2s;
+}
+.participant-card:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.participant-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--bone);
+  margin-bottom: 14px;
+}
+
+.participant-name {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin-bottom: 4px;
+}
+.participant-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.facilitator-badge {
+  position: absolute;
+  top: 14px; right: 14px;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 0;
+  font-weight: 700;
+}
+
+.lobby-sidebar {
+  border-left: 1px solid var(--line);
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background: rgba(237, 229, 212, 0.45);
+}
+
+.info-block { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.info-block:last-child { border-bottom: 0; }
+.info-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.info-value {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.info-value::after { content: '.'; color: var(--lime); }
+.info-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+.info-block .text-red { color: var(--ink); }
+
+.waiting-pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: rgba(237, 229, 212, 0.9);
+  border: 1px solid var(--line);
+}
+
+.pulse-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 2px rgba(28,24,34,0.15);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ─── SESSION SCREEN ─── */
+#screen-session { padding: 0; overflow: hidden; }
+
+.session-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  border-bottom: 1.5px solid var(--ink);
+  background: rgba(249,243,234,0.7);
+  backdrop-filter: blur(12px);
+  flex-shrink: 0;
+}
+
+.session-progress { display: flex; align-items: center; gap: 18px; }
+
+.progress-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.progress-bar-wrap {
+  width: 220px;
+  height: 2px;
+  background: var(--line);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--ink);
+  border-radius: 0;
+  transition: width 0.5s ease;
+}
+
+.progress-count {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* Timer */
+.timer-display { display: flex; flex-direction: column; align-items: center; }
+.timer-ring-wrap { position: relative; width: 64px; height: 64px; }
+.timer-ring-wrap svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); }
+.timer-circle-bg { fill: none; stroke: var(--line); stroke-width: 3; }
+.timer-circle-fill {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 163;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.5s;
+}
+.timer-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.timer-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 6px;
+}
+
+/* Card display */
+.session-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  overflow: hidden;
+}
+
+.card-stage {
+  padding: 56px 56px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  overflow-y: auto;
+}
+
+.card-reveal { animation: cardReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.card-meta { display: flex; align-items: center; gap: 14px; }
+
+.card-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 0;
+  background: var(--ink);
+  color: var(--bone);
+  border: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.cat-pip { width: 8px; height: 8px; border-radius: 50%; }
+
+.card-type-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 8px 0;
+}
+.card-type-tag::before { content: '[ '; }
+.card-type-tag::after { content: ' ]'; }
+
+.card-number-big {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: clamp(160px, 18vw, 240px);
+  line-height: 0.84;
+  color: rgba(28,24,34,0.06);
+  letter-spacing: -0.04em;
+  margin-top: -10px;
+  margin-bottom: -20px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.card-question-text {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 800;
+  font-size: clamp(34px, 3.4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 1000px;
+}
+
+.card-hint-box {
+  background: rgba(237, 229, 212, 0.9);
+  border: 1px dashed var(--line-strong);
+  border-radius: 0;
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 28px;
+  align-items: start;
+  max-width: 1000px;
+}
+
+.hint-icon { display: none; }
+
+.hint-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.hint-label::before { content: '[ '; }
+.hint-label::after { content: ' ]'; }
+
+.hint-text {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Answer panel */
+.answer-panel {
+  border-left: 1px solid var(--line);
+  padding: 36px 36px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  overflow-y: auto;
+  background: rgba(237, 229, 212, 0.55);
+}
+
+.answer-panel-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.answer-panel-title::before { content: '▌ '; color: var(--lime); -webkit-text-stroke: 0.4px var(--ink); }
+
+.my-answer-wrap { display: flex; flex-direction: column; gap: 12px; }
+
+.my-answer-label {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.answer-textarea {
+  background: rgba(249,243,234,0.8);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: 16px;
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 140px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.answer-textarea:focus { border-color: var(--ink); }
+.answer-textarea::placeholder { color: var(--ink-dim); }
+.answer-textarea:disabled { opacity: 0.6; background: rgba(237, 229, 212, 0.6); }
+
+.mini-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  color: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Waiting status tracker */
+.answer-status-list { display: flex; flex-direction: column; gap: 8px; }
+
+.answer-status-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(249,243,234,0.8);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  transition: all 0.3s ease;
+}
+
+.answer-status-item.submitted {
+  border-color: var(--ink);
+  background: var(--lime);
+}
+
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.answer-status-item.submitted .status-dot { background: var(--ink); }
+
+.status-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+  color: var(--ink);
+}
+.status-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.answer-status-item.submitted .status-label { color: var(--ink); }
+
+.all-submitted-banner {
+  display: none;
+  background: var(--ink);
+  color: var(--lime);
+  border: 0;
+  border-radius: 0;
+  padding: 16px 18px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.all-submitted-banner.visible { display: block; }
+
+/* Exercise done button */
+.exercise-done-btn {
+  background: var(--ink);
+  color: var(--bone);
+  border: 0;
+  border-radius: 999px;
+  padding: 18px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s, color .2s, transform .2s;
+  width: 100%;
+}
+.exercise-done-btn:hover { background: var(--lime); color: var(--ink); transform: translateY(-2px); }
+.exercise-done-btn.done {
+  background: var(--lime);
+  color: var(--ink);
+  border: 0;
+  cursor: default;
+  transform: none;
+}
+
+.completion-tracker {
+  background: rgba(249,243,234,0.7);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 18px;
+}
+
+.completion-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+
+.completion-avatars { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.completion-avatar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(237, 229, 212, 0.9);
+  border-radius: 999px;
+  padding: 5px 14px 5px 6px;
+  border: 1px solid var(--line);
+  transition: all 0.3s;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.completion-avatar.done { border-color: var(--ink); background: var(--lime); }
+.completion-avatar .ca-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
+.completion-avatar.done .ca-dot { background: var(--ink); }
+
+/* Transition overlay */
+.card-transition {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bone);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.card-transition.active { display: flex; }
+
+.ct-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.ct-label::before { content: '▌ '; color: var(--lime); -webkit-text-stroke: 0.4px var(--ink); }
+
+.ct-number {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 220px;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 0.84;
+  animation: ctNum 0.5s ease;
+}
+.ct-number::after { content: '.'; color: var(--lime); }
+@keyframes ctNum { from { transform: scale(1.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ─── REPORT SCREEN ─── */
+#screen-report { padding: 0; overflow-y: auto; background: var(--bone); }
+
+.report-header {
+  padding: 56px 64px 44px;
+  border-bottom: 1.5px solid var(--ink);
+  background: rgba(237, 229, 212, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+}
+
+.report-eyebrow {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  margin-bottom: 18px;
+}
+
+.report-title {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: clamp(56px, 7vw, 96px);
+  letter-spacing: -0.025em;
+  line-height: 0.9;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.report-title::after { content: '.'; color: var(--lime); }
+
+.report-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.report-body { padding: 56px 64px 88px; max-width: 1080px; }
+
+.report-card-block {
+  margin-bottom: 56px;
+  border-left: 3px solid var(--line-strong);
+  padding-left: 32px;
+  position: relative;
+}
+
+.report-card-block::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bone);
+  border: 2px solid var(--ink);
+}
+
+.rcb-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+.rcb-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.rcb-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 0;
+  font-weight: 600;
+}
+.rcb-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.rcb-type::before { content: '[ '; }
+.rcb-type::after { content: ' ]'; }
+.rcb-question {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 800;
+  font-size: clamp(22px, 2vw, 30px);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+.rcb-answers { display: flex; flex-direction: column; gap: 12px; }
+
+.rcb-answer {
+  background: rgba(237, 229, 212, 0.85);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  align-items: start;
+  transition: border-color .2s;
+}
+.rcb-answer:hover { border-color: var(--ink); }
+
+.rcb-answer-name {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.rcb-answer-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.rcb-answer-text {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.65;
+  padding-top: 2px;
+  font-weight: 400;
+}
+
+.report-download {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1.5px solid var(--ink);
+}
+.report-download .btn-primary,
+.report-download .btn-ghost { width: auto; margin-top: 0; padding: 16px 26px; }
+
+/* Waiting screen between transitions */
+.waiting-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bone);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+.waiting-overlay.active { display: flex; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 0; }
+
+/* Utils */
+.text-red { color: var(--ink); }
+.mt-auto { margin-top: auto; }
+</style>
+</head>
+<body>
+
+<div class="grad-bg" id="gradBg"></div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 1: WELCOME / REGISTRATION
+═══════════════════════════════════════════ -->
+<div id="screen-welcome" class="screen active">
+  <div class="welcome-inner">
+    <div class="logo-lockup">
+      <div class="logo-main">Chaos<span style="color: var(--lime);">/</span>Cards<span style="color: var(--lime);">.</span></div>
+      <div class="logo-sub">▌ Commercial Alignment Workshop · Chaos Over</div>
+    </div>
+
+    <p class="welcome-copy">
+      <strong>52 cards. 6 categories.</strong> One room — or five browser tabs.<br>
+      No hiding. No "we're working on it." Answers must be specific.
+    </p>
+
+    <!-- Role picker -->
+    <div class="role-picker" id="rolePicker">
+      <button class="role-btn" data-role="facilitator" onclick="selectRole('facilitator', this)">
+        <span class="role-num">[ 01 / Facilitator ]</span>
+        <div class="role-label">Run the session.</div>
+        <div class="role-desc">Start a new session and share the code with your team.</div>
+      </button>
+      <button class="role-btn" data-role="participant" onclick="selectRole('participant', this)">
+        <span class="role-num">[ 02 / Participant ]</span>
+        <div class="role-label">Join your team.</div>
+        <div class="role-desc">Enter the code your facilitator just sent over.</div>
+      </button>
+    </div>
+
+    <!-- Facilitator form -->
+    <div id="facilitatorForm" style="display:none;">
+      <div class="reg-form">
+        <div class="form-row">
+          <div class="field-group">
+            <label class="field-label">First Name</label>
+            <input type="text" class="field-input" id="fac-firstname" placeholder="Sukhi">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Last Name</label>
+            <input type="text" class="field-input" id="fac-lastname" placeholder="Dhaliwal">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">WORK EMAIL ADDRESS</label>
+          <input type="email" class="field-input" id="fac-email" placeholder="you@chaosover.com">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Job Title</label>
+          <input type="text" class="field-input" id="fac-jobtitle" placeholder="Founder, MD, Head of Growth...">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Your Session Code (share this with your team)</label>
+          <div class="session-code-wrap">
+            <div class="session-code-display" id="generatedCode">—</div>
+            <button class="copy-btn" onclick="copyCode()">Copy</button>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="startFacilitatorSession()">Create Session &amp; Go to Lobby →</button>
+      </div>
+    </div>
+
+    <!-- Participant form -->
+    <div id="participantForm" style="display:none;">
+      <div class="reg-form">
+        <div class="form-row">
+          <div class="field-group">
+            <label class="field-label">First Name</label>
+            <input type="text" class="field-input" id="par-firstname" placeholder="First name">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Last Name</label>
+            <input type="text" class="field-input" id="par-lastname" placeholder="Last name">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email Address</label>
+          <input type="email" class="field-input" id="par-email" placeholder="your@email.com">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Job Title</label>
+          <input type="text" class="field-input" id="par-jobtitle" placeholder="Your role">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Session Code</label>
+          <input type="text" class="field-input" id="par-code" placeholder="Enter the code from your facilitator" style="letter-spacing:3px;text-transform:uppercase;font-family:'Bebas Neue',sans-serif;font-size:20px;">
+        </div>
+        <button class="btn-primary" onclick="joinSession()">Join Session →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 2: LOBBY
+═══════════════════════════════════════════ -->
+<div id="screen-lobby" class="screen">
+  <div class="lobby-header">
+    <div class="lobby-title">Lobby</div>
+    <div class="session-pill">
+      Session <strong id="lobby-code">—</strong>
+      <span style="font-size:10px; letter-spacing:0.22em;">Share with your team</span>
+    </div>
+  </div>
+  <div class="lobby-body">
+    <div class="lobby-main">
+      <div class="lobby-section-title">Participants in this session</div>
+      <div class="participants-grid" id="participantsGrid"></div>
+
+      <div id="facilitator-start-wrap" style="display:none; margin-top: 8px;">
+        <button class="btn-primary" style="max-width:380px;" onclick="beginSession()">
+          Deal the cards — start workshop →
+        </button>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft); margin-top:14px;">
+          [ This deals 15 random cards from 52. Everyone advances together. ]
+        </p>
+      </div>
+
+      <div id="participant-wait-wrap">
+        <div class="waiting-pulse">
+          <div class="pulse-dot"></div>
+          Waiting for the facilitator to start the session...
+        </div>
+      </div>
+    </div>
+    <div class="lobby-sidebar">
+      <div class="info-block">
+        <div class="info-label">Participants</div>
+        <div class="info-value" id="lobby-count">1</div>
+        <div class="info-sub">in the lobby</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Cards</div>
+        <div class="info-value">15</div>
+        <div class="info-sub">randomly selected from 52</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Format</div>
+        <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:20px; letter-spacing:-0.015em; line-height:1.2; color:var(--ink); margin-bottom:6px;">Questions · 2 min<br>Exercises · group-paced</div>
+        <div class="info-sub">Facilitator advances the deck</div>
+      </div>
+      <div class="info-block" style="border-bottom:0; margin-top:auto;">
+        <div class="info-label">Works</div>
+        <div style="font-size:14px; color:var(--ink); line-height:1.55;">In the same room — or fully remote, everyone on their own device.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 3: SESSION (LIVE CARDS)
+═══════════════════════════════════════════ -->
+<div id="screen-session" class="screen">
+  <div class="session-topbar">
+    <div class="session-progress">
+      <span class="progress-label">Card</span>
+      <span class="progress-count"><span id="current-card-num">1</span> / 15</span>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="pulse-dot"></div>
+      <span style="font-size:12px;color:var(--muted);letter-spacing:1px;" id="session-participants-label">— participants</span>
+    </div>
+    <div class="timer-display" id="timerWrap">
+      <div class="timer-ring-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="timer-circle-bg" cx="32" cy="32" r="26"/>
+          <circle class="timer-circle-fill" id="timerCircle" cx="32" cy="32" r="26"/>
+        </svg>
+        <div class="timer-number" id="timerNumber">2:00</div>
+      </div>
+      <div class="timer-label">remaining</div>
+    </div>
+  </div>
+
+  <div class="session-body">
+    <!-- Card display -->
+    <div class="card-stage" id="cardStage">
+      <div class="card-reveal" id="cardContent">
+        <div class="card-meta">
+          <div class="card-cat-badge">
+            <div class="cat-pip" id="cardCatPip"></div>
+            <span id="cardCatLabel">—</span>
+          </div>
+          <div class="card-type-tag" id="cardTypeTag">—</div>
+        </div>
+        <div class="card-number-big" id="cardNumBig">01</div>
+        <div class="card-question-text" id="cardQuestionText">—</div>
+        <div class="card-hint-box">
+          <div>
+            <div class="hint-label">How to use this card</div>
+          </div>
+          <div>
+            <div class="hint-text" id="cardHintText">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Answer panel -->
+    <div class="answer-panel" id="answerPanel">
+      <div class="answer-panel-title">Your Answer</div>
+
+      <!-- Question answer area -->
+      <div id="questionAnswerArea" class="my-answer-wrap">
+        <div class="my-answer-label" id="myAnswerLabel">Your answer — private until the session ends</div>
+        <textarea class="answer-textarea" id="myAnswerText" placeholder="Type your answer here..."></textarea>
+        <button class="btn-ghost" onclick="submitMyAnswer()" id="submitAnswerBtn">Submit Answer</button>
+      </div>
+
+      <!-- Exercise done area -->
+      <div id="exerciseArea" style="display:none;">
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px;">
+          Complete this exercise with your team — in the room or on a shared call. Click when you're done.
+        </p>
+        <button class="exercise-done-btn" id="exerciseDoneBtn" onclick="markExerciseDone()">
+          ✓ I've completed this exercise
+        </button>
+        <div style="height:16px;"></div>
+        <div class="completion-tracker">
+          <div class="completion-label">Team completion</div>
+          <div class="completion-avatars" id="completionAvatars"></div>
+        </div>
+      </div>
+
+      <!-- Team submission status (who has answered — no content shown) -->
+      <div id="submissionStatusWrap" style="display:none; margin-top: 8px;">
+        <div class="answer-panel-title" style="margin-bottom:12px;">Team Status</div>
+        <div class="answer-status-list" id="answerStatusList"></div>
+        <div class="all-submitted-banner" id="allSubmittedBanner">
+          ✓ All answered — advancing
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card transition overlay -->
+<div class="card-transition" id="cardTransition">
+  <div class="ct-label">Next Card</div>
+  <div class="ct-number" id="ctNumber">02</div>
+  <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-soft); margin-top:8px;">[ Chaos Over · Chaos Cards ]</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 4: REPORT
+═══════════════════════════════════════════ -->
+<div id="screen-report" class="screen">
+  <!-- FACILITATOR REPORT -->
+  <div id="facilitatorReport" style="display:none; overflow-y:auto; flex:1;">
+    <div class="report-header">
+      <div class="report-eyebrow">Chaos Cards · Session Complete · Facilitator Report</div>
+      <div class="report-title">Full Team Report</div>
+      <div class="report-meta" id="reportMeta">—</div>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6;">Every card, every question, every team member's answer. Use this to lead your debrief. Each participant has received the same full report by email.</p>
+    </div>
+    <div class="report-body" id="reportBody"></div>
+  </div>
+
+  <!-- PARTICIPANT SESSION COMPLETE -->
+  <div id="participantComplete" style="display:none; flex:1; align-items:center; justify-content:center; flex-direction:column; gap:22px; text-align:center; padding:64px;">
+    <span style="display:inline-block; background:var(--lime); color:var(--ink); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; padding:4px 9px;">▌ Session complete</span>
+    <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(56px, 7vw, 96px); letter-spacing:-0.025em; line-height:0.9; color:var(--ink);">That's the deck<span style="color:var(--lime);">.</span></div>
+    <p style="font-size:17px; color:var(--ink-soft); max-width:520px; line-height:1.65;">
+      The full team report — every card, every answer — is on its way to your inbox.
+    </p>
+    <div style="background:rgba(237, 229, 212, 0.9); border:1px solid var(--line); padding:24px 32px; max-width:440px; margin-top:8px; text-align:left;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px;">[ What's in your email ]</div>
+      <p style="font-size:14px; color:var(--ink); line-height:1.65;">
+        All 15 cards, every question, and every team member's answer — so you can follow the debrief your facilitator is about to lead.
+      </p>
+    </div>
+    <button class="btn-ghost" style="max-width:280px; margin-top:8px;" onclick="restartSession()">Start a new session</button>
+  </div>
+</div>
+
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const CAT_COLORS = {
+  proposition:'#c43c2a', pipeline:'#d97a2c', people:'#1f7a7a',
+  proof:'#9c7c2a', position:'#5a3590', pace:'#2a6645'
+};
+
+const CAT_LABELS = {
+  proposition:'Proposition', pipeline:'Pipeline', people:'People & Leadership',
+  proof:'Proof', position:'Positioning', pace:'Pace & Rhythm'
+};
+
+const CARDS = [
+  {id:1,cat:'proposition',type:'q',q:'If we disappeared tomorrow, what would our best clients actually miss?',hint:'Not the deliverables — the outcome. Not the output — the feeling. If you can\'t answer this in one sentence, neither can they. That\'s the problem.'},
+  {id:2,cat:'proposition',type:'q',q:'Say what we do in one sentence. Now ask everyone in the room to do the same. How different are the answers?',hint:'The delta between those sentences is the proposition problem made visible. It\'s not a messaging issue — it\'s a clarity issue. Start there.'},
+  {id:3,cat:'proposition',type:'e',q:'Write down the three things you think make us different. Now imagine a competitor reading the list. Could they claim all three?',hint:'Everyone writes independently first. Then read them out. Count the claims your best competitor could also make without lying. Anything left is your real differentiator.'},
+  {id:4,cat:'proposition',type:'q',q:'What\'s the problem we solve that nobody else in our space frames the way we do?',hint:'If the answer is "we do it better," that\'s not a proposition — that\'s a hope. Push for something specific, ownable, and verifiable.'},
+  {id:5,cat:'proposition',type:'q',q:'When a client says yes to us, what are they actually buying confidence in?',hint:'Skills? Speed? Fewer mistakes? The founder\'s judgement? A proven process? This answer is usually the real proposition — and it\'s often never written down.'},
+  {id:6,cat:'proposition',type:'e',q:'Read your own homepage out loud. Would a potential client understand what you do and who you do it for inside 10 seconds?',hint:'One person reads cold. The rest listen. No explaining after. If someone has to clarify what was meant — that\'s a rewrite, not a conversation.'},
+  {id:7,cat:'proposition',type:'q',q:'What do we consistently turn down? And does that say something powerful about who we are — or do we just not know?',hint:'Saying no is only commercially powerful if it\'s strategic. If you\'re unclear what you\'re refusing, the proposition isn\'t tight enough.'},
+  {id:8,cat:'proposition',type:'q',q:'If we could only lead with one thing — one problem, one audience, one outcome — what would it be?',hint:'Not what\'s most profitable right now. What gives us the clearest right to win? If this takes more than two minutes to answer, that\'s the answer.'},
+  {id:9,cat:'proposition',type:'e',q:'Ask your last five clients why they chose you. Now ask the team why those clients chose you. Compare the two sets of answers.',hint:'Don\'t summarise — read the actual words clients used. The gap between what they say and what the team assumes is always illuminating.'},
+  {id:10,cat:'pipeline',type:'q',q:'Where did our last five pieces of work genuinely come from? Trace each one all the way back to the original trigger.',hint:'Not "referral" — who specifically? Not "inbound" — what specifically prompted it? The real source of growth usually surprises people.'},
+  {id:11,cat:'pipeline',type:'e',q:'Map your pipeline right now. Every live opportunity. Every warm conversation. Every near-miss. Where are the gaps?',hint:'Don\'t use a CRM report — draw it. Real named conversations only. No "potentials" without a specific person attached. Count the silences on the board.'},
+  {id:12,cat:'pipeline',type:'q',q:'What happens when a warm lead goes quiet? Who owns the follow-up, and what does that process actually look like?',hint:'If the answer is "we email them at some point," that\'s not a system — it\'s a vague intention. The best businesses chase every no until it\'s clearly a no.'},
+  {id:13,cat:'pipeline',type:'q',q:'How long does a deal take from first conversation to signed? What slows it down the most — and is that within our control?',hint:'Think about the last three wins. Where did time die? Was the delay on their side or ours? Honest answer only.'},
+  {id:14,cat:'pipeline',type:'q',q:'If we got no inbound next month — none at all — what would we actually do?',hint:'A business that can\'t answer this immediately is more fragile than it thinks. This isn\'t a scare question. It\'s a commercial resilience question.'},
+  {id:15,cat:'pipeline',type:'e',q:'List every lead or opportunity you turned down or lost in the last six months. Add up the estimated value. What patterns emerge?',hint:'A mobile app agency had £1.7m in passed-on leads in a single year — and hadn\'t counted it. Most businesses have more latent pipeline than they realise.'},
+  {id:16,cat:'pipeline',type:'q',q:'Are we nurturing the people who aren\'t ready to buy yet? If not, who will they call when they finally are?',hint:'Not manual nurture — a system. If you\'re only talking to people who are actively in-market, you\'re always starting from cold.'},
+  {id:17,cat:'pipeline',type:'q',q:'Do marketing and sales operate as one commercial system — or as two separate teams with different metrics that rarely align?',hint:'What does marketing measure? What does sales measure? Are those numbers pointed at the same commercial outcome?'},
+  {id:18,cat:'pipeline',type:'e',q:'Score every live opportunity on quality, not just presence. Right sector? Right size? Right budget? Right relationship? Right timing?',hint:'A full pipeline of wrong-fit clients is worse than a lean pipeline of good ones. Pressure-test every entry.'},
+  {id:19,cat:'people',type:'q',q:'If the founder stepped back for three months, which parts of the commercial engine would break first?',hint:'Not hypothetically — map it specifically. Opening conversations? Proposal writing? Closing? Following up? Be uncomfortable and be precise.'},
+  {id:20,cat:'people',type:'e',q:'Put every commercial activity on the table. Who owns each one today? Who should own it? Name the gaps between those two answers.',hint:'Awareness. Outreach. First meetings. Qualification. Proposals. Closing. Nurture. Visibility. Allocate honestly — then compare to what\'s actually happening.'},
+  {id:21,cat:'people',type:'q',q:'Who on the team is genuinely commercially hungry — not just commercially competent? And what are we doing with that person?',hint:'Not everyone on the commercial team is as hungry as the founders. Find the exceptions and build the commercial system around them.'},
+  {id:22,cat:'people',type:'q',q:'Are the people who built this business from zero to here still the right people to take it to where we\'re trying to go?',hint:'Not a redundancy question — a growth question. The skills that build a business often aren\'t the same as the skills that scale one.'},
+  {id:23,cat:'people',type:'e',q:'Write down the top three commercial accountabilities of each person in this room. Don\'t look at each other\'s answers until everyone\'s done.',hint:'The mismatch between what people think they own and what the business actually needs them to own is almost always larger than expected.'},
+  {id:24,cat:'people',type:'q',q:'When something commercial isn\'t getting done, do we address the behaviour or redesign the process to route around the person?',hint:'Both have a place. But if the answer is always the latter, there\'s a leadership conversation that\'s been quietly avoided for too long.'},
+  {id:25,cat:'people',type:'q',q:'Does the leadership team share a definition of what "good commercial performance" actually looks like in this business?',hint:'Not revenue targets — the specific behaviours and weekly activities that lead there. If the answer varies, alignment is currently an illusion.'},
+  {id:26,cat:'people',type:'e',q:'Everyone rates their own commercial confidence out of 10. Then rates the team\'s commercial confidence out of 10. Read them all out.',hint:'The gap between self-score and team-score is always revealing. So is who rates themselves highest versus who others rate highest. Don\'t skip this one.'},
+  {id:27,cat:'people',type:'q',q:'Is there anyone in this business who is quietly holding back commercial progress — and does everyone in this room already know who it is?',hint:'The hardest card in the deck. But experience says: everyone usually knows. The question is whether leadership is willing to act on what they\'ve known.'},
+  {id:28,cat:'proof',type:'q',q:'What\'s the best work this business has ever done? Now — how quickly can a prospect find that story without our help?',hint:'Most businesses have more credibility than they use commercially. Proof is only an asset if it\'s packaged, findable, and placed where buyers look.'},
+  {id:29,cat:'proof',type:'e',q:'List every case study you have. Now separate the ones that show specific outcomes from the ones that just describe what you did.',hint:'Output is not proof. "We built an app" is a description. "We built an app that cut churn by 23% in six months" is a case study.'},
+  {id:30,cat:'proof',type:'q',q:'If a potential client asked for three references today, who would you call? Could you reach all three within the hour?',hint:'This isn\'t about whether clients like you — it\'s about whether proof is active and accessible, not buried in an email chain from eighteen months ago.'},
+  {id:31,cat:'proof',type:'q',q:'Which sector or problem type do we have the deepest proof in? Are we actively using that credibility to win more of the same?',hint:'Depth in one area is usually worth more commercially than breadth across many. Most businesses underuse their strongest proof.'},
+  {id:32,cat:'proof',type:'e',q:'Find five real, specific numbers from your last twelve months of client work. Time saved. Revenue impacted. Retention improved. Say them out loud.',hint:'Most businesses have the data somewhere. The issue is nobody has packaged it commercially. Five minutes here can transform a proposal.'},
+  {id:33,cat:'proof',type:'q',q:'Where is the founder\'s personal credibility strongest? Is that credibility visible externally — or does it exist only inside the business?',hint:'Public thinking, speaking, published perspectives. If the founder\'s expertise isn\'t externally visible, it\'s a commercial asset being left entirely unused.'},
+  {id:34,cat:'proof',type:'q',q:'What do we claim on our website that we couldn\'t immediately back up with a specific example if a prospect asked?',hint:'Go through it together. For every "we are experts in X" — find the proof. If it isn\'t there, the claim shouldn\'t be either.'},
+  {id:35,cat:'proof',type:'e',q:'Write a cold email using only verifiable, specific claims. No adjectives. No superlatives. Just outcomes, numbers, and named clients. Read it out loud.',hint:'This is the best discipline check on your proof. If the email feels thin or vague, that\'s a signal about proof — not writing ability.'},
+  {id:36,cat:'position',type:'q',q:'When a prospect searches for help with the problem we solve, do they find us — or our competitors?',hint:'Not a Google rankings question. A clarity question. If the buyers who need you most aren\'t finding you, your positioning isn\'t matching how they think.'},
+  {id:37,cat:'position',type:'e',q:'Ask five people outside this room to describe what we do in their own words. Write down every phrase they use. Compare it to your own language.',hint:'The gap between how the market describes you and how you describe yourself is the positioning problem made visible.'},
+  {id:38,cat:'position',type:'q',q:'Are we being compared to the right competitors at the right budget? Or has the market put us in the wrong mental category?',hint:'The category buyers put you in determines the price they\'re willing to pay. Getting in the wrong category costs more than a weak pitch.'},
+  {id:39,cat:'position',type:'q',q:'What do we want to be known for in three years? Is what we\'re doing today actively building towards that reputation?',hint:'Positioning is a long game. Most services businesses manage it reactively — they respond to what comes in rather than shaping what should come in.'},
+  {id:40,cat:'position',type:'e',q:'Write your positioning statement for a CEO. Now write it for a Head of Marketing. Are they the same — or meaningfully different?',hint:'If they\'re identical, you might be writing for nobody in particular. Different buyers have different problems. Position to both.'},
+  {id:41,cat:'position',type:'q',q:'Is there a specific sector, problem type, or client profile where we win disproportionately? Why aren\'t we doubling down on that deliberately?',hint:'Most businesses know their sweet spot. Most underinvest in it because breadth feels safer. It\'s usually the opposite.'},
+  {id:42,cat:'position',type:'q',q:'What\'s the one thing we should be saying clearly in the market that we\'re currently not saying loudly enough?',hint:'It\'s usually the thing that feels too niche, too bold, or too specific. That discomfort is exactly why it would work.'},
+  {id:43,cat:'position',type:'e',q:'Map every competitor you\'ve lost to in the last year. What are they saying that\'s resonating with buyers? Where is the gap they\'re not filling?',hint:'You\'re not looking for what they do well — you\'re looking for what the market still needs that nobody is saying clearly.'},
+  {id:44,cat:'position',type:'q',q:'If you renamed this business today — starting fresh — what would you call it and why? What does that reveal about where the current brand is falling short?',hint:'Don\'t take this literally. Use it as a diagnostic. The name people instinctively reach for often reveals what the real positioning should be.'},
+  {id:45,cat:'pace',type:'q',q:'Is there a regular commercial meeting in this business? What\'s the mood in that room — and what does that mood tell you about the pipeline?',hint:'We can tell the pipeline health of an agency just by walking into the boardroom. The atmosphere is always honest, even when the numbers aren\'t.'},
+  {id:46,cat:'pace',type:'e',q:'Map the commercial activity of the last 30 days. Outreach sent. Conversations started. Proposals issued. Follow-ups made. Lay it all out on a page.',hint:'Most businesses believe they\'re more commercially active than they are. This exercise nearly always produces a sobering silence. That silence is the starting point.'},
+  {id:47,cat:'pace',type:'q',q:'Does the business have a genuine commercial rhythm — or does it sprint when scared and rest when comfortable?',hint:'The good month that stops you doing new business. Every person in this room knows that feeling. The question is what the system does to prevent it.'},
+  {id:48,cat:'pace',type:'q',q:'What is the minimum commercial activity that must happen every single week — regardless of how busy delivery gets?',hint:'If you can\'t name it immediately, you don\'t have a rhythm — you have good intentions. Define the floor. Write it down. Protect it.'},
+  {id:49,cat:'pace',type:'e',q:'Each person names three relationships they\'ve let go quiet in the last six months. Write one specific, honest message to each. Send them before this session ends.',hint:'Not "just checking in." Something useful, specific, and brief. Restart the conversation with genuine intent. Watch what comes back within 48 hours.'},
+  {id:50,cat:'pace',type:'q',q:'How long between a new contact\'s first interaction with us and them receiving something genuinely useful — not a proposal, but actual value?',hint:'Speed of value is a signal of investment and confidence. The ones that consistently win lead with usefulness before they ever pitch.'},
+  {id:51,cat:'pace',type:'q',q:'If a genuinely great potential client came to us today, how long would it take to respond — and what would that response actually contain?',hint:'The process you run for a warm opportunity reveals more about the commercial culture of this business than any strategy document ever will.'},
+  {id:52,cat:'pace',type:'e',q:'Name the one commercial action this business has been putting off for more than 90 days. Why? And what has that delay actually cost so far?',hint:'There\'s always one. It\'s usually the most important one. Deadline it in this session. Assign a specific owner. Set a date to report back.'},
+];
+
+const AVATAR_COLORS = ['#c43c2a','#d97a2c','#1f7a7a','#9c7c2a','#5a3590','#2a6645','#b86844','#3a5a8a'];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let state = {
+  role: null,
+  me: null,            // { firstName, lastName, email, jobTitle }
+  sessionCode: null,
+  isFacilitator: false,
+  participants: [],    // [{ id, firstName, lastName, email, jobTitle, isFacilitator }]
+  selectedCards: [],   // 15 Card objects
+  currentCardIndex: 0,
+  answers: {},         // { cardId: [ { participantId, text } ] }
+  exerciseDone: {},    // { cardId: Set of participantIds }
+  timerInterval: null,
+  timerSeconds: 120,
+  myId: null,
+};
+
+// ─────────────────────────────────────────────
+// SCREEN MANAGEMENT
+// ─────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+// ─────────────────────────────────────────────
+// WELCOME / REGISTRATION
+// ─────────────────────────────────────────────
+function selectRole(role, btn) {
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.role = role;
+  document.getElementById('facilitatorForm').style.display = 'none';
+  document.getElementById('participantForm').style.display = 'none';
+  if (role === 'facilitator') {
+    document.getElementById('facilitatorForm').style.display = 'block';
+    generateSessionCode();
+  } else {
+    document.getElementById('participantForm').style.display = 'block';
+  }
+}
+
+function generateSessionCode() {
+  const words = ['CHAOS','CLEAR','SHARP','BRAVE','ALIGN','SIGNAL','FOCUS','DRIVE','BUILD','SCALE'];
+  const nums = Math.floor(Math.random() * 900) + 100;
+  const word = words[Math.floor(Math.random() * words.length)];
+  state.sessionCode = word + nums;
+  document.getElementById('generatedCode').textContent = state.sessionCode;
+}
+
+function copyCode() {
+  navigator.clipboard.writeText(state.sessionCode).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+
+function startFacilitatorSession() {
+  const fn = document.getElementById('fac-firstname').value.trim();
+  const ln = document.getElementById('fac-lastname').value.trim();
+  const em = document.getElementById('fac-email').value.trim();
+  const jt = document.getElementById('fac-jobtitle').value.trim();
+  if (!fn || !ln || !em || !jt) { alert('Please fill in all fields.'); return; }
+
+  state.myId = 'p_' + Date.now();
+  state.isFacilitator = true;
+  state.me = { id: state.myId, firstName: fn, lastName: ln, email: em, jobTitle: jt, isFacilitator: true };
+  state.participants = [state.me];
+
+  // Save to localStorage for cross-tab simulation
+  saveSession();
+  enterLobby();
+}
+
+function joinSession() {
+  const fn = document.getElementById('par-firstname').value.trim();
+  const ln = document.getElementById('par-lastname').value.trim();
+  const em = document.getElementById('par-email').value.trim();
+  const jt = document.getElementById('par-jobtitle').value.trim();
+  const code = document.getElementById('par-code').value.trim().toUpperCase();
+  if (!fn || !ln || !em || !jt || !code) { alert('Please fill in all fields including the session code.'); return; }
+
+  // Load facilitator's session
+  const saved = localStorage.getItem('chaos_session_' + code);
+  if (!saved) {
+    alert('Session not found. Check the code and try again.');
+    return;
+  }
+
+  const session = JSON.parse(saved);
+  state.sessionCode = code;
+  state.selectedCards = session.selectedCards;
+  state.myId = 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2,4);
+  state.isFacilitator = false;
+  state.me = { id: state.myId, firstName: fn, lastName: ln, email: em, jobTitle: jt, isFacilitator: false };
+
+  // Add me to session
+  session.participants.push(state.me);
+  localStorage.setItem('chaos_session_' + code, JSON.stringify(session));
+
+  state.participants = session.participants;
+  state.answers = session.answers || {};
+  state.exerciseDone = {};
+  state.currentCardIndex = session.currentCardIndex || 0;
+
+  enterLobby();
+  if (session.started) startCardSession();
+}
+
+// ─────────────────────────────────────────────
+// SESSION STORAGE (localStorage cross-tab sync)
+// ─────────────────────────────────────────────
+function saveSession() {
+  const data = {
+    sessionCode: state.sessionCode,
+    participants: state.participants,
+    selectedCards: state.selectedCards,
+    answers: state.answers,
+    currentCardIndex: state.currentCardIndex,
+    started: state.started || false,
+  };
+  localStorage.setItem('chaos_session_' + state.sessionCode, JSON.stringify(data));
+}
+
+function loadSession() {
+  if (!state.sessionCode) return null;
+  const saved = localStorage.getItem('chaos_session_' + state.sessionCode);
+  return saved ? JSON.parse(saved) : null;
+}
+
+// Poll for updates every 2s
+let pollInterval = null;
+function startPolling() {
+  pollInterval = setInterval(() => {
+    const session = loadSession();
+    if (!session) return;
+    state.participants = session.participants;
+    state.answers = session.answers || {};
+    renderLobbyParticipants();
+    document.getElementById('lobby-count').textContent = state.participants.length;
+    if (session.started && !state.started) {
+      state.started = true;
+      state.selectedCards = session.selectedCards;
+      state.currentCardIndex = session.currentCardIndex || 0;
+      startCardSession();
+    }
+    if (state.started) {
+      // Sync card index
+      if (session.currentCardIndex !== undefined && session.currentCardIndex !== state.currentCardIndex) {
+        state.currentCardIndex = session.currentCardIndex;
+        displayCurrentCard();
+      }
+      // Sync exercise completions
+      if (session.exerciseDone) {
+        state.exerciseDone = session.exerciseDone;
+        updateExerciseCompletion();
+      }
+      // Update submission status
+      updateSubmissionStatus();
+    }
+  }, 2000);
+}
+
+// ─────────────────────────────────────────────
+// LOBBY
+// ─────────────────────────────────────────────
+function enterLobby() {
+  document.getElementById('lobby-code').textContent = state.sessionCode;
+  renderLobbyParticipants();
+  document.getElementById('lobby-count').textContent = state.participants.length;
+  document.getElementById('facilitator-start-wrap').style.display = state.isFacilitator ? 'block' : 'none';
+  document.getElementById('participant-wait-wrap').style.display = state.isFacilitator ? 'none' : 'block';
+  showScreen('lobby');
+  startPolling();
+}
+
+function renderLobbyParticipants() {
+  const grid = document.getElementById('participantsGrid');
+  grid.innerHTML = state.participants.map((p, i) => `
+    <div class="participant-card">
+      <div class="participant-avatar" style="background:${AVATAR_COLORS[i % AVATAR_COLORS.length]}22;color:${AVATAR_COLORS[i % AVATAR_COLORS.length]};">
+        ${p.firstName[0]}${p.lastName[0]}
+      </div>
+      ${p.isFacilitator ? '<div class="facilitator-badge">Facilitator</div>' : ''}
+      <div class="participant-name">${p.firstName} ${p.lastName}</div>
+      <div class="participant-title">${p.jobTitle}</div>
+    </div>
+  `).join('');
+  document.getElementById('lobby-count').textContent = state.participants.length;
+  document.getElementById('session-participants-label').textContent = state.participants.length + ' participants';
+}
+
+// ─────────────────────────────────────────────
+// BEGIN SESSION (facilitator only)
+// ─────────────────────────────────────────────
+function beginSession() {
+  // Select 15 random cards
+  const shuffled = [...CARDS].sort(() => Math.random() - 0.5);
+  state.selectedCards = shuffled.slice(0, 15);
+  state.currentCardIndex = 0;
+  state.answers = {};
+  state.exerciseDone = {};
+  state.started = true;
+
+  const session = loadSession();
+  session.selectedCards = state.selectedCards;
+  session.started = true;
+  session.currentCardIndex = 0;
+  session.answers = {};
+  session.exerciseDone = {};
+  localStorage.setItem('chaos_session_' + state.sessionCode, JSON.stringify(session));
+
+  startCardSession();
+}
+
+// ─────────────────────────────────────────────
+// CARD SESSION
+// ─────────────────────────────────────────────
+function startCardSession() {
+  clearInterval(pollInterval);
+  showScreen('session');
+  state.currentCardIndex = 0;
+  displayCurrentCard();
+  startPolling();
+}
+
+function displayCurrentCard() {
+  const card = state.selectedCards[state.currentCardIndex];
+  const cardNum = state.currentCardIndex + 1;
+  const total = 15;
+
+  // Progress
+  document.getElementById('current-card-num').textContent = cardNum;
+  document.getElementById('progressFill').style.width = ((cardNum / total) * 100) + '%';
+
+  // Card content
+  document.getElementById('cardCatPip').style.background = CAT_COLORS[card.cat];
+  document.getElementById('cardCatLabel').textContent = CAT_LABELS[card.cat];
+  document.getElementById('cardTypeTag').textContent = card.type === 'e' ? '✦ Team Exercise' : 'Discussion Question';
+  document.getElementById('cardNumBig').textContent = String(card.id).padStart(2,'0');
+  document.getElementById('cardQuestionText').textContent = card.q;
+  document.getElementById('cardHintText').textContent = card.hint;
+
+  // Animate
+  const content = document.getElementById('cardContent');
+  content.classList.remove('card-reveal');
+  void content.offsetWidth;
+  content.classList.add('card-reveal');
+
+  // Answer/Exercise area
+  const isExercise = card.type === 'e';
+  document.getElementById('questionAnswerArea').style.display = isExercise ? 'none' : 'block';
+  document.getElementById('exerciseArea').style.display = isExercise ? 'block' : 'none';
+  document.getElementById('submissionStatusWrap').style.display = isExercise ? 'none' : 'block';
+  document.getElementById('allSubmittedBanner').classList.remove('visible');
+
+  // Reset answer field
+  const textarea = document.getElementById('myAnswerText');
+  textarea.value = '';
+  textarea.disabled = false;
+  document.getElementById('submitAnswerBtn').disabled = false;
+  document.getElementById('submitAnswerBtn').textContent = 'Submit Answer';
+
+  // Reset exercise
+  const doneBtn = document.getElementById('exerciseDoneBtn');
+  doneBtn.classList.remove('done');
+  doneBtn.textContent = '✓ I\'ve Completed This Exercise';
+  doneBtn.disabled = false;
+
+  // Render submission status
+  if (!isExercise) renderSubmissionStatus(card.id);
+
+  // Completion avatars for exercises
+  renderCompletionAvatars(card.id);
+
+  // Timer
+  clearInterval(state.timerInterval);
+  if (!isExercise) {
+    document.getElementById('timerWrap').style.opacity = '1';
+    startTimer(120, card.id);
+  } else {
+    document.getElementById('timerWrap').style.opacity = '0.3';
+    document.getElementById('timerNumber').textContent = '—';
+    document.getElementById('timerCircle').style.strokeDashoffset = '0';
+  }
+
+  // Check if I already answered
+  const existing = (state.answers[card.id] || []).find(a => a.participantId === state.myId);
+  if (existing) {
+    textarea.value = existing.text;
+    textarea.disabled = true;
+    document.getElementById('submitAnswerBtn').disabled = true;
+    document.getElementById('submitAnswerBtn').textContent = 'Answer Submitted ✓';
+  }
+
+  // Check exercise done
+  const exDone = state.exerciseDone[card.id] || [];
+  if (exDone.includes(state.myId)) {
+    doneBtn.classList.add('done');
+    doneBtn.textContent = '✓ Marked as Done';
+    doneBtn.disabled = true;
+  }
+}
+
+// ─────────────────────────────────────────────
+// TIMER
+// ─────────────────────────────────────────────
+function startTimer(seconds, cardId) {
+  state.timerSeconds = seconds;
+  updateTimerDisplay(seconds, seconds);
+
+  state.timerInterval = setInterval(() => {
+    state.timerSeconds--;
+    updateTimerDisplay(state.timerSeconds, seconds);
+    if (state.timerSeconds <= 0) {
+      clearInterval(state.timerInterval);
+      onTimerEnd(cardId);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay(remaining, total) {
+  const mins = Math.floor(remaining / 60);
+  const secs = remaining % 60;
+  document.getElementById('timerNumber').textContent = mins + ':' + String(secs).padStart(2,'0');
+  const circumference = 163;
+  const offset = circumference * (1 - remaining / total);
+  document.getElementById('timerCircle').style.strokeDashoffset = offset;
+  const pct = remaining / total;
+  const color = pct > 0.5 ? CAT_COLORS['pace'] : pct > 0.25 ? CAT_COLORS['proof'] : CAT_COLORS['proposition'];
+  document.getElementById('timerCircle').style.stroke = color;
+}
+
+function onTimerEnd(cardId) {
+  // Lock answer field
+  document.getElementById('myAnswerText').disabled = true;
+  document.getElementById('submitAnswerBtn').disabled = true;
+  document.getElementById('submitAnswerBtn').textContent = 'Time\'s Up';
+
+  // Auto-save whatever they had typed
+  const text = document.getElementById('myAnswerText').value.trim();
+  if (text) saveAnswer(cardId, text);
+
+  // Facilitator advances after a short pause
+  if (state.isFacilitator) {
+    setTimeout(() => advanceCard(), 3000);
+  }
+}
+
+// ─────────────────────────────────────────────
+// ANSWERS
+// ─────────────────────────────────────────────
+function submitMyAnswer() {
+  const card = state.selectedCards[state.currentCardIndex];
+  const text = document.getElementById('myAnswerText').value.trim();
+  if (!text) { alert('Please write something before submitting.'); return; }
+  saveAnswer(card.id, text);
+  document.getElementById('myAnswerText').disabled = true;
+  document.getElementById('submitAnswerBtn').disabled = true;
+  document.getElementById('submitAnswerBtn').textContent = 'Answer Submitted ✓';
+  renderSubmissionStatus(card.id);
+  checkAllAnswered(card.id);
+}
+
+function saveAnswer(cardId, text) {
+  if (!state.answers[cardId]) state.answers[cardId] = [];
+  const existing = state.answers[cardId].findIndex(a => a.participantId === state.myId);
+  const me = state.me;
+  const entry = { participantId: state.myId, firstName: me.firstName, lastName: me.lastName, jobTitle: me.jobTitle, text };
+  if (existing >= 0) state.answers[cardId][existing] = entry;
+  else state.answers[cardId].push(entry);
+
+  const session = loadSession();
+  if (session) {
+    session.answers = state.answers;
+    localStorage.setItem('chaos_session_' + state.sessionCode, JSON.stringify(session));
+  }
+}
+
+// Show who has submitted (names only, no answer content)
+function renderSubmissionStatus(cardId) {
+  const answers = state.answers[cardId] || [];
+  const submittedIds = answers.map(a => a.participantId);
+  const list = document.getElementById('answerStatusList');
+  list.innerHTML = state.participants.map((p, i) => {
+    const done = submittedIds.includes(p.id);
+    return `<div class="answer-status-item ${done ? 'submitted' : ''}">
+      <div class="status-dot"></div>
+      <span class="status-name">${p.firstName} ${p.lastName}</span>
+      <span class="status-label">${done ? 'Answered' : 'Thinking...'}</span>
+    </div>`;
+  }).join('');
+}
+
+// Check if everyone has answered — auto-advance if so
+function checkAllAnswered(cardId) {
+  const answers = state.answers[cardId] || [];
+  const submittedIds = answers.map(a => a.participantId);
+  const allDone = state.participants.every(p => submittedIds.includes(p.id));
+  if (allDone) {
+    document.getElementById('allSubmittedBanner').classList.add('visible');
+    if (state.isFacilitator) {
+      clearInterval(state.timerInterval);
+      setTimeout(() => advanceCard(), 2000);
+    }
+  }
+}
+
+function updateSubmissionStatus() {
+  const card = state.selectedCards[state.currentCardIndex];
+  if (!card || card.type !== 'q') return;
+  renderSubmissionStatus(card.id);
+  checkAllAnswered(card.id);
+}
+
+// ─────────────────────────────────────────────
+// EXERCISES
+// ─────────────────────────────────────────────
+function markExerciseDone() {
+  const card = state.selectedCards[state.currentCardIndex];
+  if (!state.exerciseDone[card.id]) state.exerciseDone[card.id] = [];
+  if (!state.exerciseDone[card.id].includes(state.myId)) {
+    state.exerciseDone[card.id].push(state.myId);
+  }
+
+  const btn = document.getElementById('exerciseDoneBtn');
+  btn.classList.add('done');
+  btn.textContent = '✓ Marked as Done';
+  btn.disabled = true;
+
+  // Save
+  const session = loadSession();
+  if (session) {
+    session.exerciseDone = state.exerciseDone;
+    localStorage.setItem('chaos_session_' + state.sessionCode, JSON.stringify(session));
+  }
+
+  renderCompletionAvatars(card.id);
+  checkExerciseComplete(card.id);
+}
+
+function renderCompletionAvatars(cardId) {
+  const done = state.exerciseDone[cardId] || [];
+  const avatars = document.getElementById('completionAvatars');
+  avatars.innerHTML = state.participants.map((p, i) => {
+    const isDone = done.includes(p.id);
+    return `<div class="completion-avatar ${isDone ? 'done' : ''}">
+      <div class="ca-dot"></div>
+      ${p.firstName}
+    </div>`;
+  }).join('');
+}
+
+function updateExerciseCompletion() {
+  const card = state.selectedCards[state.currentCardIndex];
+  if (!card || card.type !== 'e') return;
+  renderCompletionAvatars(card.id);
+  checkExerciseComplete(card.id);
+}
+
+function checkExerciseComplete(cardId) {
+  const done = state.exerciseDone[cardId] || [];
+  const allDone = state.participants.every(p => done.includes(p.id));
+  if (allDone && state.isFacilitator) {
+    setTimeout(() => advanceCard(), 2000);
+  }
+}
+
+// ─────────────────────────────────────────────
+// ADVANCE CARD
+// ─────────────────────────────────────────────
+function advanceCard() {
+  clearInterval(state.timerInterval);
+  const nextIndex = state.currentCardIndex + 1;
+
+  if (nextIndex >= 15) {
+    // Session complete
+    if (state.isFacilitator) {
+      const session = loadSession();
+      session.completed = true;
+      localStorage.setItem('chaos_session_' + state.sessionCode, JSON.stringify(session));
+    }
+    showReport();
+    return;
+  }
+
+  // Transition animation
+  const trans = document.getElementById('cardTransition');
+  document.getElementById('ctNumber').textContent = String(nextIndex + 1).padStart(2,'0');
+  trans.classList.add('active');
+
+  setTimeout(() => {
+    trans.classList.remove('active');
+    state.currentCardIndex = nextIndex;
+
+    if (state.isFacilitator) {
+      const session = loadSession();
+      session.currentCardIndex = nextIndex;
+      localStorage.setItem('chaos_session_' + state.sessionCode, JSON.stringify(session));
+    }
+
+    displayCurrentCard();
+  }, 1200);
+}
+
+// ─────────────────────────────────────────────
+// REPORT
+// ─────────────────────────────────────────────
+function showReport() {
+  clearInterval(pollInterval);
+  clearInterval(state.timerInterval);
+
+  const session = loadSession() || {};
+  const allAnswers = session.answers || state.answers;
+
+  showScreen('report');
+
+  if (state.isFacilitator) {
+    // ── FACILITATOR: full on-screen report ──
+    document.getElementById('facilitatorReport').style.display = 'block';
+    document.getElementById('participantComplete').style.display = 'none';
+
+    document.getElementById('reportMeta').textContent =
+      `Session ${state.sessionCode} · ${state.participants.length} participants · ${state.selectedCards.length} cards`;
+
+    const body = document.getElementById('reportBody');
+    let html = '';
+
+    state.selectedCards.forEach((card, i) => {
+      const answers = allAnswers[card.id] || [];
+      const color = CAT_COLORS[card.cat];
+      const answersHtml = answers.length
+        ? answers.map(a => `
+          <div class="rcb-answer">
+            <div class="rcb-answer-who">
+              <div class="rcb-answer-name">${a.firstName} ${a.lastName}</div>
+              <div class="rcb-answer-role">${a.jobTitle}</div>
+            </div>
+            <div class="rcb-answer-text">${a.text || '<em style="opacity:0.4">No answer recorded</em>'}</div>
+          </div>`).join('')
+        : `<div style="font-size:13px;color:var(--muted);font-style:italic;">No answers recorded for this card.</div>`;
+
+      html += `
+        <div class="report-card-block" style="border-left-color:${color}40;">
+          <div class="rcb-meta">
+            <span class="rcb-num">Card ${String(i+1).padStart(2,'0')}</span>
+            <span class="rcb-cat" style="background:${color}22;color:${color};">${CAT_LABELS[card.cat]}</span>
+            <span class="rcb-type">${card.type === 'e' ? '✦ Exercise' : 'Question'}</span>
+          </div>
+          <div class="rcb-question">${card.q}</div>
+          <div class="rcb-answers">${answersHtml}</div>
+        </div>`;
+    });
+
+    // ── Bottom action bar ──
+    html += `
+      <div class="report-download">
+        <button class="btn-primary" style="max-width:320px;" onclick="emailReportToSelf()">
+          ✉ Email questions &amp; answers to yourself
+        </button>
+        <button class="btn-ghost" style="max-width:220px;" onclick="printReport()">Print / Save as PDF</button>
+        <button class="btn-ghost" style="max-width:220px;" onclick="restartSession()">Run Another Session</button>
+      </div>`;
+
+    body.innerHTML = html;
+
+    // Trigger participant emails
+    sendParticipantEmails(allAnswers);
+
+  } else {
+    // ── PARTICIPANT: session complete screen ──
+    document.getElementById('facilitatorReport').style.display = 'none';
+    document.getElementById('participantComplete').style.display = 'flex';
+    sendMyAnswerEmail(allAnswers);
+  }
+}
+
+// ─────────────────────────────────────────────
+// FACILITATOR: email full report to themselves
+// ─────────────────────────────────────────────
+function emailReportToSelf() {
+  const session = loadSession() || {};
+  const allAnswers = session.answers || state.answers;
+  const me = state.me;
+
+  let body = `Hi ${me.firstName},\n\nHere is the full Chaos Cards session report (${state.sessionCode}).\n`;
+  body += `Team: ${state.participants.map(p => `${p.firstName} ${p.lastName} (${p.jobTitle})`).join(', ')}\n\n`;
+  body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  state.selectedCards.forEach((card, i) => {
+    const answers = allAnswers[card.id] || [];
+    body += `CARD ${String(i+1).padStart(2,'0')} — ${CAT_LABELS[card.cat].toUpperCase()} (${card.type === 'e' ? 'Exercise' : 'Question'})\n`;
+    body += `${card.q}\n\n`;
+    if (answers.length) {
+      answers.forEach(a => {
+        body += `${a.firstName} ${a.lastName} (${a.jobTitle}):\n${a.text || '(No answer recorded)'}\n\n`;
+      });
+    } else {
+      body += `(No answers recorded for this card)\n\n`;
+    }
+    body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  });
+
+  body += `Chaos Cards · Chaos Over · chaosover.com`;
+
+  const subject = encodeURIComponent(`Chaos Cards full report — Session ${state.sessionCode}`);
+  const encodedBody = encodeURIComponent(body);
+  window.location.href = `mailto:${me.email}?subject=${subject}&body=${encodedBody}`;
+}
+
+// ─────────────────────────────────────────────
+// PARTICIPANT: email full team report to them
+// ─────────────────────────────────────────────
+function sendMyAnswerEmail(allAnswers) {
+  const me = state.me;
+  let body = `Hi ${me.firstName},\n\nHere is the full team report from your Chaos Cards workshop (Session ${state.sessionCode}).\n`;
+  body += `Use this as your reference going into the debrief with your facilitator.\n\n`;
+  body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  state.selectedCards.forEach((card, i) => {
+    const answers = allAnswers[card.id] || [];
+    body += `CARD ${String(i+1).padStart(2,'0')} — ${CAT_LABELS[card.cat].toUpperCase()} (${card.type === 'e' ? 'Exercise' : 'Question'})\n`;
+    body += `${card.q}\n\n`;
+    if (answers.length) {
+      answers.forEach(a => {
+        body += `${a.firstName} ${a.lastName} (${a.jobTitle}):\n${a.text || '(No answer recorded)'}\n\n`;
+      });
+    } else {
+      body += `(No answers recorded for this card)\n\n`;
+    }
+    body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  });
+
+  body += `Chaos Cards · Chaos Over · chaosover.com`;
+
+  const subject = encodeURIComponent(`Chaos Cards team report — Session ${state.sessionCode}`);
+  const encodedBody = encodeURIComponent(body);
+  setTimeout(() => { window.location.href = `mailto:${me.email}?subject=${subject}&body=${encodedBody}`; }, 1500);
+}
+
+// ─────────────────────────────────────────────
+// FACILITATOR: send full report to each participant
+// ─────────────────────────────────────────────
+function sendParticipantEmails(allAnswers) {
+  const notice = document.createElement('div');
+  notice.style.cssText = 'background:rgba(42,144,144,0.1);border:1px solid rgba(42,144,144,0.3);border-radius:10px;padding:20px 24px;margin-bottom:32px;';
+  notice.innerHTML = `
+    <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#2a9090;margin-bottom:8px;">Send Full Report to Participants</div>
+    <p style="font-size:13px;color:rgba(240,236,227,0.6);line-height:1.6;margin-bottom:14px;">
+      Each button opens a pre-filled email with all 15 cards and every team member's answer for that participant.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;" id="participantEmailBtns"></div>
+  `;
+
+  const body = document.getElementById('reportBody');
+  body.insertBefore(notice, body.firstChild);
+
+  const btnWrap = document.getElementById('participantEmailBtns');
+  state.participants.filter(p => !p.isFacilitator).forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'btn-ghost';
+    btn.style.cssText = 'width:auto;padding:10px 20px;font-size:13px;margin-top:0;';
+    btn.textContent = `✉ ${p.firstName} ${p.lastName}`;
+    btn.onclick = () => openParticipantEmail(p, allAnswers);
+    btnWrap.appendChild(btn);
+  });
+}
+
+function openParticipantEmail(participant, allAnswers) {
+  let body = `Hi ${participant.firstName},\n\nHere is the full team report from your Chaos Cards workshop (Session ${state.sessionCode}).\n`;
+  body += `Use this alongside your facilitator's debrief.\n\n`;
+  body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  state.selectedCards.forEach((card, i) => {
+    const answers = allAnswers[card.id] || [];
+    body += `CARD ${String(i+1).padStart(2,'0')} — ${CAT_LABELS[card.cat].toUpperCase()} (${card.type === 'e' ? 'Exercise' : 'Question'})\n`;
+    body += `${card.q}\n\n`;
+    if (answers.length) {
+      answers.forEach(a => {
+        body += `${a.firstName} ${a.lastName} (${a.jobTitle}):\n${a.text || '(No answer recorded)'}\n\n`;
+      });
+    } else {
+      body += `(No answers recorded for this card)\n\n`;
+    }
+    body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  });
+
+  body += `Chaos Cards · Chaos Over · chaosover.com`;
+
+  const subject = encodeURIComponent(`Chaos Cards team report — Session ${state.sessionCode}`);
+  const encodedBody = encodeURIComponent(body);
+  window.location.href = `mailto:${participant.email}?subject=${subject}&body=${encodedBody}`;
+}
+
+function printReport() { window.print(); }
+function restartSession() { location.reload(); }
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+showScreen('welcome');
+
+// Petal gradient parallax — slow drift on scroll
+(function () {
+  const bg = document.getElementById('gradBg');
+  if (!bg) return;
+  let y = 0, ticking = false;
+  function update() { bg.style.transform = `translate3d(0, ${-y * 0.35}px, 0)`; ticking = false; }
+  window.addEventListener('scroll', () => {
+    y = window.scrollY;
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

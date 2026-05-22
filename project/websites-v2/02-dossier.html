@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · The Dossier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="co.css" rel="stylesheet">
+<style>
+  /* Dossier — feels like a confidential document folder. Heavy metadata, file numbers,
+     classified stamps, archival type. Calmer than the motion site. */
+  body {
+    background: var(--ink);
+    background-image:
+      linear-gradient(0deg, rgba(255,255,255,0.012) 50%, transparent 50%);
+    background-size: 100% 4px;
+  }
+  .doc { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+  .meta-strip { padding: 16px 40px; }
+  .meta-strip .lime { color: var(--lime); }
+  /* Folder tab */
+  .folder-tab {
+    display: inline-block; padding: 6px 14px; background: var(--lime); color: var(--ink);
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    margin-top: 28px;
+  }
+  /* Hero */
+  .hero { padding: 60px 0 80px; border-bottom: 1px solid var(--line); }
+  .hero-grid {
+    display: grid; grid-template-columns: 200px 1fr 200px; gap: 40px;
+    align-items: start; padding-top: 40px;
+  }
+  .left-col, .right-col {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dim); display: flex; flex-direction: column; gap: 22px;
+  }
+  .left-col strong, .right-col strong { font-weight: 700; color: var(--bone); display: block; margin-bottom: 4px; }
+  .right-col { text-align: right; }
+  .hero h1 { font-size: clamp(96px, 14vw, 240px); margin: 0; }
+  .hero .strap { margin-top: 28px; font-family: 'Big Shoulders Display'; font-weight: 700; font-size: clamp(24px, 2.2vw, 36px); line-height: 1.2; letter-spacing: -0.01em; max-width: 760px; }
+  .hero .strap .lime { color: var(--lime); }
+
+  /* Stamp */
+  .stamp {
+    position: absolute; right: 80px; top: 220px;
+    width: 200px; height: 200px;
+    border: 3px solid var(--lime); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(-12deg);
+    color: var(--lime);
+  }
+  .stamp .inner {
+    border: 2px solid var(--lime); border-radius: 50%;
+    width: 86%; height: 86%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    text-align: center;
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+  }
+  .stamp .inner .big { font-size: 28px; letter-spacing: -0.02em; line-height: 0.9; }
+  .stamp .inner .small { font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* Section header — file divider style */
+  .section-head {
+    display: grid; grid-template-columns: 200px 1fr 200px; gap: 40px;
+    align-items: end; padding: 80px 0 24px;
+    border-bottom: 2px solid var(--bone);
+  }
+  .section-head .label { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+  .section-head h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(48px, 6vw, 92px); line-height: 0.92; letter-spacing: -0.02em; }
+  .section-head .ref { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); text-align: right; }
+
+  /* Proposition — letter / brief */
+  .brief {
+    padding: 40px 0; display: grid; grid-template-columns: 200px 1fr 200px; gap: 40px;
+  }
+  .brief .meta { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); }
+  .brief .body { font-size: 19px; line-height: 1.65; max-width: 720px; }
+  .brief .body p + p { margin-top: 18px; }
+  .brief .body .lime-bg { background: var(--lime); color: var(--ink); padding: 0 .12em; }
+  .brief .body em { font-style: normal; color: var(--lime); font-weight: 700; }
+
+  /* Service rows — like classified file entries */
+  .service {
+    border-bottom: 1px solid var(--line);
+    padding: 40px 0;
+    display: grid; grid-template-columns: 200px 1fr 200px; gap: 40px;
+    align-items: start;
+  }
+  .service .ref {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim);
+  }
+  .service .ref strong { color: var(--lime); display: block; margin-bottom: 6px; font-weight: 700; }
+  .service .body h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 48px; letter-spacing: -0.02em; line-height: 1; margin-bottom: 14px; }
+  .service .body .blurb { font-size: 16px; line-height: 1.55; max-width: 620px; color: var(--dim); }
+  .service .body .deliverables {
+    margin-top: 20px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .service .body .deliverables span {
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 10px; border: 1px solid var(--line); color: var(--dim);
+  }
+  .service .price {
+    text-align: right;
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: 36px; line-height: 1; letter-spacing: -0.02em;
+  }
+  .service .price small {
+    display: block; margin-top: 8px;
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--dim); font-weight: 400;
+  }
+
+  /* Sign-off */
+  .signoff {
+    padding: 100px 0; text-align: center;
+    border-top: 2px solid var(--bone);
+  }
+  .signoff h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(56px, 9vw, 140px); line-height: 0.88; letter-spacing: -0.02em; }
+  .signoff h2 .dot { color: var(--lime); }
+  .signoff .btn { display: inline-block; margin-top: 36px; padding: 18px 30px; background: var(--lime); color: var(--ink); font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; }
+  .signoff .file-no { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-top: 80px; }
+
+  /* Decorative file edge */
+  .perforation {
+    height: 12px; background: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 12px);
+  }
+</style>
+</head>
+<body>
+
+<!-- Top meta strip -->
+<div class="meta-strip">
+  <div><span class="lime">CO/01</span> · FILE — COMMERCIAL ENGINE</div>
+  <div>CLASSIFIED · FOUNDER EYES</div>
+  <div>02 / 2026 · UK</div>
+</div>
+
+<div class="doc">
+
+  <div class="folder-tab">Open file CO/01</div>
+
+  <section class="hero" style="position: relative;">
+    <div class="hero-grid">
+      <div class="left-col">
+        <div><strong>File</strong>CO/01.2026</div>
+        <div><strong>Subject</strong>Founder-led B2B</div>
+        <div><strong>Author</strong>Chaos Over Ltd</div>
+        <div><strong>Status</strong>Open</div>
+      </div>
+      <div>
+        <h1 class="display"><span class="co-wordmark"><span class="strike-line">CHAOS</span><br/>OVER<span class="dot">.</span></span></h1>
+        <p class="strap">From chaos, <span class="lime">a commercial engine</span>. An intelligent commercial-strategy practice for founder-led B2B owners.</p>
+      </div>
+      <div class="right-col">
+        <div><strong>Service</strong>Strategy · Systems</div>
+        <div><strong>Sector</strong>B2B Services<br/>B2B SaaS</div>
+        <div><strong>Engagement</strong>4–12 weeks</div>
+        <div><strong>Office</strong>London, UK</div>
+      </div>
+    </div>
+    <div class="stamp" aria-hidden="true">
+      <div class="inner">
+        <div class="big">CHAOS<br/>OVER.</div>
+        <div class="small">CO · 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="perforation"></div>
+
+  <!-- Proposition -->
+  <div class="section-head">
+    <div class="label">[ Section 01 ]</div>
+    <h2>The Brief.</h2>
+    <div class="ref">Ref: PR/2026</div>
+  </div>
+  <section class="brief">
+    <div class="meta">
+      RE: FOUNDER-LED B2B<br/>DATE: 02 / 2026<br/>FROM: CO/01
+    </div>
+    <div class="body">
+      <p>Most founder-led B2B companies don't have a pipeline problem — they have a <em>clarity</em> problem.</p>
+      <p>The offer is fuzzy. The pricing is reactive. The pipeline depends on the founder being in every conversation. The team is busy but the business isn't compounding.</p>
+      <p>We're not another agency, fractional, or framework merchant. We work like a forensic accountant for your commercial engine: we read the file, find the lever, and install the system that makes growth a <span class="lime-bg">habit</span> instead of a heroic act.</p>
+    </div>
+    <div class="meta" style="text-align: right;">
+      CC: FOUNDER<br/>CC: HEAD OF COMMERCIAL<br/>FILE: OPEN
+    </div>
+  </section>
+
+  <div class="perforation"></div>
+
+  <!-- Services as classified entries -->
+  <div class="section-head">
+    <div class="label">[ Section 02 ]</div>
+    <h2>The Engagements.</h2>
+    <div class="ref">Ref: SV/2026</div>
+  </div>
+  <section>
+    <div class="service">
+      <div class="ref"><strong>SV-01</strong>Diagnostic<br/>4 weeks · fixed-fee</div>
+      <div class="body">
+        <h3>Diagnostic</h3>
+        <p class="blurb">A deep audit of your commercial engine. We talk to your customers, ex-customers, and the deals you lost. We pull apart your funnel, pricing, and team's day-to-day. You leave with one map and the three highest-leverage moves.</p>
+        <div class="deliverables">
+          <span>ICP audit</span><span>Win/loss interviews</span><span>Pricing tear-down</span><span>Pipeline review</span><span>Founder time audit</span>
+        </div>
+      </div>
+      <div class="price">£18k<small>From — fixed</small></div>
+    </div>
+    <div class="service">
+      <div class="ref"><strong>SV-02</strong>Strategy &amp; Positioning<br/>8 weeks · fixed-fee</div>
+      <div class="body">
+        <h3>Strategy &amp; Positioning</h3>
+        <p class="blurb">Sharpen the wedge. Re-architect the offer ladder, narrative, and pricing model. Land the version of your business that the right customers actually want to buy — at the price you actually want to charge.</p>
+        <div class="deliverables">
+          <span>Wedge offer</span><span>Messaging house</span><span>Pricing architecture</span><span>Sales motion</span><span>Pitch system</span>
+        </div>
+      </div>
+      <div class="price">£42k<small>From — fixed</small></div>
+    </div>
+    <div class="service">
+      <div class="ref"><strong>SV-03</strong>Engine Build<br/>12 weeks · fixed-fee</div>
+      <div class="body">
+        <h3>Engine Build</h3>
+        <p class="blurb">Stand up the operating system. Pipeline, playbooks, dashboards, cadence. Your team runs it; we sit in the room until it sticks, then we leave. Includes 90 days of embedded coaching.</p>
+        <div class="deliverables">
+          <span>CRM &amp; pipeline</span><span>Sales playbook</span><span>Operating cadence</span><span>KPI dashboards</span><span>90-day coaching</span>
+        </div>
+      </div>
+      <div class="price">£85k<small>From — fixed</small></div>
+    </div>
+  </section>
+
+  <div class="perforation"></div>
+
+  <!-- Sign-off -->
+  <section class="signoff">
+    <h2 class="display">Open the file<span class="dot">.</span></h2>
+    <a class="btn" href="mailto:hello@chaosover.co">Request a diagnostic →</a>
+    <div class="file-no">FILE NO. CO/01 — END OF DOCUMENT</div>
+  </section>
+
+</div>
+
+<div class="meta-foot">
+  <div>© 2026 Chaos Over Ltd</div>
+  <div>chaosover.co · hello@chaosover.co</div>
+  <div>CONFIDENTIAL — FOR FOUNDER EYES</div>
+</div>
+
+</body>
+</html>

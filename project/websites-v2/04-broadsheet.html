@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · Broadsheet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="co.css" rel="stylesheet">
+<style>
+  /* Broadsheet — newspaper feel. Dense, classified-ad-grid for services,
+     dateline + folio + multi-column body text. Reads serious. */
+  body {
+    background: #0E0E0C;
+    color: var(--bone);
+  }
+  .paper { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+
+  /* Dateline */
+  .dateline {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 14px 0; border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+  }
+  .dateline .lime { color: var(--lime); }
+
+  /* Masthead */
+  .masthead {
+    text-align: center; padding: 50px 0 30px;
+    border-bottom: 4px double var(--bone);
+    position: relative;
+  }
+  .masthead .title {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(80px, 14vw, 220px); line-height: 0.84; letter-spacing: -0.02em;
+    display: inline-block;
+  }
+  .masthead .title .strike-line { display: inline-block; }
+  .masthead .title .dot { color: var(--lime); }
+  .masthead .strap {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono'; font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--dim);
+  }
+  .masthead .strap .lime { color: var(--lime); }
+  .masthead-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+  }
+
+  /* Front-page grid */
+  .front {
+    display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 32px;
+    padding: 40px 0; border-bottom: 4px double var(--bone);
+  }
+  .front .col h3 {
+    font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 28px; letter-spacing: -0.02em; line-height: 1; margin-bottom: 12px;
+  }
+  .front .col .deck {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+    margin-bottom: 16px;
+  }
+  .front .col p { font-size: 15px; line-height: 1.55; }
+  .front .col p + p { margin-top: 12px; }
+  .front .col p .lime { color: var(--lime); font-weight: 700; }
+  .front .col p .lime-bg { background: var(--lime); color: var(--ink); padding: 0 .1em; }
+
+  .front .lead h2 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(56px, 7vw, 92px); line-height: 0.9; letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .front .lead .deck { margin-bottom: 24px; font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime); }
+  .front .lead .body {
+    column-count: 2; column-gap: 32px; column-rule: 1px solid var(--line);
+    font-size: 16px; line-height: 1.6;
+  }
+  .front .lead .body p { break-inside: avoid; margin-bottom: 14px; }
+  .front .lead .body p:first-child::first-letter {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    float: left; font-size: 72px; line-height: 0.85; padding: 0 10px 0 0; color: var(--lime);
+  }
+  .front .lead .byline {
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+  }
+
+  /* Classifieds — services */
+  .classifieds {
+    padding: 60px 0 80px;
+    border-bottom: 4px double var(--bone);
+  }
+  .classifieds .section-title {
+    text-align: center; margin-bottom: 40px;
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(56px, 8vw, 110px); line-height: 0.9; letter-spacing: -0.02em;
+  }
+  .classifieds .section-title .dot { color: var(--lime); }
+  .classifieds-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-top: 1px solid var(--bone); border-bottom: 1px solid var(--bone); margin-bottom: 32px;
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+  }
+  .ad-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .ad {
+    background: var(--ink); padding: 32px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .ad .ref { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); }
+  .ad h4 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 40px; letter-spacing: -0.02em; line-height: 1; }
+  .ad .meta { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); padding-bottom: 12px; border-bottom: 1px dashed var(--line); }
+  .ad .body { font-size: 14px; line-height: 1.5; color: var(--dim); }
+  .ad ul { list-style: none; padding: 0; margin-top: 10px; font-size: 13px; line-height: 1.7; }
+  .ad ul li::before { content: '·  '; color: var(--lime); }
+  .ad .foot {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; border-top: 1px solid var(--line);
+  }
+  .ad .price { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 24px; letter-spacing: -0.01em; color: var(--lime); }
+  .ad .apply { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .ad .apply::after { content: ' →'; color: var(--lime); }
+
+  /* Editorial — method */
+  .editorial {
+    padding: 60px 0;
+    border-bottom: 4px double var(--bone);
+  }
+  .editorial-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 2px solid var(--bone);
+    padding-bottom: 14px; margin-bottom: 30px;
+  }
+  .editorial-head h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(40px, 6vw, 80px); letter-spacing: -0.02em; line-height: 0.9; }
+  .editorial-head .meta { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+  .editorial-body {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .step {
+    padding-top: 14px; border-top: 2px solid var(--lime);
+  }
+  .step .pp { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+  .step h5 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 32px; letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 8px; }
+  .step p { font-size: 14px; line-height: 1.5; color: var(--dim); }
+
+  /* Letters / contact */
+  .letters {
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .letters h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(64px, 10vw, 180px); line-height: 0.88; letter-spacing: -0.02em; }
+  .letters h2 .dot { color: var(--lime); }
+  .letters .btn { display: inline-block; margin-top: 32px; padding: 18px 32px; background: var(--lime); color: var(--ink); font-family: 'JetBrains Mono'; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; }
+  .letters .colophon { margin-top: 50px; font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+
+  /* Folio (page number style) */
+  .folio {
+    display: flex; justify-content: space-between; padding: 18px 0;
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+    border-top: 1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<div class="paper">
+
+  <div class="dateline">
+    <div>Founded 2026 · <span class="lime">London, UK</span></div>
+    <div>Volume 01 · No. 01</div>
+    <div>FEBRUARY 2026 · 24 pages</div>
+  </div>
+
+  <header class="masthead">
+    <div class="title display"><span class="co-wordmark"><span class="strike-line">CHAOS</span> OVER<span class="dot">.</span></span></div>
+    <div class="strap">— An intelligent commercial-strategy practice <span class="lime">·</span> Founder-led B2B —</div>
+  </header>
+
+  <div class="masthead-bar">
+    <div>Today's edition</div>
+    <div>Proposition · Services · Method · Contact</div>
+    <div>fn(chaos) → order</div>
+  </div>
+
+  <!-- Front page -->
+  <section class="front">
+    <aside class="col">
+      <div class="deck">[ A note from the editor ]</div>
+      <h3>The pipeline isn't broken — the picture is.</h3>
+      <p>Most founder-led B2B businesses are doing two-thirds of the right things, in the wrong order, at the wrong price.</p>
+      <p>We make our living by reading the picture, finding the one move that moves the most weight, and installing the operating system that lets the business compound.</p>
+      <p>Inside this edition: <span class="lime">three engagements</span>, our method, and how to start.</p>
+    </aside>
+
+    <article class="lead">
+      <div class="deck">[ Lead feature · pp. 02–05 ]</div>
+      <h2>From chaos, a commercial engine.</h2>
+      <div class="body">
+        <p>Most founder-led B2B companies don't have a pipeline problem — they have a clarity problem. The offer is fuzzy, the pricing is reactive, and growth depends on the founder being in every conversation.</p>
+        <p>We work like a forensic accountant for your commercial engine: we read the file, find the lever, and install the operating system that makes growth a habit instead of a heroic act.</p>
+        <p>Three engagements. Sequenced or standalone. Diagnostic, four weeks. Strategy &amp; Positioning, eight weeks. Engine Build, twelve weeks plus ninety days of embedded coaching.</p>
+        <p>Across <span class="lime">B2B services, consulting, and SaaS</span> between £1M and £15M ARR, the same three things tend to be broken: the offer is undercooked, the pricing is timid, and the pipeline is one person deep.</p>
+        <p>The fix is rarely more effort. It's clearer architecture, sharper boundaries, and a cadence that lets the team execute without the founder being in every conversation.</p>
+        <p>That's what we install. Then we <span class="lime-bg">leave</span>.</p>
+      </div>
+      <div class="byline">By Chaos Over · cont'd inside</div>
+    </article>
+
+    <aside class="col">
+      <div class="deck">[ In this issue ]</div>
+      <h3>The three engagements at a glance.</h3>
+      <p><span class="lime">01.</span> Diagnostic — 4 weeks · from £18k</p>
+      <p><span class="lime">02.</span> Strategy &amp; Positioning — 8 weeks · from £42k</p>
+      <p><span class="lime">03.</span> Engine Build — 12 weeks · from £85k</p>
+      <p style="margin-top:18px;font-family:'JetBrains Mono';font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim);">[ pp. 08–10 ]</p>
+    </aside>
+  </section>
+
+  <!-- Classifieds — services -->
+  <section class="classifieds">
+    <h2 class="section-title display">Engagements<span class="dot">.</span></h2>
+    <div class="classifieds-bar">
+      <div>Section 02 · pp. 08–10</div>
+      <div>Three positions · Sequenced or standalone</div>
+      <div>Apply: hello@chaosover.co</div>
+    </div>
+    <div class="ad-grid">
+      <div class="ad">
+        <div class="ref">[ Ref CO/SV-01 ]</div>
+        <h4>Diagnostic</h4>
+        <div class="meta">4 weeks · Fixed fee · Remote + 2 days on-site</div>
+        <p class="body">A deep audit of your commercial engine. We talk to your customers, ex-customers, and the deals you lost. You leave with one map and three highest-leverage moves.</p>
+        <ul>
+          <li>ICP &amp; offer audit</li>
+          <li>Win/loss interviews</li>
+          <li>Pricing &amp; pipeline review</li>
+          <li>Founder time audit</li>
+        </ul>
+        <div class="foot"><a class="apply" href="#">Apply</a><span class="price">From £18k</span></div>
+      </div>
+      <div class="ad">
+        <div class="ref">[ Ref CO/SV-02 ]</div>
+        <h4>Strategy &amp; Positioning</h4>
+        <div class="meta">8 weeks · Fixed fee · Embedded with leadership</div>
+        <p class="body">Sharpen the wedge. Re-architect the offer ladder, narrative, and pricing model. Land the version of your business customers actually want to buy.</p>
+        <ul>
+          <li>Wedge offer + packages</li>
+          <li>Messaging house</li>
+          <li>Pricing architecture</li>
+          <li>Sales motion + gates</li>
+        </ul>
+        <div class="foot"><a class="apply" href="#">Apply</a><span class="price">From £42k</span></div>
+      </div>
+      <div class="ad">
+        <div class="ref">[ Ref CO/SV-03 ]</div>
+        <h4>Engine Build</h4>
+        <div class="meta">12 weeks + 90 days coaching · Fixed fee · Hybrid</div>
+        <p class="body">Stand up the operating system. Pipeline, playbooks, dashboards, cadence. Your team runs it; we sit in the room until it sticks, then we leave.</p>
+        <ul>
+          <li>CRM &amp; pipeline architecture</li>
+          <li>Sales playbook + roles</li>
+          <li>Operating cadence</li>
+          <li>Dashboards + KPIs</li>
+        </ul>
+        <div class="foot"><a class="apply" href="#">Apply</a><span class="price">From £85k</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial — method -->
+  <section class="editorial">
+    <div class="editorial-head">
+      <h3>Editorial: Our method.</h3>
+      <div class="meta">[ Section 03 · pp. 12 ]</div>
+    </div>
+    <div class="editorial-body">
+      <div class="step"><div class="pp">[ 01 · MAP ]</div><h5>Read the engine</h5><p>Two weeks of customer interviews, data, and listening. We draw the picture.</p></div>
+      <div class="step"><div class="pp">[ 02 · SHARPEN ]</div><h5>Find the lever</h5><p>The single move that moves the most weight. Surface it. Pressure-test it.</p></div>
+      <div class="step"><div class="pp">[ 03 · INSTALL ]</div><h5>Stand up the system</h5><p>Pipeline, playbook, dashboards, cadence. Built with your team in the room.</p></div>
+      <div class="step"><div class="pp">[ 04 · COMPOUND ]</div><h5>Run without you</h5><p>90 days of coaching. We measure leverage gained, not hours delivered.</p></div>
+    </div>
+  </section>
+
+  <!-- Letters / contact -->
+  <section class="letters">
+    <h2 class="display">Open the file<span class="dot">.</span></h2>
+    <a class="btn" href="mailto:hello@chaosover.co">Write to the editor →</a>
+    <div class="colophon">Edited &amp; published by Chaos Over Ltd · London · 2026</div>
+  </section>
+
+  <div class="folio">
+    <span>© 2026 · Chaos Over Ltd</span>
+    <span>chaosover.co</span>
+    <span>End of edition · No. 01</span>
+  </div>
+
+</div>
+
+</body>
+</html>

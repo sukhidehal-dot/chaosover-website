@@ -1,0 +1,1406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · Brand Book</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="co-soft.css" rel="stylesheet">
+<style>
+  /* ——— PAGE SHELL ——— */
+  body { background: var(--bone); }
+  .grad-bg {
+    position: fixed; inset: -20vh -5vw -20vh -5vw;
+    width: 110vw; height: 140vh; pointer-events: none; z-index: -1;
+    background:
+      radial-gradient(110% 90% at 95% 5%, #e6dcf3 0%, rgba(230,220,243,0) 60%),
+      radial-gradient(110% 90% at 5% 95%, #fbe2e9 0%, rgba(251,226,233,0) 60%),
+      #f9f3ea;
+  }
+
+  /* ——— TOP META STRIP ——— */
+  .top-meta { display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 40px; border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft); }
+  .top-meta .dot { color: var(--lime); -webkit-text-stroke: 0.5px var(--ink); }
+
+  /* ——— SECTIONED LAYOUT ——— */
+  main { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  section.bb { padding: 120px 0 60px; border-bottom: 1.5px solid var(--ink); }
+  section.bb:last-of-type { border-bottom: 0; }
+
+  /* Section header — bracket reference + huge title */
+  .bb-head {
+    display: grid; grid-template-columns: 200px 1fr; gap: 40px;
+    margin-bottom: 50px; padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .bb-ref {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .bb-ref .num { color: var(--ink); }
+  .bb-head h2 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(48px, 6.2vw, 92px); line-height: 0.9; letter-spacing: -0.02em;
+  }
+  .bb-head h2 .lime-fill { padding: 0 .1em; }
+  .bb-head .sub {
+    margin-top: 16px; font-family: 'Big Shoulders Display'; font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 28px); line-height: 1.25; letter-spacing: -0.01em;
+    color: var(--ink-soft); max-width: 820px;
+  }
+
+  /* ——— HERO COVER ——— */
+  .cover {
+    padding: 80px 0 100px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .cover .eyebrow-row {
+    display: flex; gap: 12px; align-items: center; margin-bottom: 60px; flex-wrap: wrap;
+  }
+  .cover .stamp {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    color: var(--ink-soft);
+  }
+  .cover h1 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(96px, 13vw, 200px); line-height: 0.84; letter-spacing: -0.025em;
+  }
+  .cover h1 .dot { color: var(--lime); }
+  .cover .strap {
+    margin-top: 36px;
+    font-family: 'Big Shoulders Display'; font-weight: 800;
+    font-size: clamp(28px, 3.4vw, 56px); line-height: 1.05; letter-spacing: -0.02em;
+    max-width: 1000px;
+  }
+  .cover .body { margin-top: 30px; max-width: 720px; font-size: 18px; line-height: 1.6; color: var(--ink-soft); }
+
+  .cover .index {
+    margin-top: 80px; padding-top: 32px; border-top: 1.5px solid var(--ink);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .idx-cell { display: flex; flex-direction: column; gap: 8px; }
+  .idx-cell .ref { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; color: var(--ink-soft); }
+  .idx-cell .name { font-family: 'Big Shoulders Display'; font-weight: 800; font-size: 22px; letter-spacing: -0.01em; line-height: 1.05; }
+  .idx-cell a { color: var(--ink); }
+  .idx-cell a:hover .name { border-bottom: 2px solid var(--lime); padding-bottom: 2px; }
+
+  /* ——— GENERIC BLOCKS ——— */
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .block {
+    background: rgba(237, 229, 212, 0.9); border: 1px solid var(--line);
+    padding: 28px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .block .label {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .block h4 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: 28px; letter-spacing: -0.02em; line-height: 1;
+  }
+  .block p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+  .block p strong { color: var(--ink); }
+
+  .pull {
+    font-family: 'Big Shoulders Display'; font-weight: 800;
+    font-size: clamp(28px, 3.4vw, 52px); line-height: 1.1; letter-spacing: -0.015em;
+    max-width: 1100px; margin-bottom: 50px;
+  }
+  .pull .lime-fill { padding: 0 .1em; }
+
+  /* ——— BRACKET TAG (signature device) ——— */
+  .bracket {
+    display: inline-block; padding: 8px 12px; border-radius: 4px;
+    background: #eaf8c0; color: var(--ink);
+    font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .bracket.dark { background: var(--ink); color: var(--bone); }
+  .bracket.dark strong { color: var(--lime); font-weight: 700; }
+  .bracket.lime { background: var(--lime); color: var(--ink); }
+
+  /* ——— VOICE: DO/DON'T ——— */
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .dodont .col {
+    background: rgba(237, 229, 212, 0.9); border: 1px solid var(--line); padding: 28px;
+  }
+  .dodont .col h5 {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft); margin-bottom: 18px;
+  }
+  .dodont .col.do h5 { color: #1c1822; }
+  .dodont .col.do h5::before { content: '→ '; color: var(--lime); -webkit-text-stroke: 0.4px var(--ink); }
+  .dodont .col.dont h5::before { content: '× '; color: #c1453f; }
+  .dodont ul { list-style: none; display: flex; flex-direction: column; }
+  .dodont li {
+    padding: 14px 0; border-top: 1px solid var(--line);
+    font-family: 'Big Shoulders Display'; font-weight: 700;
+    font-size: 18px; line-height: 1.3; letter-spacing: -0.005em;
+  }
+  .dodont li:last-child { border-bottom: 1px solid var(--line); }
+  .dodont .col.dont li { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: rgba(193,69,63,0.5); }
+
+  /* ——— WORDMARK ANATOMY ——— */
+  .wm-stage {
+    background: var(--bone-2); border: 1px solid var(--line); padding: 80px 60px;
+    display: flex; align-items: center; justify-content: center; min-height: 360px;
+    position: relative;
+  }
+  .wm-stage.ink { background: var(--ink); color: var(--bone); }
+  .wm-stage.lime { background: var(--lime); }
+  .wm-big {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: 140px; line-height: 0.82; letter-spacing: -0.025em;
+  }
+  .wm-big .strike-line { position: relative; display: inline-block; }
+  .wm-big .strike-line::after {
+    content: ''; position: absolute; left: -6%; right: -6%; top: 72%;
+    height: 0.04em; background: var(--lime);
+    transform: translateY(-50%) rotate(-39deg);
+    transform-origin: center;
+  }
+  .wm-big .dot { color: var(--lime); }
+  .wm-stage.ink .wm-big .strike-line::after { background: var(--lime); }
+  .wm-stage.lime .wm-big .strike-line::after { background: var(--ink); }
+  .wm-stage.lime .wm-big .dot { color: var(--ink); }
+  .wm-caption {
+    position: absolute; bottom: 14px; left: 18px;
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .wm-stage.ink .wm-caption { color: rgba(244,238,226,0.6); }
+
+  /* horizontal locked variant */
+  .wm-row {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: 64px; line-height: 1; letter-spacing: -0.025em;
+    display: inline-flex; align-items: baseline; gap: 0.08em;
+  }
+  .wm-row .strike-line { position: relative; display: inline-block; }
+  .wm-row .strike-line::after {
+    content: ''; position: absolute; left: -6%; right: -6%; top: 60%;
+    height: 0.06em; background: var(--lime);
+    transform: translateY(-50%) rotate(-12deg);
+  }
+  .wm-row .dot { color: var(--lime); }
+
+  /* ——— COLOUR PALETTE ——— */
+  .palette { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 14px; }
+  .swatch {
+    border: 1px solid var(--line); padding: 24px; min-height: 220px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .swatch .name {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: 28px; letter-spacing: -0.01em; line-height: 1;
+  }
+  .swatch .role {
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; opacity: 0.65;
+  }
+  .swatch .hex {
+    font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .swatch .ratio {
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; opacity: 0.65;
+  }
+
+  /* gradient ground tile */
+  .grad-tile {
+    border: 1px solid var(--line); padding: 32px; min-height: 240px;
+    background:
+      radial-gradient(110% 90% at 95% 5%, #e6dcf3 0%, rgba(230,220,243,0) 60%),
+      radial-gradient(110% 90% at 5% 95%, #fbe2e9 0%, rgba(251,226,233,0) 60%),
+      #f9f3ea;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+
+  /* ——— TYPOGRAPHY ——— */
+  .type-stack { display: flex; flex-direction: column; gap: 32px; }
+  .type-spec {
+    display: grid; grid-template-columns: 240px 1fr; gap: 40px;
+    padding: 28px 0; border-top: 1px solid var(--line);
+  }
+  .type-spec:last-child { border-bottom: 1px solid var(--line); }
+  .type-meta { display: flex; flex-direction: column; gap: 6px; }
+  .type-meta .fam {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: 26px; letter-spacing: -0.01em; line-height: 1;
+  }
+  .type-meta .role {
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .type-meta .spec {
+    margin-top: 4px;
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.18em;
+    color: var(--ink-soft);
+  }
+  .type-sample-display { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 92px; line-height: 0.84; letter-spacing: -0.025em; }
+  .type-sample-body { font-family: 'Space Grotesk'; font-size: 19px; line-height: 1.55; color: var(--ink); max-width: 720px; }
+  .type-sample-mono { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* hierarchy ladder */
+  .ladder { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+  .rung { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
+  .rung:last-child { border-bottom: 1px solid var(--line); }
+  .rung .lbl { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
+
+  .t-h1 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 76px; line-height: 0.85; letter-spacing: -0.025em; }
+  .t-h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 56px; line-height: 0.9; letter-spacing: -0.02em; }
+  .t-h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 36px; line-height: 0.95; letter-spacing: -0.02em; }
+  .t-strap { font-family: 'Big Shoulders Display'; font-weight: 800; font-size: 28px; line-height: 1.1; letter-spacing: -0.015em; }
+  .t-tagline { font-family: 'Big Shoulders Display'; font-weight: 700; font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; }
+  .t-body-lg { font-family: 'Space Grotesk'; font-size: 18px; line-height: 1.6; color: var(--ink-soft); }
+  .t-body { font-family: 'Space Grotesk'; font-size: 16px; line-height: 1.6; color: var(--ink); }
+  .t-caption { font-family: 'Space Grotesk'; font-size: 14px; line-height: 1.5; color: var(--ink-soft); }
+  .t-mono { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* ——— GRID + SPACING ——— */
+  .grid-demo {
+    border: 1px solid var(--line); background: rgba(237, 229, 212, 0.55);
+    padding: 32px; position: relative;
+    background-image:
+      linear-gradient(to right, rgba(28,24,34,0.08) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100%;
+  }
+  .grid-demo .row {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px; height: 36px;
+  }
+  .grid-demo .row + .row { margin-top: 8px; }
+  .grid-demo .cell { background: var(--ink); }
+  .grid-demo .cell.lime { background: var(--lime); }
+
+  .spacing-scale { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  .sp-row { display: grid; grid-template-columns: 120px 80px 1fr; gap: 16px; align-items: center; }
+  .sp-row .key { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); }
+  .sp-row .val { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.18em; color: var(--ink-soft); }
+  .sp-row .bar { background: var(--ink); height: 14px; }
+
+  /* ——— COMPONENTS ——— */
+  .comp-stage {
+    border: 1px solid var(--line); background: rgba(237, 229, 212, 0.9);
+    padding: 36px; display: flex; flex-direction: column; gap: 18px;
+    position: relative;
+  }
+  .comp-stage .cap {
+    position: absolute; top: 12px; left: 14px;
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .comp-stage.dark { background: var(--ink); }
+  .comp-stage.dark .cap { color: rgba(244,238,226,0.55); }
+  .comp-stage.lime { background: var(--lime); }
+
+  .row-inline { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+  .card-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* check list */
+  .checklist { display: flex; flex-direction: column; }
+  .check {
+    display: grid; grid-template-columns: 32px 1fr; gap: 18px;
+    padding: 14px 0; border-top: 1px solid var(--line);
+  }
+  .check:last-child { border-bottom: 1px solid var(--line); }
+  .check .arrow {
+    font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 22px;
+    color: var(--lime); -webkit-text-stroke: 0.5px var(--ink); line-height: 1;
+  }
+  .check .body { font-size: 15px; line-height: 1.55; color: var(--ink); }
+
+  /* ——— APPLICATIONS ——— */
+  .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .app-frame {
+    background: var(--bone-2); border: 1px solid var(--line);
+    padding: 36px; min-height: 460px; position: relative;
+    display: flex; flex-direction: column;
+  }
+  .app-frame .stamp {
+    position: absolute; top: 14px; right: 18px;
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+
+  /* proposal mock */
+  .prop .meta-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 36px;
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .prop .ref { color: var(--ink); }
+  .prop h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 64px; line-height: 0.88; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .prop .sub { font-family: 'Big Shoulders Display'; font-weight: 700; font-size: 22px; line-height: 1.2; max-width: 80%; margin-bottom: 36px; }
+  .prop .for-row { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .prop .for-row .lbl { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; display: block; }
+  .prop .for-row .val { font-family: 'Big Shoulders Display'; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+
+  /* invoice mock */
+  .inv .hdr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px; }
+  .inv .hdr .who { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 32px; letter-spacing: -0.01em; line-height: 0.9; }
+  .inv .hdr .who .dot { color: var(--lime); }
+  .inv .hdr .ttl { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; color: var(--ink-soft); }
+  .inv table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .inv th, .inv td { padding: 12px 0; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .inv th { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); font-weight: 400; }
+  .inv td.amt, .inv th.amt { text-align: right; font-family: 'JetBrains Mono'; }
+  .inv .total {
+    margin-top: 16px; padding: 14px 16px; background: var(--ink); color: var(--bone);
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .inv .total .v { color: var(--lime); font-weight: 700; font-size: 14px; }
+
+  /* slide cover */
+  .slide-mock { background: var(--ink); color: var(--bone); padding: 48px; min-height: 460px;
+    display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+  .slide-mock .top { display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(244,238,226,0.55); }
+  .slide-mock h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 88px; line-height: 0.85; letter-spacing: -0.025em; }
+  .slide-mock h3 .lime-fill { background: var(--lime); color: var(--ink); padding: 0 .1em; }
+  .slide-mock h3 .dot { color: var(--lime); }
+  .slide-mock .bottom { display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px; border-top: 1px solid rgba(244,238,226,0.18); font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,238,226,0.55); }
+
+  /* LinkedIn carousel slide */
+  .li-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .li-card {
+    aspect-ratio: 1/1; padding: 28px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border: 1px solid var(--line);
+  }
+  .li-card.bone { background: var(--bone); }
+  .li-card.ink { background: var(--ink); color: var(--bone); }
+  .li-card.lime { background: var(--lime); color: var(--ink); }
+  .li-card .top { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.65; }
+  .li-card h4 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 36px; line-height: 0.92; letter-spacing: -0.02em; }
+  .li-card .swipe { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.65; }
+
+  /* email signature */
+  .esig {
+    background: var(--bone); border: 1px solid var(--line); padding: 24px;
+    display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center;
+    max-width: 540px;
+  }
+  .esig .avatar {
+    width: 64px; height: 64px; border-radius: 6px;
+    background: linear-gradient(150deg, #3a3540 0%, #2a2730 100%);
+  }
+  .esig .name { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 22px; letter-spacing: -0.01em; line-height: 1; }
+  .esig .role { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
+  .esig .ln { margin-top: 10px; font-family: 'Space Grotesk'; font-size: 13px; color: var(--ink-soft); }
+  .esig .ln strong { color: var(--ink); }
+
+  /* social tile */
+  .social-tile {
+    aspect-ratio: 16/9; padding: 36px;
+    background: var(--lime); color: var(--ink);
+    display: flex; flex-direction: column; justify-content: space-between;
+    border: 1px solid var(--line);
+  }
+  .social-tile .top { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .social-tile h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 56px; line-height: 0.88; letter-spacing: -0.02em; }
+  .social-tile .bottom { display: flex; justify-content: space-between; align-items: baseline; font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .social-tile .bottom .dot { color: var(--lime); -webkit-text-stroke: 0.5px var(--ink); }
+
+  /* misuse */
+  .misuse { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .mis-card { border: 1px solid var(--line); padding: 26px; background: rgba(237,229,212,0.9); position: relative; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; }
+  .mis-card .x { position: absolute; top: 14px; right: 16px; font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 26px; color: #c1453f; }
+  .mis-card .why { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #c1453f; margin-top: 14px; }
+  .mis-card h5 { font-family: 'Big Shoulders Display'; font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: -0.01em; }
+
+  .mis-demo-1 { font-family: 'Inter', system-ui, sans-serif; font-size: 28px; font-weight: 800; color: var(--ink); }
+  .mis-demo-2 { background: linear-gradient(135deg, #c8ff3d, #fbe2e9); padding: 12px 18px; display: inline-block; font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 22px; color: var(--ink); border-radius: 24px; }
+  .mis-demo-3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 28px; color: #c8ff3d; -webkit-text-stroke: 1px var(--ink); text-shadow: 3px 3px 0 #fbe2e9; }
+
+  /* ——— FOOTER ——— */
+  footer.bb-foot {
+    margin-top: 80px; padding: 36px 40px;
+    border-top: 1.5px solid var(--ink);
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-soft);
+    max-width: 1320px; margin-left: auto; margin-right: auto;
+  }
+  footer.bb-foot .wm { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 18px; letter-spacing: -0.01em; color: var(--ink); }
+  footer.bb-foot .wm .dot { color: var(--lime); }
+
+  @media (max-width: 960px) {
+    .bb-head { grid-template-columns: 1fr; gap: 12px; }
+    .row-2, .row-3, .row-4, .dodont, .apps, .li-row, .misuse { grid-template-columns: 1fr; }
+    .palette { grid-template-columns: 1fr 1fr; }
+    .cover .index { grid-template-columns: 1fr 1fr; }
+    .type-spec, .rung { grid-template-columns: 1fr; }
+    .wm-big { font-size: 88px; }
+  }
+
+  /* ——— PRINT ——— */
+  @media print {
+    @page { size: A4 portrait; margin: 14mm 12mm; }
+
+    html, body {
+      background: #f4eee2 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+    /* Fixed parallax ground breaks across pages — paint a solid bone surface instead. */
+    .grad-bg { display: none !important; }
+
+    /* Strip the sticky top strip from non-first pages. */
+    .top-meta {
+      border-bottom: 1px solid rgba(28,24,34,0.2);
+      padding: 8px 12mm;
+    }
+
+    main { max-width: none; padding: 0; margin: 0; }
+
+    /* Each major section on its own page(s). */
+    section.bb, section.cover {
+      padding: 18mm 12mm 14mm;
+      border-bottom: 0;
+      break-before: page;
+      break-inside: auto;
+    }
+    section.cover { break-before: auto; padding-top: 8mm; }
+
+    /* Keep heads, headlines, cards together. */
+    .bb-head, .block, .swatch, .wm-stage, .li-card, .mis-card,
+    .app-frame, .slide-mock, .comp-stage, .type-spec, .rung, .check,
+    .grad-tile, .esig, .social-tile, .dodont .col {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    h1, h2, h3, h4, h5 { break-after: avoid; page-break-after: avoid; }
+
+    /* Scale down the giant cover headline for A4. */
+    .cover h1 { font-size: 110px !important; line-height: 0.84 !important; }
+    .cover .strap { font-size: 32px !important; }
+    .bb-head h2 { font-size: 58px !important; }
+    .pull { font-size: 32px !important; }
+
+    /* Type sample: shrink the 92px sample so the rest of the spec fits. */
+    .type-sample-display { font-size: 64px !important; }
+
+    /* Wordmark stages: keep manageable on A4. */
+    .wm-big { font-size: 88px !important; }
+    .wm-stage { min-height: 220px; padding: 40px 32px; }
+    .slide-mock { min-height: 360px; padding: 32px; }
+    .slide-mock h3 { font-size: 56px !important; }
+
+    /* The apps grid: stack cleanly per page. */
+    .apps, .row-2, .row-3, .row-4, .dodont, .li-row, .misuse, .palette {
+      gap: 14px;
+    }
+
+    /* Footer at the very end, not floating. */
+    footer.bb-foot {
+      margin-top: 24px; padding: 14px 12mm 0;
+      border-top: 1px solid rgba(28,24,34,0.25);
+    }
+
+    /* Don't carry the colour cards as outlines only. */
+    .swatch, .card-ink, .card-lime, .slide-mock, .li-card.ink, .li-card.lime,
+    .social-tile, .bracket.dark, .bracket.lime, .bracket {
+      box-shadow: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="grad-bg"></div>
+
+<div class="top-meta">
+  <div>CO/BRAND · <span class="dot">●</span> COMMERCIAL ENGINES DESIGNED AROUND PEOPLE</div>
+  <div>BRAND BOOK · v1.0</div>
+  <div>EST. 2026 · LONDON, UK</div>
+</div>
+
+<main>
+
+<!-- ============================================== -->
+<!-- COVER                                          -->
+<!-- ============================================== -->
+<section class="cover">
+  <div class="eyebrow-row">
+    <span class="eyebrow-tag">Brand Book</span>
+    <span class="bracket">[ Internal · v1.0 · 2026 ]</span>
+    <span class="stamp">For use across proposals, invoices, decks, social</span>
+  </div>
+
+  <h1>
+    <span class="co-wordmark"><span class="strike-line">CHAOS</span><br/><span class="strike-line">OVER</span><span class="dot">.</span></span>
+  </h1>
+
+  <p class="strap">A brand built on one promise: <span class="lime-fill">clear thinking</span> in a category full of noise.</p>
+
+  <p class="body">This is the book. The rules that keep us recognisable, the patterns that keep us moving fast, the lines that keep us honest. If you're making something on behalf of Chaos Over — a proposal, an invoice, a deck, a carousel, a signature, a single email — this is the source.</p>
+
+  <div class="index">
+    <div class="idx-cell"><a href="#sec-01"><div class="ref">01 / Position</div><div class="name">The brand in a sentence</div></a></div>
+    <div class="idx-cell"><a href="#sec-02"><div class="ref">02 / Voice</div><div class="name">How we talk</div></a></div>
+    <div class="idx-cell"><a href="#sec-03"><div class="ref">03 / Wordmark</div><div class="name">The mark &amp; clear space</div></a></div>
+    <div class="idx-cell"><a href="#sec-04"><div class="ref">04 / Colour</div><div class="name">Palette &amp; ratios</div></a></div>
+    <div class="idx-cell"><a href="#sec-05"><div class="ref">05 / Type</div><div class="name">Three families, one ladder</div></a></div>
+    <div class="idx-cell"><a href="#sec-06"><div class="ref">06 / Layout</div><div class="name">Grid, spacing, rhythm</div></a></div>
+    <div class="idx-cell"><a href="#sec-07"><div class="ref">07 / Motifs</div><div class="name">Brackets, lime-fill, eyebrows</div></a></div>
+    <div class="idx-cell"><a href="#sec-08"><div class="ref">08 / Components</div><div class="name">Buttons, cards, lists</div></a></div>
+    <div class="idx-cell"><a href="#sec-09"><div class="ref">09 / Imagery</div><div class="name">Gradient ground &amp; texture</div></a></div>
+    <div class="idx-cell"><a href="#sec-10"><div class="ref">10 / Applications</div><div class="name">Decks, proposals, invoices</div></a></div>
+    <div class="idx-cell"><a href="#sec-11"><div class="ref">11 / Social</div><div class="name">LinkedIn &amp; carousels</div></a></div>
+    <div class="idx-cell"><a href="#sec-12"><div class="ref">12 / Misuse</div><div class="name">What never to do</div></a></div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 01 — POSITION                                  -->
+<!-- ============================================== -->
+<section class="bb" id="sec-01">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">01</span> / Position</div>
+    <div>
+      <h2>The brand in a <span class="lime-fill">sentence</span>.</h2>
+      <p class="sub">Before colour, type, or anything visual — this is the centre of gravity. Every artefact should be testable against it.</p>
+    </div>
+  </div>
+
+  <p class="pull">We make new business feel less like luck — and more like a system the founder owns. <span class="lime-fill">Pattern recognised. Engine built. Chaos managed.</span></p>
+
+  <div class="row-3">
+    <div class="block">
+      <span class="label">What we are</span>
+      <h4>Commercial strategy for agency founders.</h4>
+      <p>Diagnosis, build, and ongoing partnership. Not therapy. Not theatre. A working system the team owns and can run.</p>
+    </div>
+    <div class="block">
+      <span class="label">Who we serve</span>
+      <h4>Founder-led agencies, 10–50 people.</h4>
+      <p>Good at the work, frustrated by the growth. Too dependent on the founder's name, network, and luck. Ready to fix it.</p>
+    </div>
+    <div class="block">
+      <span class="label">Why we exist</span>
+      <h4>Strategy without execution is expensive therapy.</h4>
+      <p>The market is full of advice nobody implements. We move at the speed of the founder, not the speed of the slide deck.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 02 — VOICE                                     -->
+<!-- ============================================== -->
+<section class="bb" id="sec-02">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">02</span> / Voice &amp; tone</div>
+    <div>
+      <h2>Plain. Pointed. <span class="lime-fill">Useful.</span></h2>
+      <p class="sub">We sound like a smart operator who's been in the room. Not a consultant. Not a coach. Not a guru. The voice is the same on a £4,700 proposal, on a LinkedIn post, and in a one-line invoice note.</p>
+    </div>
+  </div>
+
+  <div class="row-3" style="margin-bottom: 60px;">
+    <div class="block">
+      <span class="label">01 / Cadence</span>
+      <h4>Short. Then longer. Then short.</h4>
+      <p>Punch, breathe, punch. Sentence fragments are allowed. Adjectives are taxed. Every paragraph earns its line break.</p>
+    </div>
+    <div class="block">
+      <span class="label">02 / Posture</span>
+      <h4>Direct without being clever.</h4>
+      <p>We name the thing. We tell the truth even when it makes the meeting awkward. We never perform expertise.</p>
+    </div>
+    <div class="block">
+      <span class="label">03 / Register</span>
+      <h4>Operator, not consultant.</h4>
+      <p>Words a founder uses in a Tuesday afternoon meeting. Not words from a strategy deck. Pipeline, not "demand funnel."</p>
+    </div>
+  </div>
+
+  <div class="dodont">
+    <div class="col do">
+      <h5>We say</h5>
+      <ul>
+        <li>Most agency growth is accidental.</li>
+        <li>Strategy without execution is expensive therapy.</li>
+        <li>Close enough to be useful. Not close enough to create dependency.</li>
+        <li>Find what's actually broken before you spend time fixing the wrong thing.</li>
+        <li>A working system the team owns and can run.</li>
+      </ul>
+    </div>
+    <div class="col dont">
+      <h5>We don't say</h5>
+      <ul>
+        <li>Unlock your growth potential.</li>
+        <li>End-to-end transformational journey.</li>
+        <li>Best-in-class methodology and frameworks.</li>
+        <li>Synergistic alignment across stakeholders.</li>
+        <li>We help you become the best version of your business.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 03 — WORDMARK                                  -->
+<!-- ============================================== -->
+<section class="bb" id="sec-03">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">03</span> / Wordmark</div>
+    <div>
+      <h2>The mark, the strike, <span class="lime-fill">the dot</span>.</h2>
+      <p class="sub">Three signals. The two stacked words. The lime strike-through running across each word at a tilt. The lime period after OVER — a stop, not a flourish. Together they read as a logo and a manifesto at the same time.</p>
+    </div>
+  </div>
+
+  <div class="row-2" style="margin-bottom: 24px;">
+    <div class="wm-stage">
+      <div class="wm-big"><span class="strike-line">CHAOS</span><br/><span class="strike-line">OVER</span><span class="dot">.</span></div>
+      <span class="wm-caption">[ Primary · stacked · on bone ]</span>
+    </div>
+    <div class="wm-stage ink">
+      <div class="wm-big" style="color: var(--bone);"><span class="strike-line">CHAOS</span><br/><span class="strike-line">OVER</span><span class="dot">.</span></div>
+      <span class="wm-caption">[ Reversed · stacked · on ink ]</span>
+    </div>
+  </div>
+
+  <div class="row-2" style="margin-bottom: 50px;">
+    <div class="wm-stage lime">
+      <div class="wm-big"><span class="strike-line">CHAOS</span><br/><span class="strike-line">OVER</span><span class="dot">.</span></div>
+      <span class="wm-caption">[ Acid · stacked · on lime ]</span>
+    </div>
+    <div class="wm-stage" style="background: var(--bone-2);">
+      <div class="wm-row" style="font-size: 64px;"><span class="strike-line">CHAOS</span>&nbsp;<span class="strike-line">OVER</span><span class="dot">.</span></div>
+      <span class="wm-caption">[ Inline · for nav, footers, signatures ]</span>
+    </div>
+  </div>
+
+  <div class="row-3">
+    <div class="block">
+      <span class="label">Anatomy</span>
+      <h4>Two words. One strike. One dot.</h4>
+      <p><strong>CHAOS / OVER</strong> stacked, Big Shoulders Display 900. The strike is a 0.04em lime bar at 72% baseline, rotated –39°. The dot is the lime period after OVER. Nothing else.</p>
+    </div>
+    <div class="block">
+      <span class="label">Clear space</span>
+      <h4>One cap-height on every side.</h4>
+      <p>Use the height of the cap "O" as the unit. Keep that much breathing room around the mark on every side. Never crowd it with rules, gradients, or text.</p>
+    </div>
+    <div class="block">
+      <span class="label">Minimum size</span>
+      <h4>32px digital · 16mm print.</h4>
+      <p>Below this, the strike-through becomes a smudge. Drop to the inline variant for nav bars, footers and email signatures.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 04 — COLOUR                                    -->
+<!-- ============================================== -->
+<section class="bb" id="sec-04">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">04</span> / Colour</div>
+    <div>
+      <h2>Cream, ink, and <span class="lime-fill">one shock of lime</span>.</h2>
+      <p class="sub">Three working colours plus two pastels for ground. The palette is intentionally narrow. Lime is the only saturated colour we use — that's the point.</p>
+    </div>
+  </div>
+
+  <div class="palette" style="margin-bottom: 50px;">
+    <div class="swatch" style="background: var(--bone);">
+      <div>
+        <div class="role">Primary ground</div>
+        <div class="name">Bone</div>
+      </div>
+      <div>
+        <div class="hex">#F4EEE2</div>
+        <div class="ratio">--bone · 85% surface</div>
+      </div>
+    </div>
+    <div class="swatch" style="background: var(--ink); color: var(--bone);">
+      <div>
+        <div class="role" style="opacity: 0.55;">Primary text</div>
+        <div class="name">Ink</div>
+      </div>
+      <div>
+        <div class="hex">#1C1822</div>
+        <div class="ratio" style="opacity: 0.55;">--ink · warm charcoal</div>
+      </div>
+    </div>
+    <div class="swatch" style="background: var(--lime);">
+      <div>
+        <div class="role">Signal</div>
+        <div class="name">Acid Lime</div>
+      </div>
+      <div>
+        <div class="hex">#C8FF3D</div>
+        <div class="ratio">--lime · &lt; 5% surface</div>
+      </div>
+    </div>
+    <div class="swatch" style="background: var(--bone-2);">
+      <div>
+        <div class="role">Surface</div>
+        <div class="name">Sand</div>
+      </div>
+      <div>
+        <div class="hex">#EDE5D4</div>
+        <div class="ratio">--bone-2 · cards, panels</div>
+      </div>
+    </div>
+    <div class="swatch" style="background: #eaf8c0;">
+      <div>
+        <div class="role">Soft signal</div>
+        <div class="name">Pastel Lime</div>
+      </div>
+      <div>
+        <div class="hex">#EAF8C0</div>
+        <div class="ratio">price tags, soft highlights</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-2" style="margin-bottom: 50px;">
+    <div class="grad-tile">
+      <div>
+        <span class="t-mono">Gradient ground · parallax</span>
+      </div>
+      <div>
+        <div class="t-mono" style="opacity: 0.8;">Radial · lilac top-right · pink bottom-left</div>
+        <div class="t-mono" style="opacity: 0.6;">#E6DCF3 → #FBE2E9 → #F9F3EA</div>
+      </div>
+    </div>
+    <div class="block" style="background: rgba(237,229,212,0.9);">
+      <span class="label">How to mix</span>
+      <h4>The 85 / 10 / 5 rule.</h4>
+      <p><strong>85% bone &amp; sand</strong> — body, cards, surface. <strong>10% ink</strong> — type, rules, the dark card. <strong>≤5% lime</strong> — the strike, the dot, the highlight, the one button you want pressed. If lime fills more than a fifth of the page, something is wrong.</p>
+      <p>Pastels (lilac + pink) only appear as the fixed parallax gradient behind everything, or as accents inside specific panels (e.g. the <em>Calm Flow</em> retainer block). Never as foreground tints on body copy.</p>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Accessibility</p>
+  <div class="row-3">
+    <div class="block">
+      <span class="label">Ink on Bone</span>
+      <h4>15.2 : 1</h4>
+      <p>AAA. The default working pair. Use for all body copy.</p>
+    </div>
+    <div class="block">
+      <span class="label">Ink on Lime</span>
+      <h4>13.4 : 1</h4>
+      <p>AAA. Why we always put ink type <em>on</em> lime, never lime type on ink.</p>
+    </div>
+    <div class="block">
+      <span class="label">Lime on Ink</span>
+      <h4>2.7 : 1</h4>
+      <p>Fails AA for body. Lime on dark is decoration only — strikes, dots, hovers, never paragraphs.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 05 — TYPE                                      -->
+<!-- ============================================== -->
+<section class="bb" id="sec-05">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">05</span> / Typography</div>
+    <div>
+      <h2>Three families. <span class="lime-fill">One ladder.</span></h2>
+      <p class="sub">A heavy display, a workhorse body, and a tight technical mono. Used together they sound like our voice on the page: bold claims, plain explanations, bracketed metadata.</p>
+    </div>
+  </div>
+
+  <div class="type-stack" style="margin-bottom: 50px;">
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <div class="fam">Big Shoulders Display</div>
+        <div class="role">Display</div>
+        <div class="spec">Weights · 600 / 800 / 900</div>
+        <div class="spec">Tracking · –2 to –2.5%</div>
+        <div class="spec">Line-height · 0.84 → 0.95</div>
+      </div>
+      <div>
+        <div class="type-sample-display">Chaos Over.</div>
+        <p class="t-body-lg" style="margin-top: 16px;">Used for every headline, wordmark, slide title, big pull quote, and any number that needs to dominate the page. Always set tight — leading under 1.0 — to give it physical weight.</p>
+      </div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <div class="fam">Space Grotesk</div>
+        <div class="role">Body</div>
+        <div class="spec">Weights · 400 / 500 / 600 / 700</div>
+        <div class="spec">Tracking · 0</div>
+        <div class="spec">Line-height · 1.55 → 1.6</div>
+      </div>
+      <div>
+        <p class="type-sample-body">Most retainer relationships look like this: a call once a month, a slide deck, some observations, an invoice. The founder nods along. Nothing really changes. Two months later they're wondering what they're paying for.</p>
+        <p class="t-mono" style="margin-top: 12px;">Body copy · 16–19px · 1.6 leading</p>
+      </div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <div class="fam">JetBrains Mono</div>
+        <div class="role">Metadata</div>
+        <div class="spec">Weights · 400 / 500 / 700</div>
+        <div class="spec">Tracking · +22%</div>
+        <div class="spec">Always UPPERCASE</div>
+      </div>
+      <div>
+        <div class="type-sample-mono">[ CO/01 · ● Commercial engines designed around people ]</div>
+        <p class="t-body-lg" style="margin-top: 16px;">The bracket voice of the brand. Labels, eyebrows, references, meta strips, price tags, button text. 10–12px, always tracked +0.22em, always uppercase.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 8px;">Hierarchy</p>
+  <div class="ladder" style="margin-bottom: 30px;">
+    <div class="rung"><div class="lbl">H1 / Page title</div><div class="t-h1">Cleaner pipeline.</div></div>
+    <div class="rung"><div class="lbl">H2 / Section</div><div class="t-h2">How we work together.</div></div>
+    <div class="rung"><div class="lbl">H3 / Block</div><div class="t-h3">Calm Flow</div></div>
+    <div class="rung"><div class="lbl">Strap / Lede</div><div class="t-strap">Most agency growth is accidental. We make it deliberate.</div></div>
+    <div class="rung"><div class="lbl">Tagline / Pull</div><div class="t-tagline">Close enough to be useful. Not close enough to create dependency.</div></div>
+    <div class="rung"><div class="lbl">Body / Lead</div><div class="t-body-lg">A half-day to full-day working session — structured, practical, and honest.</div></div>
+    <div class="rung"><div class="lbl">Body</div><div class="t-body">We go through your proposition, your pipeline, your positioning, and your proof.</div></div>
+    <div class="rung"><div class="lbl">Caption</div><div class="t-caption">Three services. One clear journey.</div></div>
+    <div class="rung"><div class="lbl">Mono / Eyebrow</div><div class="t-mono">[ £4,700 / one-off fee ]</div></div>
+  </div>
+
+  <div class="row-3">
+    <div class="block"><span class="label">Use display when</span><h4>You want it heard from the next room.</h4><p>Headlines. Slide titles. The hero strap. The wordmark. Never below 28px — it loses its punch.</p></div>
+    <div class="block"><span class="label">Use body when</span><h4>Someone needs to actually read it.</h4><p>Proposals, decks, paragraphs, email. Default 16–19px. Be generous with leading. Never set body below 14px.</p></div>
+    <div class="block"><span class="label">Use mono when</span><h4>It's a label, not a sentence.</h4><p>Eyebrows, prices, dates, references, button text. Never run mono past one line — if it wraps, it's not a label.</p></div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 06 — LAYOUT                                    -->
+<!-- ============================================== -->
+<section class="bb" id="sec-06">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">06</span> / Layout</div>
+    <div>
+      <h2>Grid. Air. <span class="lime-fill">Hard rules</span>.</h2>
+      <p class="sub">Wide containers, tight columns, generous vertical rhythm, and a 1.5px ink rule between sections. The page should feel deliberately spaced — like a print magazine that knows where its edges are.</p>
+    </div>
+  </div>
+
+  <div class="row-2" style="margin-bottom: 40px;">
+    <div>
+      <p class="t-mono" style="margin-bottom: 14px;">12-column grid · 40px gutters · 1400px max</p>
+      <div class="grid-demo">
+        <div class="row">
+          <div class="cell" style="grid-column: 1 / 8;"></div>
+          <div class="cell lime" style="grid-column: 8 / 13;"></div>
+        </div>
+        <div class="row">
+          <div class="cell" style="grid-column: 1 / 5;"></div>
+          <div class="cell" style="grid-column: 5 / 9;"></div>
+          <div class="cell" style="grid-column: 9 / 13;"></div>
+        </div>
+        <div class="row">
+          <div class="cell" style="grid-column: 1 / 13;"></div>
+        </div>
+        <div class="row">
+          <div class="cell lime" style="grid-column: 1 / 4;"></div>
+          <div class="cell" style="grid-column: 4 / 13;"></div>
+        </div>
+      </div>
+      <p class="t-caption" style="margin-top: 12px;">Common splits: 7/5 (lede + checklist), 4/4/4 (pillars), 12 (full-bleed band), 3/9 (label + content).</p>
+    </div>
+
+    <div>
+      <p class="t-mono" style="margin-bottom: 14px;">Spacing scale · 8px base</p>
+      <div class="spacing-scale">
+        <div class="sp-row"><span class="key">3xs</span><span class="val">4px</span><div class="bar" style="width: 4px;"></div></div>
+        <div class="sp-row"><span class="key">2xs</span><span class="val">8px</span><div class="bar" style="width: 8px;"></div></div>
+        <div class="sp-row"><span class="key">xs</span><span class="val">14px</span><div class="bar" style="width: 14px;"></div></div>
+        <div class="sp-row"><span class="key">sm</span><span class="val">24px</span><div class="bar" style="width: 24px;"></div></div>
+        <div class="sp-row"><span class="key">md</span><span class="val">40px</span><div class="bar" style="width: 40px;"></div></div>
+        <div class="sp-row"><span class="key">lg</span><span class="val">60px</span><div class="bar" style="width: 60px;"></div></div>
+        <div class="sp-row"><span class="key">xl</span><span class="val">100px</span><div class="bar" style="width: 100px;"></div></div>
+        <div class="sp-row"><span class="key">2xl</span><span class="val">200px</span><div class="bar" style="width: 200px;"></div></div>
+      </div>
+      <p class="t-caption" style="margin-top: 14px;">Section padding is always 100–200px vertical. Headlines breathe. Body groups sit tight at 14–24px. Never use values off the scale.</p>
+    </div>
+  </div>
+
+  <div class="row-3">
+    <div class="block"><span class="label">Page edges</span><h4>40px hard margin.</h4><p>Same on mobile, tablet, desktop. The cream ground is part of the design — don't fight to reclaim it.</p></div>
+    <div class="block"><span class="label">Vertical rhythm</span><h4>200px between sections.</h4><p>1.5px solid ink rule across the top of every new section. The rule is the section header — no need for over-decoration.</p></div>
+    <div class="block"><span class="label">Cards</span><h4>32–40px padding.</h4><p>1px <code style="font-family: 'JetBrains Mono';">rgba(28,24,34,0.14)</code> border. No drop shadows. No gradients. Surface lifts come from the sand background, not effects.</p></div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 07 — MOTIFS                                    -->
+<!-- ============================================== -->
+<section class="bb" id="sec-07">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">07</span> / Signature motifs</div>
+    <div>
+      <h2>The bracket, <span class="lime-fill">the highlight</span>, the dot.</h2>
+      <p class="sub">Three small devices do most of the brand work. Use them consistently and the brand reads from across the room. Use them indiscriminately and they become wallpaper.</p>
+    </div>
+  </div>
+
+  <div class="row-3" style="margin-bottom: 40px;">
+    <div class="comp-stage">
+      <span class="cap">01 / Bracket tag</span>
+      <div class="row-inline" style="margin-top: 20px;">
+        <span class="bracket">[ £4,700 / One-off ]</span>
+        <span class="bracket">[ Est. 2026 ]</span>
+        <span class="bracket">[ London, UK ]</span>
+      </div>
+      <p class="t-body" style="margin-top: 10px;">Mono in square brackets, pastel-lime background, 4px radius. Used for prices, dates, locations, references, side-of-page metadata. The closest thing we have to ornament.</p>
+    </div>
+    <div class="comp-stage">
+      <span class="cap">02 / Lime fill</span>
+      <p class="t-h3" style="margin-top: 22px; line-height: 1.05;">A word that <span class="lime-fill">needs to be heard</span> sits in lime.</p>
+      <p class="t-body" style="margin-top: 6px;">Gradient-clipped highlight — sits behind the visual letterforms only, not the full em box. One per headline. Never on body copy. Never on more than three words in a row.</p>
+    </div>
+    <div class="comp-stage">
+      <span class="cap">03 / The dot</span>
+      <p class="t-h2" style="margin-top: 18px; line-height: 0.9;">Chaos Over<span style="color: var(--lime);">.</span></p>
+      <p class="t-body" style="margin-top: 4px;">A lime full stop at the end of any title, section header, or sign-off. The brand's punctuation. The mark says: that's it. Decision made.</p>
+    </div>
+  </div>
+
+  <div class="row-3">
+    <div class="comp-stage dark">
+      <span class="cap">04 / Eyebrow tag</span>
+      <div class="row-inline" style="margin-top: 20px;">
+        <span class="eyebrow-tag">Brand Book</span>
+        <span class="eyebrow-tag">Chaos Scan</span>
+      </div>
+      <p class="t-body" style="color: rgba(244,238,226,0.78); margin-top: 10px;">Solid lime block, ink type. The on-page label that introduces a unit of work. Used once at the top of a page or slide — not as repeated decoration.</p>
+    </div>
+    <div class="comp-stage lime">
+      <span class="cap" style="color: rgba(28,24,34,0.55);">05 / Strike-through</span>
+      <p class="t-h3" style="margin-top: 20px;"><span class="co-wordmark" style="font-size: 56px; display: inline;"><span class="strike-line">CHAOS</span></span></p>
+      <p class="t-body" style="margin-top: 6px;">The –39° lime bar across the wordmark. Reserved for the wordmark only. Never use as a generic underline or strike on other words.</p>
+    </div>
+    <div class="comp-stage">
+      <span class="cap">06 / Meta strip</span>
+      <div style="display: flex; justify-content: space-between; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 22px; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft);">
+        <span>CO/07 · <span style="color: var(--lime); -webkit-text-stroke: 0.5px var(--ink);">●</span> Motif</span>
+        <span>Est. 2026 · London</span>
+      </div>
+      <p class="t-body" style="margin-top: 12px;">The narrow horizontal band at the very top of every page or deliverable. Reference number on the left, lime dot, location on the right. Never wider than 11px type.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 08 — COMPONENTS                                -->
+<!-- ============================================== -->
+<section class="bb" id="sec-08">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">08</span> / Components</div>
+    <div>
+      <h2>Buttons. Cards. <span class="lime-fill">Lists.</span></h2>
+      <p class="sub">The small library of UI parts the brand reaches for again and again. Re-use these before you invent.</p>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Buttons · pill, 999px radius, mono caps</p>
+  <div class="comp-stage" style="margin-bottom: 32px;">
+    <div class="row-inline">
+      <a class="btn btn-ink" href="#">Book a Chaos Scan →</a>
+      <a class="btn btn-outline" href="#">See how it works</a>
+      <a class="btn btn-lime" href="#">Try Chaos Cards →</a>
+    </div>
+    <p class="t-body" style="margin-top: 10px;"><strong>Ink</strong> for the primary action. <strong>Outline</strong> for the secondary. <strong>Lime</strong> only when the action itself is the playful one (cards, a fun tool, a surprise). Never three lime buttons in a row.</p>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Card pair · ink &amp; lime · 220px min-height</p>
+  <div class="card-pair" style="margin-bottom: 32px;">
+    <div class="card-ink">
+      <span class="meta">[ Diagnosis ]</span>
+      <h4>Find what's actually broken — before you fix the wrong thing.</h4>
+    </div>
+    <div class="card-lime">
+      <span class="meta">[ Outcome ]</span>
+      <h4>A working commercial engine the team owns and can run.</h4>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Checklist · arrow → bullets · top/bottom rules</p>
+  <div class="comp-stage" style="margin-bottom: 32px;">
+    <div class="checklist">
+      <div class="check"><span class="arrow">→</span><div class="body">Monthly commercial review and challenge session</div></div>
+      <div class="check"><span class="arrow">→</span><div class="body">Keeping you and your commercial team accountable</div></div>
+      <div class="check"><span class="arrow">→</span><div class="body">Pipeline health and conversion review</div></div>
+      <div class="check"><span class="arrow">→</span><div class="body">Async input between sessions when it matters</div></div>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Price band · pastel lime · 4px radius</p>
+  <div class="comp-stage" style="margin-bottom: 32px;">
+    <div class="row-inline">
+      <span class="bracket">[ £4,700 / One-off Fee ]</span>
+      <span class="bracket">[ £3,500 per month / six months ]</span>
+      <span class="bracket">[ £2,100 per month / three months minimum ]</span>
+    </div>
+    <p class="t-body" style="margin-top: 10px;">The price band is the only place pastel lime <em>(#EAF8C0)</em> sits as a block. Always with the bracketed mono treatment. Use this format on proposals, invoice line summaries, and the services section of any deck.</p>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Format strip · ink band · uppercase mono</p>
+  <div class="comp-stage">
+    <div class="bracket dark"><strong>Format:</strong> &nbsp;Monthly retainer · Minimum 3-month commitment</div>
+    <p class="t-body" style="margin-top: 10px;">Ink bar with lime "<strong>Format:</strong>" key, then mono details. The footer of every service card. The reassurance that the commercial terms are crisp.</p>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 09 — IMAGERY                                   -->
+<!-- ============================================== -->
+<section class="bb" id="sec-09">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">09</span> / Imagery &amp; ground</div>
+    <div>
+      <h2>The page is the image. <span class="lime-fill">Nearly.</span></h2>
+      <p class="sub">We don't lean on stock photography or illustration. The visual richness comes from the typographic system, the cream ground, and the soft parallax gradient behind everything. Where we do use imagery, the rules are tight.</p>
+    </div>
+  </div>
+
+  <div class="row-2" style="margin-bottom: 30px;">
+    <div class="grad-tile">
+      <div><span class="t-mono">Parallax ground</span></div>
+      <div>
+        <p class="t-body" style="color: var(--ink); max-width: 380px;">Fixed background, slow scroll drift. Lilac top-right, pink bottom-left, cream centre. Sits at <code style="font-family: 'JetBrains Mono';">z-index: -1</code> behind every page.</p>
+      </div>
+    </div>
+    <div class="block">
+      <span class="label">Use it when</span>
+      <h4>Anything that lives on screen.</h4>
+      <p>Website, decks shown live, prototypes, social tiles. The drift gives the cream surface depth without ever pulling focus.</p>
+      <span class="label" style="margin-top: 16px;">Skip it when</span>
+      <h4 style="font-size: 22px;">Anything that lives on paper.</h4>
+      <p>Printed proposals, invoices, A4/Letter PDFs. Solid bone (#F4EEE2) instead — gradients muddy on print.</p>
+    </div>
+  </div>
+
+  <div class="row-3">
+    <div class="block">
+      <span class="label">Photography</span>
+      <h4>Used sparingly. Always portrait.</h4>
+      <p>One image per long-form artefact at most. Always founder / team / client portrait, never office or laptop stock. Rounded 4px corners, soft shadow, on the dark ink card so it reads as a quoted source.</p>
+    </div>
+    <div class="block">
+      <span class="label">Illustration</span>
+      <h4>Don't.</h4>
+      <p>No spot illustrations, no abstract shapes, no AI-generated decoration. If a moment needs more energy, reach for type scale or lime contrast — not pictures.</p>
+    </div>
+    <div class="block">
+      <span class="label">Iconography</span>
+      <h4>One glyph only.</h4>
+      <p>The lime arrow (→) is our entire icon set. Use it for list bullets, button cues, link affordances. Other symbols (×, ●) appear in mono labels but never as primary navigation.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 10 — APPLICATIONS                              -->
+<!-- ============================================== -->
+<section class="bb" id="sec-10">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">10</span> / Applications</div>
+    <div>
+      <h2>The system, in <span class="lime-fill">the wild</span>.</h2>
+      <p class="sub">How the rules add up in the artefacts you actually send. Start from these templates — don't rebuild from scratch every time.</p>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Proposal cover &amp; invoice</p>
+  <div class="apps" style="margin-bottom: 30px;">
+
+    <!-- PROPOSAL -->
+    <div class="app-frame prop">
+      <span class="stamp">[ Proposal · cover ]</span>
+      <div class="meta-row">
+        <span class="ref">CO/24-08 · <span style="color: var(--lime); -webkit-text-stroke: 0.5px var(--ink);">●</span> Proposal</span>
+        <span>August 2026</span>
+      </div>
+      <span class="eyebrow-tag" style="margin-bottom: 30px; align-self: flex-start;">Engine Build</span>
+      <h3>A bespoke <span class="lime-fill">commercial system</span> your team owns.</h3>
+      <p class="sub">Six months. One operator in your corner. A pipeline that runs without the founder.</p>
+      <div class="for-row">
+        <div><span class="lbl">Prepared for</span><span class="val">[Founder Name]</span></div>
+        <div><span class="lbl">Prepared by</span><span class="val">Chaos Over<span style="color: var(--lime);">.</span></span></div>
+      </div>
+    </div>
+
+    <!-- INVOICE -->
+    <div class="app-frame inv">
+      <span class="stamp">[ Invoice · CO-2026-0184 ]</span>
+      <div class="hdr">
+        <div class="who">Chaos<span style="color: var(--lime);">/</span><br/>Over<span class="dot">.</span></div>
+        <div class="ttl">Invoice · Aug 2026</div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Line</th><th>Description</th><th class="amt">Amount</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td>Engine Build · Month 3 of 6</td><td class="amt">£3,500.00</td></tr>
+          <tr><td>02</td><td>Pipeline session · 14 Aug</td><td class="amt">£0.00</td></tr>
+          <tr><td>03</td><td>Async review · proposal v2</td><td class="amt">£0.00</td></tr>
+        </tbody>
+      </table>
+      <div class="t-caption" style="margin-bottom: 6px;">Payment within 14 days. BACS: 00-00-00 · 12345678</div>
+      <div class="total">
+        <span>Total due</span>
+        <span class="v">£3,500.00 GBP</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Slide cover · 16:9 · ink ground</p>
+  <div class="apps" style="margin-bottom: 30px;">
+    <div class="slide-mock" style="grid-column: span 2;">
+      <div class="top"><span>CO · Deck · 03 / 24</span><span>Chaos Over<span style="color: var(--lime);">.</span></span></div>
+      <div>
+        <span class="eyebrow-tag" style="margin-bottom: 28px;">Chaos Scan</span>
+        <h3>Find what's <span class="lime-fill">actually broken</span><br/>before you fix the wrong thing<span class="dot">.</span></h3>
+      </div>
+      <div class="bottom"><span>[ Section 02 / Diagnosis ]</span><span>Slide 04 / 24</span></div>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Email signature · max width 540px</p>
+  <div class="esig">
+    <div class="avatar"></div>
+    <div>
+      <div class="name">[Founder name]</div>
+      <div class="role">Founder · Chaos Over<span style="color: var(--lime);">.</span></div>
+      <div class="ln"><strong>chaosover.co.uk</strong> · Commercial engines designed around people.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 11 — SOCIAL                                    -->
+<!-- ============================================== -->
+<section class="bb" id="sec-11">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">11</span> / LinkedIn &amp; carousels</div>
+    <div>
+      <h2>Same rules. <span class="lime-fill">Smaller stage.</span></h2>
+      <p class="sub">A LinkedIn carousel is a deck that scrolls in a phone. The brand doesn't change — the density does. One idea per card. One headline per card. One colour move per card.</p>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Carousel · square 1:1 · sequence of three</p>
+  <div class="li-row" style="margin-bottom: 30px;">
+    <div class="li-card bone">
+      <div class="top">CO · 01 / 06</div>
+      <h4>Most agency growth is <span class="lime-fill">accidental</span>.</h4>
+      <div class="swipe">Swipe →</div>
+    </div>
+    <div class="li-card ink">
+      <div class="top" style="opacity: 0.65;">CO · 02 / 06</div>
+      <h4>Strategy without execution<br/>is <span style="color: var(--lime);">expensive therapy</span>.</h4>
+      <div class="swipe" style="opacity: 0.65;">Keep going →</div>
+    </div>
+    <div class="li-card lime">
+      <div class="top">CO · 03 / 06</div>
+      <h4>Pattern recognised.<br/>Engine built.<br/>Chaos managed<span class="dot">.</span></h4>
+      <div class="swipe">Talk to us →</div>
+    </div>
+  </div>
+
+  <p class="t-mono" style="margin-bottom: 14px;">Single quote tile · 16:9 · social share</p>
+  <div class="row-2" style="margin-bottom: 30px;">
+    <div class="social-tile">
+      <div class="top">[ CO · Note 01 ]</div>
+      <h3>The Sunday dread<br/>is a <span class="co-wordmark" style="font-size: inherit; display: inline;"><span class="strike-line">commercial</span></span> problem.</h3>
+      <div class="bottom"><span><span class="dot">●</span> Chaos Over</span><span>chaosover.co.uk</span></div>
+    </div>
+    <div class="social-tile" style="background: var(--ink); color: var(--bone);">
+      <div class="top" style="opacity: 0.55;">[ CO · Note 02 ]</div>
+      <h3>If your pipeline is <span style="color: var(--lime);">you</span>,<br/>you don't have a pipeline.</h3>
+      <div class="bottom" style="opacity: 0.55;"><span><span style="color: var(--lime);">●</span> Chaos Over</span><span>chaosover.co.uk</span></div>
+    </div>
+  </div>
+
+  <div class="row-3">
+    <div class="block"><span class="label">Carousel rules</span><h4>Max 8 cards.</h4><p>Open with a punch (bone or ink). Middle in ink for weight. Close on lime for the payoff. Never two lime cards in a row.</p></div>
+    <div class="block"><span class="label">Density</span><h4>One headline. No body.</h4><p>If the caption needs explaining, it goes in the LinkedIn post copy — not on the card. Cards are statements, not slides.</p></div>
+    <div class="block"><span class="label">Typography</span><h4>36–56px Big Shoulders.</h4><p>Tracking –2%, leading 0.88–0.95. Same headline rules as the website. Don't shrink type to fit more words; cut the words.</p></div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 12 — MISUSE                                    -->
+<!-- ============================================== -->
+<section class="bb" id="sec-12">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">12</span> / Misuse</div>
+    <div>
+      <h2>What never <span class="lime-fill">to do</span>.</h2>
+      <p class="sub">The system is narrow on purpose. These are the moves that break it.</p>
+    </div>
+  </div>
+
+  <div class="misuse" style="margin-bottom: 30px;">
+    <div class="mis-card">
+      <span class="x">×</span>
+      <div>
+        <div class="mis-demo-1">Chaos Over</div>
+      </div>
+      <div>
+        <h5>Wrong font</h5>
+        <div class="why">Don't replace Big Shoulders with Inter, Roboto, or any system sans. The headline language disappears.</div>
+      </div>
+    </div>
+    <div class="mis-card">
+      <span class="x">×</span>
+      <div>
+        <div class="mis-demo-2">Unlock your growth →</div>
+      </div>
+      <div>
+        <h5>Gradient buttons</h5>
+        <div class="why">Don't mix lime and pink into a gradient. Don't use marketing language. Don't soften the corners past 999px.</div>
+      </div>
+    </div>
+    <div class="mis-card">
+      <span class="x">×</span>
+      <div>
+        <div class="mis-demo-3">CHAOS OVER.</div>
+      </div>
+      <div>
+        <h5>Outlined / shadowed type</h5>
+        <div class="why">No text strokes, no drop shadows, no offset duplicate. The wordmark sits flat or it doesn't sit.</div>
+      </div>
+    </div>
+    <div class="mis-card">
+      <span class="x">×</span>
+      <div>
+        <p class="t-body" style="font-size: 14px; line-height: 1.5; color: var(--ink);">In today's hyper-competitive landscape, organisations must leverage best-in-class methodologies to unlock transformational growth potential through synergistic stakeholder alignment.</p>
+      </div>
+      <div>
+        <h5>Consultant-speak</h5>
+        <div class="why">Plain English, every time. If a sentence sounds like a McKinsey deck, rewrite it as a founder would say it out loud.</div>
+      </div>
+    </div>
+    <div class="mis-card">
+      <span class="x">×</span>
+      <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+        <span class="bracket lime" style="font-size: 10px;">[ Lime ]</span>
+        <span class="bracket lime" style="font-size: 10px;">[ Lime ]</span>
+        <span class="bracket lime" style="font-size: 10px;">[ Lime ]</span>
+        <span class="bracket lime" style="font-size: 10px;">[ Lime ]</span>
+        <span class="bracket lime" style="font-size: 10px;">[ Lime ]</span>
+        <span class="bracket lime" style="font-size: 10px;">[ Lime ]</span>
+      </div>
+      <div>
+        <h5>Lime everywhere</h5>
+        <div class="why">Lime is a punctuation mark, not a paint. If more than 5% of the surface is lime, take some away.</div>
+      </div>
+    </div>
+    <div class="mis-card">
+      <span class="x">×</span>
+      <div>
+        <p class="t-h3" style="font-size: 22px; text-align: center; line-height: 1.1;">Headline centred on the page, justified, in italic and underlined.</p>
+      </div>
+      <div>
+        <h5>Centred body copy</h5>
+        <div class="why">Headlines and body are left-aligned. No italics for emphasis (use lime-fill). No underline for emphasis (use the dot).</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="pull" style="margin-top: 50px;">If you're unsure: <span class="lime-fill">narrower, plainer, quieter</span> is always the answer.</p>
+</section>
+
+
+<!-- ============================================== -->
+<!-- QUICK REFERENCE                                -->
+<!-- ============================================== -->
+<section class="bb" id="sec-ref">
+  <div class="bb-head">
+    <div class="bb-ref"><span class="num">13</span> / Quick reference</div>
+    <div>
+      <h2>Tokens, fonts, <span class="lime-fill">file map</span>.</h2>
+      <p class="sub">If you're sitting in a tool that doesn't read this CSS, copy the values from here.</p>
+    </div>
+  </div>
+
+  <div class="row-2">
+    <div class="block" style="background: var(--ink); color: var(--bone);">
+      <span class="label" style="color: rgba(244,238,226,0.55);">CSS variables</span>
+      <h4 style="color: var(--bone);">Design tokens</h4>
+      <pre style="font-family: 'JetBrains Mono'; font-size: 12px; line-height: 1.8; color: rgba(244,238,226,0.85); white-space: pre-wrap; margin-top: 8px;">--ink:        #1C1822
+--ink-soft:   rgba(28,24,34,0.65)
+--ink-dim:    rgba(28,24,34,0.45)
+--bone:       #F4EEE2
+--bone-2:     #EDE5D4
+--lime:       #C8FF3D
+--lime-soft:  #EAF8C0
+--line:       rgba(28,24,34,0.14)
+--line-strong:rgba(28,24,34,0.22)
+--lilac-bg:   #E6DCF3
+--pink-bg:    #FBE2E9</pre>
+    </div>
+    <div class="block">
+      <span class="label">Fonts · Google Fonts</span>
+      <h4>Three families, eight weights total.</h4>
+      <p><strong>Big Shoulders Display</strong> — 600 / 800 / 900<br/>
+      <strong>Space Grotesk</strong> — 400 / 500 / 600 / 700<br/>
+      <strong>JetBrains Mono</strong> — 400 / 500 / 700</p>
+      <p style="margin-top: 12px;">Embed via the single Google Fonts URL used in every Chaos Over page. Don't substitute. Don't add a fourth family.</p>
+    </div>
+  </div>
+
+  <p class="pull" style="margin-top: 80px;">Built for the brand. Built to be <span class="lime-fill">copied, not improvised</span>.</p>
+</section>
+
+</main>
+
+<footer class="bb-foot">
+  <div class="wm">Chaos<span style="color: var(--lime);">/</span>Over<span class="dot">.</span></div>
+  <div>Brand Book · v1.0 · 2026</div>
+  <div>© Chaos Over · chaosover.co.uk</div>
+</footer>
+
+<script>
+  (async function autoPrint() {
+    try {
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+    } catch (e) {}
+    await new Promise(r => setTimeout(r, 500));
+    window.print();
+  })();
+</script>
+
+</body>
+</html>

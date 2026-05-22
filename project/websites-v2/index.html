@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · Website v2 — Editorial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="co.css" rel="stylesheet">
+<style>
+  body { background: var(--ink); color: var(--bone); }
+  .frame { max-width: 1480px; margin: 0 auto; padding: 60px 48px 80px; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px; }
+  .head .logo { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 26px; letter-spacing: -0.02em; }
+  .head .logo .dot { color: var(--lime); }
+  .head .label { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.6; }
+  h1 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(72px, 11vw, 180px); line-height: 0.86; letter-spacing: -0.02em;
+    margin: 30px 0 18px;
+  }
+  h1 .lime-bg { background: var(--lime); color: var(--ink); padding: 0 .08em; }
+  .sub { font-size: 18px; line-height: 1.5; opacity: 0.78; max-width: 880px; margin-bottom: 70px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  @media (min-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  a.card {
+    display: block; text-decoration: none; color: inherit;
+    background: rgba(242,237,227,0.04); border: 1px solid var(--line);
+    padding: 24px; transition: transform .2s, border-color .2s, background .2s;
+  }
+  a.card:hover { transform: translateY(-4px); border-color: var(--lime); background: rgba(200,255,61,0.04); }
+  .card .preview {
+    aspect-ratio: 16/10; margin-bottom: 18px; overflow: hidden; border: 1px solid var(--line);
+    background: var(--ink); position: relative;
+  }
+  .card .preview iframe {
+    border: 0; width: 250%; height: 250%; transform: scale(0.4); transform-origin: top left; pointer-events: none;
+  }
+  .card .no { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); margin-bottom: 12px; }
+  .card h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 38px; letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px; }
+  .card p { font-size: 14px; line-height: 1.55; opacity: 0.75; margin-bottom: 16px; min-height: 72px; }
+  .card .open {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .card .open .arrow { color: var(--lime); }
+  footer { margin-top: 80px; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="frame">
+  <header class="head">
+    <div class="logo">Chaos Over<span class="dot">.</span></div>
+    <div class="label">Website explorations · v2 · Editorial</div>
+  </header>
+
+  <h1>Five <span class="lime-bg">editorial</span> directions.</h1>
+  <p class="sub">All five inspired by the In-the-Wild editorial poster — charcoal, acid lime, big-shoulders display, mono metadata stamps. The brand wordmark (CHAOS with the locked lime diagonal strike, OVER in ink with the lime dot) is the constant. The editorial archetype is what changes.</p>
+
+  <div class="grid">
+    <a class="card" href="01-avexa.html">
+      <div class="preview"><iframe src="01-avexa.html" loading="lazy"></iframe></div>
+      <div class="no">01 / Motion · Avexa-inspired ★ NEW</div>
+      <h2>Editorial Motion</h2>
+      <p>Avexa-Webflow-style agency layout: hero with image marquee gallery, "Our Approach" benefits grid (5 cards + 1 lime stat tile), works list with /YEAR convention, services with Project-Based / Monthly pricing toggle, client stories, FAQ, contact + newsletter. The parallax X-cross field runs subtly in the background. <strong>Includes drop-in image slots</strong> — drag photos onto any placeholder.</p>
+      <div class="open"><span>Open</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="card" href="01-motion-x.html">
+      <div class="preview"><iframe src="01-motion-x.html" loading="lazy"></iframe></div>
+      <div class="no">01b / Motion (original)</div>
+      <h2>X-Field Motion</h2>
+      <p>The original 01 — type-led editorial with the parallax X-cross field as the lead motif. Charcoal editorial site with X's drifting on scroll and mouse movement.</p>
+      <div class="open"><span>Open</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="card" href="02-dossier.html">
+      <div class="preview"><iframe src="02-dossier.html" loading="lazy"></iframe></div>
+      <div class="no">02 / Dossier</div>
+      <h2>The Dossier</h2>
+      <p>A confidential-file feel. Folder tab, classified stamps, three-column document grid (file metadata · body · references), perforated section dividers, deliverables as tags.</p>
+      <div class="open"><span>Open</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="card" href="03-magazine.html">
+      <div class="preview"><iframe src="03-magazine.html" loading="lazy"></iframe></div>
+      <div class="no">03 / Magazine</div>
+      <h2>Issue Nº01</h2>
+      <p>A magazine cover + departmental spreads. Masthead, story index, multi-column feature with drop-cap, full-bleed pull-quote, three-up service "index". The premium-publication version.</p>
+      <div class="open"><span>Open</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="card" href="04-broadsheet.html">
+      <div class="preview"><iframe src="04-broadsheet.html" loading="lazy"></iframe></div>
+      <div class="no">04 / Broadsheet</div>
+      <h2>Broadsheet</h2>
+      <p>Newspaper front-page layout: dateline, masthead, three-column lead with drop-cap, services as classified ads, editorial-style method block. Dense and serious.</p>
+      <div class="open"><span>Open</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="card" href="05-manifesto.html">
+      <div class="preview"><iframe src="05-manifesto.html" loading="lazy"></iframe></div>
+      <div class="no">05 / Manifesto</div>
+      <h2>The Manifesto</h2>
+      <p>Alternating dark/light full-height slabs. Three numbered statements, one declarative slab, services as chapters. Reads like a confident essay. The "considered take" version.</p>
+      <div class="open"><span>Open</span><span class="arrow">→</span></div>
+    </a>
+  </div>
+
+  <footer>
+    <span>Five archetypes. One brand.</span>
+    <span>Locked strike: -39° · 72% · 6px · lime</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · Website Explorations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1822; --bone: #f9f3ea; --lime: #c8ff3d;
+    --line: rgba(28,24,34,0.14); --muted: rgba(28,24,34,0.6);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(110% 90% at 95% 5%, #e6dcf3 0%, rgba(230,220,243,0) 60%),
+                radial-gradient(110% 90% at 5% 95%, #fbe2e9 0%, rgba(251,226,233,0) 60%),
+                #f9f3ea;
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    min-height: 100vh;
+  }
+  .frame { max-width: 1280px; margin: 0 auto; padding: 60px 48px 80px; }
+  header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 60px; }
+  header .logo { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 26px; letter-spacing: -0.02em; }
+  header .logo .dot { color: var(--lime); }
+  header .label { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.6; }
+  h1 {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(72px, 10vw, 152px); line-height: 0.86; letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  h1 .lime-bg { background: var(--lime); padding: 0 .08em; }
+  .sub { font-size: 19px; line-height: 1.5; max-width: 720px; opacity: 0.78; margin-bottom: 80px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  a.card {
+    text-decoration: none; color: inherit; display: block;
+    background: rgba(255,255,255,0.4); border: 1px solid var(--line);
+    padding: 28px; border-radius: 4px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+  }
+  a.card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(28,24,34,.08); border-color: var(--ink); }
+  .card .no { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.5; margin-bottom: 20px; }
+  .card h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 44px; letter-spacing: -0.02em; line-height: 0.92; margin-bottom: 16px; }
+  .card p { font-size: 14px; line-height: 1.5; opacity: 0.75; margin-bottom: 24px; min-height: 84px; }
+  .card .open { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; display: flex; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--line); }
+  .card .open .arrow { color: var(--lime); -webkit-text-stroke: 1px var(--ink); }
+  .preview {
+    aspect-ratio: 16/10; margin-bottom: 20px; overflow: hidden;
+    border: 1px solid var(--line); border-radius: 2px;
+    background: var(--bone); position: relative;
+  }
+  .preview iframe {
+    border: 0; width: 200%; height: 200%;
+    transform: scale(0.5); transform-origin: top left;
+    pointer-events: none;
+  }
+  footer { margin-top: 80px; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <header>
+      <div class="logo">Chaos Over<span class="dot">.</span></div>
+      <div class="label">Website explorations · v0.1</div>
+    </header>
+
+    <h1>Three website <span class="lime-bg">directions</span>.</h1>
+    <p class="sub">
+      Same proposition, strapline, and three services — three different ways to bring the brand to web.
+      Click any tile to open the full prototype.
+    </p>
+
+    <div class="grid">
+      <a class="card" href="01-motion.html">
+        <div class="preview"><iframe src="01-motion.html" loading="lazy"></iframe></div>
+        <div class="no">01 / Motion</div>
+        <h2>Motion-heavy</h2>
+        <p>Webflow-style. Animated wordmark, custom cursor, scroll reveals, marquee, interactive service rows, parallax. Bold and modern.</p>
+        <div class="open"><span>Open</span><span class="arrow">→</span></div>
+      </a>
+
+      <a class="card" href="02-scroll.html">
+        <div class="preview"><iframe src="02-scroll.html" loading="lazy"></iframe></div>
+        <div class="no">02 / Scroll</div>
+        <h2>One-page</h2>
+        <p>Everything on one long page. Hero, proposition, three services in full detail with pricing, method, about, testimonial, FAQ, contact. The "ready to sell" version.</p>
+        <div class="open"><span>Open</span><span class="arrow">→</span></div>
+      </a>
+
+      <a class="card" href="03-minimal.html">
+        <div class="preview"><iframe src="03-minimal.html" loading="lazy"></iframe></div>
+        <div class="no">03 / Minimal</div>
+        <h2>Minimalist</h2>
+        <p>Sparse, type-first, two-column with sticky side nav. No animation, no motion, no ornament. Confident, restrained, considered.</p>
+        <div class="open"><span>Open</span><span class="arrow">→</span></div>
+      </a>
+    </div>
+
+    <footer>
+      <span>Same content. Three voices.</span>
+      <span>← back to brand canvas</span>
+    </footer>
+  </div>
+</body>
+</html>

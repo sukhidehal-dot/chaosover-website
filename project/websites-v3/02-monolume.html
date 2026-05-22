@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Chaos Over · Studio (Monolume-inspired)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="co-soft.css" rel="stylesheet">
+<style>
+  /* Monolume-inspired: clean, soft, image-led, with personal-introduction
+     voice and "Mono / Lume" split-display hero. */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,238,226,0.78); backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; }
+  .nav .logo { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 22px; letter-spacing: -0.02em; }
+  .nav .logo .dot { color: var(--lime); }
+  .nav ul { list-style: none; display: flex; gap: 26px; align-items: center; }
+  .nav a.link { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+  .nav a.link:hover { opacity: 1; color: var(--ink); }
+
+  /* HERO — Monolume's "Mono / Lume" split with image cluster between */
+  .hero {
+    padding: 90px 48px 100px;
+    min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .hero-top {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: center;
+  }
+  .hero-top .word {
+    font-family: 'Big Shoulders Display'; font-weight: 900;
+    font-size: clamp(120px, 18vw, 260px); line-height: 0.84; letter-spacing: -0.02em;
+  }
+  .hero-top .word.left { text-align: right; position: relative; }
+  .hero-top .word.left::after {
+    content: ''; position: absolute; right: -6%; left: -2%; top: 72%;
+    height: 0.04em; background: var(--lime);
+    transform: translateY(-50%) rotate(-39deg);
+  }
+  .hero-top .word.right { color: var(--ink); }
+  .hero-top .word.right .dot { color: var(--lime); }
+  .hero-images {
+    display: flex; gap: 14px;
+    /* Tilt slightly for that arch-folio feel */
+  }
+  .hero-images .slot {
+    width: 92px; height: 132px;
+    background: linear-gradient(150deg, #e7e0cf 0%, #d9d0bd 100%);
+    border-radius: 6px;
+    overflow: hidden; position: relative;
+    box-shadow: 0 6px 20px rgba(28,24,34,0.08);
+    transform: rotate(var(--rot, -3deg));
+  }
+  .hero-images .slot:nth-child(2) { --rot: 4deg; height: 152px; }
+  .hero-images .slot:nth-child(3) { --rot: -2deg; height: 124px; }
+  .hero-images image-slot { width: 100%; height: 100%; display: block; }
+  .hero-images .slot::after {
+    content: attr(data-label); position: absolute; bottom: 8px; left: 8px;
+    font-family: 'JetBrains Mono'; font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); pointer-events: none;
+  }
+
+  .hero-strap {
+    margin-top: 60px; display: flex; justify-content: space-between; align-items: end; gap: 40px;
+  }
+  .hero-strap .signature {
+    font-family: 'Big Shoulders Display'; font-weight: 700;
+    font-size: clamp(24px, 2.4vw, 38px); line-height: 1.15; letter-spacing: -0.01em;
+    max-width: 720px;
+  }
+  .hero-strap .signature em { font-style: normal; color: var(--ink); border-bottom: 2px solid var(--lime); }
+  .hero-strap .corner {
+    text-align: right;
+    font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* Section headers in the spare Monolume manner */
+  .section-head {
+    display: flex; justify-content: space-between; align-items: end;
+    margin-bottom: 50px; padding-bottom: 24px; border-bottom: 1px solid var(--line);
+  }
+  .section-head .label { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px; }
+  .section-head h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(48px, 7vw, 100px); line-height: 0.9; letter-spacing: -0.02em; }
+  .section-head h2 .dot { color: var(--lime); }
+  .section-head .count { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
+
+  section { padding: 130px 0; }
+
+  /* PORTFOLIO LIST — Monolume-style row with date · type · arrow */
+  .portfolio {
+    display: flex; flex-direction: column;
+  }
+  .pf-row {
+    display: grid; grid-template-columns: 130px 1fr 240px 240px 60px;
+    gap: 32px; align-items: center;
+    padding: 26px 0; border-bottom: 1px solid var(--line);
+    text-decoration: none; color: inherit; transition: padding .35s, color .35s;
+  }
+  .pf-row:first-of-type { border-top: 1px solid var(--line); }
+  .pf-row:hover { padding: 36px 0; }
+  .pf-row:hover .pf-name { color: var(--ink); }
+  .pf-row .date { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
+  .pf-row .pf-name { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(32px, 4.4vw, 56px); letter-spacing: -0.02em; line-height: 0.95; }
+  .pf-row .pf-type, .pf-row .pf-cat { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
+  .pf-row .arrow { font-family: 'Big Shoulders Display'; font-size: 26px; color: var(--lime); -webkit-text-stroke: 1.2px var(--ink); text-align: right; transition: transform .25s; }
+  .pf-row:hover .arrow { transform: translateX(8px); }
+
+  /* ABOUT — image + body + signature */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start;
+  }
+  .about-portrait {
+    aspect-ratio: 4/5; background: linear-gradient(150deg, #e7e0cf 0%, #d9d0bd 100%);
+    border-radius: 8px; position: relative; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(28,24,34,0.10);
+  }
+  .about-portrait image-slot { width: 100%; height: 100%; display: block; }
+  .about-portrait::after {
+    content: 'PORTRAIT'; position: absolute; bottom: 14px; left: 16px;
+    font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.22em; color: var(--ink-soft);
+  }
+  .about-copy h3 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(40px, 4.6vw, 64px); letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 24px; }
+  .about-copy h3 .lime-fill { background: var(--lime); color: var(--ink); padding: 0 .12em; }
+  .about-copy p { font-size: 18px; line-height: 1.6; margin-bottom: 18px; color: var(--ink); }
+  .about-copy .signoff {
+    margin-top: 28px;
+    font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 28px; letter-spacing: -0.02em;
+  }
+  .about-copy .signoff small {
+    display: block; font-family: 'JetBrains Mono'; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.6; font-weight: 400; margin-top: 4px;
+  }
+
+  /* SERVICES — small soft cards */
+  .svc-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .svc-card {
+    background: var(--bone-2); padding: 28px; border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 16px; min-height: 280px;
+    transition: background .25s, border-color .25s, transform .25s;
+  }
+  .svc-card:hover { transform: translateY(-3px); border-color: var(--ink); }
+  .svc-card .num { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; color: var(--lime); -webkit-text-stroke: 0.6px var(--ink); }
+  .svc-card h4 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 30px; letter-spacing: -0.02em; line-height: 1; }
+  .svc-card .duration { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
+  .svc-card p { font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
+  .svc-card .foot {
+    margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .svc-card .price {
+    font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 22px; letter-spacing: -0.015em;
+  }
+  .svc-card .price .lime-fill { background: var(--lime); padding: 0 .1em; }
+
+  /* IMAGE GRID — gallery wall */
+  .gallery-wall {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px;
+  }
+  .gallery-wall .slot {
+    aspect-ratio: 3/4;
+    background: linear-gradient(150deg, #e7e0cf 0%, #d9d0bd 100%);
+    border-radius: 6px; position: relative; overflow: hidden;
+  }
+  .gallery-wall .slot image-slot { width: 100%; height: 100%; display: block; }
+  .gallery-wall .slot::after {
+    content: attr(data-label); position: absolute; bottom: 10px; left: 12px;
+    font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.22em; color: var(--ink-soft);
+  }
+
+  /* IDEA / CTA — Monolume's "Do you have any idea?" -> our "Get over it" */
+  .idea {
+    padding: 160px 0; text-align: center;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .idea .pre { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 24px; }
+  .idea h2 { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: clamp(80px, 14vw, 240px); line-height: 0.84; letter-spacing: -0.02em; }
+  .idea h2 .dot { color: var(--lime); }
+  .idea .let { margin-top: 24px; font-family: 'Big Shoulders Display'; font-weight: 700; font-size: clamp(24px, 2.4vw, 38px); letter-spacing: -0.01em; }
+  .idea .let .lime-fill { background: var(--lime); color: var(--ink); padding: 0 .1em; }
+  .idea .btn-lime { margin-top: 40px; padding: 20px 36px; font-size: 13px; letter-spacing: 0.24em; }
+
+  /* CONTACT — simple form like Monolume's "Next Step" */
+  .contact-form {
+    max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px;
+  }
+  .contact-form input, .contact-form textarea {
+    background: transparent; border: 0; border-bottom: 1.5px solid var(--ink);
+    padding: 16px 4px; color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-size: 17px;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--lime); }
+  .contact-form textarea { min-height: 120px; resize: vertical; }
+  .contact-form button {
+    align-self: flex-start; margin-top: 12px; padding: 16px 30px;
+    background: var(--ink); color: var(--bone); border: 0; cursor: pointer;
+    font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    border-radius: 999px;
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-field" id="ambient"></div>
+
+<div class="stage">
+
+<div class="meta-strip">
+  <div>Chaos Over<span style="color:var(--lime);font-weight:900;">.</span> — Studio</div>
+  <div>Commercial strategy for founder-led B2B</div>
+  <div>EST. 2026 · London, UK</div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">Chaos Over<span class="dot">.</span></div>
+    <ul>
+      <li><a class="link" href="#about">About</a></li>
+      <li><a class="link" href="#portfolio">Portfolio</a></li>
+      <li><a class="link" href="#services">Services</a></li>
+      <li><a class="link" href="#contact">Contact</a></li>
+      <li><a class="btn btn-ink" href="#contact" style="padding: 8px 16px; font-size: 10px;">Book a call →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-top">
+      <div class="word left">Chaos</div>
+      <div class="hero-images">
+        <div class="slot" data-label="Workshop"><image-slot id="m-h1" placeholder="Workshop photo"></image-slot></div>
+        <div class="slot" data-label="Founder"><image-slot id="m-h2" placeholder="Founder photo"></image-slot></div>
+        <div class="slot" data-label="Studio"><image-slot id="m-h3" placeholder="Studio photo"></image-slot></div>
+      </div>
+      <div class="word right">Over<span class="dot">.</span></div>
+    </div>
+    <p style="text-align: center; margin-top: 36px; font-family: 'Big Shoulders Display'; font-weight: 700; font-size: clamp(20px, 1.8vw, 28px); letter-spacing: -0.005em;">
+      I'm <em style="font-style:normal; border-bottom: 2px solid var(--lime);">Sam Holder</em> — commercial strategy that builds engines, not decks.
+    </p>
+  </div>
+
+  <div class="hero-strap">
+    <p class="signature">Strategy meets <em>systems</em>. We help founder-led B2B operators trade hustle for a commercial engine that compounds — quietly, without drama, on the founder's terms.</p>
+    <div class="corner">↓<br/>Scroll<br/>to read</div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="container" id="portfolio">
+  <div class="section-head" data-reveal>
+    <div>
+      <div class="label">[ Selected Engagements ]</div>
+      <h2>Recent work<span class="dot">.</span></h2>
+    </div>
+    <div class="count">01 — 04</div>
+  </div>
+
+  <div class="portfolio">
+    <a class="pf-row" href="#" data-reveal>
+      <span class="date">/ MAR 2025</span>
+      <span class="pf-name">Arcworks Collective</span>
+      <span class="pf-type">B2B Services · £4M</span>
+      <span class="pf-cat">Engine Build</span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="pf-row" href="#" data-reveal data-reveal-delay="1">
+      <span class="date">/ JAN 2025</span>
+      <span class="pf-name">Studio Nive</span>
+      <span class="pf-type">Boutique Agency · £2M</span>
+      <span class="pf-cat">Diagnostic + Strategy</span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="pf-row" href="#" data-reveal data-reveal-delay="2">
+      <span class="date">/ OCT 2024</span>
+      <span class="pf-name">Fieldtone Projects</span>
+      <span class="pf-type">B2B Services · £7M</span>
+      <span class="pf-cat">Strategy &amp; Positioning</span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="pf-row" href="#" data-reveal data-reveal-delay="3">
+      <span class="date">/ JUL 2024</span>
+      <span class="pf-name">Morrow &amp; Reed</span>
+      <span class="pf-type">B2B Consulting · £6M</span>
+      <span class="pf-cat">Engine Build</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div style="text-align: right; margin-top: 30px;">
+    <a class="btn btn-outline" href="#">See all engagements →</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="container" id="about">
+  <div class="section-head" data-reveal>
+    <div>
+      <div class="label">[ About ]</div>
+      <h2>Hi, I'm Sam<span class="dot">.</span></h2>
+    </div>
+    <div class="count">02</div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-portrait" data-reveal>
+      <image-slot id="m-portrait" placeholder="Founder portrait"></image-slot>
+    </div>
+    <div class="about-copy" data-reveal data-reveal-delay="1">
+      <h3>Twelve years building <span class="lime-fill">engines</span> — now I install them for others.</h3>
+      <p>Founder-led B2B operator based in London, with deep focus on commercial systems for founder-led businesses. Over twelve years across B2B services, SaaS, and specialist agencies — including time as a founder, VP Commercial, and Head of Strategy.</p>
+      <p>My work centres around quiet impact: clearer offers, cleaner pricing, and operating systems that survive the founder's calendar. No retainers. No frameworks-as-furniture. We install, we coach, we leave.</p>
+      <div class="signoff">— Sam Holder<small>Founder, Chaos Over</small></div>
+    </div>
+  </div>
+
+  <!-- Image wall sub-section -->
+  <div style="margin-top: 100px;" data-reveal>
+    <div class="label" style="font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 18px;">[ The practice in pictures ]</div>
+    <div class="gallery-wall">
+      <div class="slot" data-label="Workshop"><image-slot id="m-w1" placeholder="Workshop"></image-slot></div>
+      <div class="slot" data-label="Whiteboard"><image-slot id="m-w2" placeholder="Whiteboard"></image-slot></div>
+      <div class="slot" data-label="Client room"><image-slot id="m-w3" placeholder="Client"></image-slot></div>
+      <div class="slot" data-label="Off-site"><image-slot id="m-w4" placeholder="Off-site"></image-slot></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="container" id="services">
+  <div class="section-head" data-reveal>
+    <div>
+      <div class="label">[ Services ]</div>
+      <h2>Three engagements<span class="dot">.</span></h2>
+    </div>
+    <div class="count">03 — 03</div>
+  </div>
+  <div class="svc-cards">
+    <div class="svc-card" data-reveal>
+      <span class="num">/ 01</span>
+      <h4>Diagnostic</h4>
+      <span class="duration">4 weeks · Fixed fee</span>
+      <p>A deep audit of your commercial engine. ICP, offer, pricing, motion, ops. You leave with one map and the three highest-leverage moves.</p>
+      <div class="foot">
+        <a style="font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;" href="#">Learn more →</a>
+        <span class="price">From <span class="lime-fill">£18k</span></span>
+      </div>
+    </div>
+    <div class="svc-card" data-reveal data-reveal-delay="1">
+      <span class="num">/ 02</span>
+      <h4>Strategy &amp; Positioning</h4>
+      <span class="duration">8 weeks · Fixed fee</span>
+      <p>Sharpen the wedge. Re-architect the offer ladder, narrative, and pricing model. Land the version of your business customers actually want to buy.</p>
+      <div class="foot">
+        <a style="font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;" href="#">Learn more →</a>
+        <span class="price">From <span class="lime-fill">£42k</span></span>
+      </div>
+    </div>
+    <div class="svc-card" data-reveal data-reveal-delay="2">
+      <span class="num">/ 03</span>
+      <h4>Engine Build</h4>
+      <span class="duration">12 weeks + 90 days coaching</span>
+      <p>Stand up the operating system. Pipeline, playbooks, dashboards, cadence. Your team runs it; we coach for 90 days; we leave.</p>
+      <div class="foot">
+        <a style="font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;" href="#">Learn more →</a>
+        <span class="price">From <span class="lime-fill">£85k</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="idea">
+  <div class="container" data-reveal>
+    <div class="pre">[ Next step ]</div>
+    <h2 class="display">Do you<br/>have any<br/>chaos<span class="dot">?</span></h2>
+    <p class="let">Let's <span class="lime-fill">collaborate</span> — diagnose it in four weeks.</p>
+    <a class="btn btn-lime" href="#contact">Book a diagnostic →</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="container" id="contact">
+  <div class="section-head" data-reveal>
+    <div>
+      <div class="label">[ Contact ]</div>
+      <h2>Get in touch<span class="dot">.</span></h2>
+    </div>
+    <div class="count">04</div>
+  </div>
+  <form class="contact-form" data-reveal onsubmit="event.preventDefault(); this.querySelector('button').textContent = '✓ Sent — we reply within 1 business day';">
+    <input type="text" placeholder="Your name" required />
+    <input type="email" placeholder="Your email *" required />
+    <textarea placeholder="What's the engine you're trying to fix?" required></textarea>
+    <button type="submit">Next step →</button>
+  </form>
+</section>
+
+<footer class="foot">
+  <div>Chaos Over<span style="color:var(--lime); font-weight:900;">.</span> &nbsp;© 2026</div>
+  <div>chaosover.co · hello@chaosover.co</div>
+  <div>Made in London</div>
+</footer>
+
+</div>
+
+<script src="image-slot.js"></script>
+<script src="ambient.js"></script>
+
+</body>
+</html>
