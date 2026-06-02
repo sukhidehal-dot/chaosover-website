@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Claude Design bundle (reference only — not part of the site)
+chats/
+project/
+README.md

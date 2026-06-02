@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+[context.production]
+  environment = { CONTEXT = "production" }
+
+[context.staging]
+  environment = { CONTEXT = "staging" }

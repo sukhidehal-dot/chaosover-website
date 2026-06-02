@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Chaos Over</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #1c1822;
+  --ink-soft: rgba(28,24,34,0.65);
+  --ink-dim: rgba(28,24,34,0.45);
+  --bone: #f4eee2;
+  --bone-2: #ede5d4;
+  --bone-3: #e3dac4;
+  --lime: #c8ff3d;
+  --line: rgba(28,24,34,0.14);
+  --line-strong: rgba(28,24,34,0.28);
+}
+
+html, body {
+  height: 100%;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  overflow: hidden;
+}
+
+/* Slow-drifting petal gradient ground — matches Chaos Over brand */
+.grad-bg {
+  position: fixed;
+  inset: -20vh -10vw -20vh -10vw;
+  width: 120vw;
+  height: 140vh;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 28px,
+      rgba(28,24,34,0.30) 28px,
+      rgba(28,24,34,0.30) 29px
+    ),
+    radial-gradient(110% 90% at 95% 5%, #e6dcf3 0%, rgba(230,220,243,0) 60%),
+    radial-gradient(110% 90% at 5% 95%, #fbe2e9 0%, rgba(251,226,233,0) 60%),
+    var(--bone);
+  will-change: transform;
+  animation: gradDrift 48s ease-in-out infinite alternate;
+}
+
+@keyframes gradDrift {
+  0%   { transform: translate3d(-2vw, -2vh, 0) rotate(0deg); }
+  50%  { transform: translate3d(2vw, 1vh, 0) rotate(0.4deg); }
+  100% { transform: translate3d(-1vw, 3vh, 0) rotate(-0.3deg); }
+}
+
+/* ─── 404 FALL ─── */
+.fall-stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fall-col {
+  position: absolute;
+  top: -120vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.fall-col .n {
+  display: block;
+  letter-spacing: -0.04em;
+}
+
+.fall-col .n .lime-dot { color: var(--lime); }
+
+/* Column variants — different sizes, positions, speeds, opacities */
+.fall-col.c1  { left: 4%;  font-size: 96px;  opacity: 0.92; animation: fall 18s linear infinite; }
+.fall-col.c2  { left: 13%; font-size: 56px;  opacity: 0.18; animation: fall 26s linear infinite; animation-delay: -6s; }
+.fall-col.c3  { left: 21%; font-size: 140px; opacity: 0.06; animation: fall 34s linear infinite; animation-delay: -14s; }
+.fall-col.c4  { left: 29%; font-size: 42px;  opacity: 0.32; animation: fall 22s linear infinite; animation-delay: -3s; }
+.fall-col.c5  { left: 38%; font-size: 72px;  opacity: 0.12; animation: fall 30s linear infinite; animation-delay: -18s; }
+.fall-col.c6  { left: 47%; font-size: 180px; opacity: 0.04; animation: fall 42s linear infinite; animation-delay: -22s; }
+.fall-col.c7  { left: 57%; font-size: 38px;  opacity: 0.45; animation: fall 20s linear infinite; animation-delay: -9s; }
+.fall-col.c8  { left: 65%; font-size: 110px; opacity: 0.08; animation: fall 36s linear infinite; animation-delay: -2s; }
+.fall-col.c9  { left: 74%; font-size: 60px;  opacity: 0.22; animation: fall 28s linear infinite; animation-delay: -16s; }
+.fall-col.c10 { left: 82%; font-size: 48px;  opacity: 0.35; animation: fall 24s linear infinite; animation-delay: -11s; }
+.fall-col.c11 { left: 90%; font-size: 88px;  opacity: 0.85; animation: fall 19s linear infinite; animation-delay: -5s; }
+.fall-col.c12 { left: 96%; font-size: 32px;  opacity: 0.5;  animation: fall 16s linear infinite; animation-delay: -7s; }
+
+@keyframes fall {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(-50%, 220vh, 0); }
+}
+
+/* ─── CENTER CAPTION ─── */
+.caption-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.caption-card {
+  position: relative;
+  text-align: center;
+  padding: 56px 72px;
+  background: rgba(244, 238, 226, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  pointer-events: auto;
+  max-width: 760px;
+  width: calc(100% - 48px);
+}
+
+.caption-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.caption-eyebrow::before,
+.caption-eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.caption-headline {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(32px, 5.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  text-wrap: balance;
+}
+
+.caption-headline .accent {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%, transparent 18%,
+    var(--lime) 18%, var(--lime) 90%,
+    transparent 90%, transparent 100%
+  );
+  padding: 0 .12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.caption-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 36px;
+}
+
+.caption-sub .dot { color: var(--lime); }
+
+.caption-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  transition: background .2s, color .2s, transform .2s;
+}
+
+.btn-ink {
+  background: var(--ink);
+  color: var(--bone);
+}
+.btn-ink:hover { background: var(--lime); color: var(--ink); border-color: var(--ink); transform: translateY(-2px); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-ghost:hover { background: var(--ink); color: var(--bone); transform: translateY(-2px); }
+
+.btn .arrow { display: inline-block; transition: transform .2s; }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* ─── CORNER MARKS ─── */
+.corner {
+  position: fixed;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.corner .bullet {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 2px rgba(28,24,34,0.15);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.corner.tl { top: 28px; left: 32px; }
+.corner.tr { top: 28px; right: 32px; }
+.corner.bl { bottom: 28px; left: 32px; }
+.corner.br { bottom: 28px; right: 32px; }
+
+.corner .strike {
+  position: relative;
+}
+.corner .strike::after {
+  content: ''; position: absolute; left: -4%; right: -4%; top: 52%;
+  height: 1.5px; background: var(--lime);
+  transform: rotate(-12deg);
+}
+
+/* Soft top/bottom bone fade so falling 404s emerge & dissolve */
+.veil {
+  position: fixed;
+  left: 0; right: 0;
+  height: 18vh;
+  pointer-events: none;
+  z-index: 1;
+}
+.veil.top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bone) 0%, rgba(244,238,226,0) 100%);
+}
+.veil.bot {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bone) 0%, rgba(244,238,226,0) 100%);
+}
+
+@media (max-width: 720px) {
+  .caption-card { padding: 40px 28px; }
+  .caption-eyebrow { font-size: 10px; letter-spacing: 0.24em; }
+  .caption-sub { font-size: 11px; }
+  .corner { font-size: 9px; }
+  .corner.bl, .corner.br { display: none; }
+  .fall-col.c3, .fall-col.c6, .fall-col.c8 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grad-bg, .fall-col, .corner .bullet { animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="grad-bg"></div>
+
+<div class="fall-stage" aria-hidden="true">
+  <!-- 12 columns of 404s, varied size / speed / opacity / phase -->
+  <div class="fall-col c1"></div>
+  <div class="fall-col c2"></div>
+  <div class="fall-col c3"></div>
+  <div class="fall-col c4"></div>
+  <div class="fall-col c5"></div>
+  <div class="fall-col c6"></div>
+  <div class="fall-col c7"></div>
+  <div class="fall-col c8"></div>
+  <div class="fall-col c9"></div>
+  <div class="fall-col c10"></div>
+  <div class="fall-col c11"></div>
+  <div class="fall-col c12"></div>
+</div>
+
+<div class="veil top"></div>
+<div class="veil bot"></div>
+
+<div class="caption-wrap">
+  <div class="caption-card">
+    <div class="caption-eyebrow">Error 404</div>
+    <h1 class="caption-headline">
+      Your prospects <span class="accent">aren't here</span>.
+    </h1>
+    <p class="caption-sub">Page not found<span class="dot">.</span> But the chaos is real<span class="dot">.</span></p>
+    <div class="caption-actions">
+      <a href="https://chaosover.co.uk" class="btn btn-ink">
+        Back to base
+        <span class="arrow">→</span>
+      </a>
+      <a href="https://cards.chaosover.co.uk" class="btn btn-ghost">
+        Access Chaos Cards Workshop
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="corner tl">
+  <span class="bullet"></span>
+  <span>CO<span class="strike">/</span>404</span>
+</div>
+<div class="corner tr">
+  <span>SIGNAL LOST</span>
+</div>
+<div class="corner bl">
+  <span>52 cards · 6 categories · 1 room</span>
+</div>
+<div class="corner br">
+  <span>chaos<span style="color:var(--lime)">.</span>over</span>
+</div>
+
+<script>
+(function () {
+  // Populate each falling column with a stack of "404" tokens.
+  // Doing it in JS keeps the markup tidy and lets us vary stack length per column.
+  const cols = document.querySelectorAll('.fall-col');
+  const stackSizes = [14, 22, 10, 18, 16, 8, 24, 12, 18, 20, 14, 26];
+
+  cols.forEach((col, idx) => {
+    const count = stackSizes[idx % stackSizes.length];
+    let html = '';
+    for (let i = 0; i < count; i++) {
+      // every 4th token gets a lime "dot" accent on the trailing 4, for rhythm
+      const accent = (i % 4 === 3);
+      html += accent
+        ? '<span class="n">40<span class="lime-dot">4</span></span>'
+        : '<span class="n">404</span>';
+    }
+    col.innerHTML = html;
+  });
+})();
+</script>
+
+</body>
+</html>
