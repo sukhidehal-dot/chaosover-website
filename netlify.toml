@@ -1,8 +1,15 @@
 [build]
+  command = ""
   publish = "."
+  functions = "netlify/functions"
 
 [context.production]
   environment = { CONTEXT = "production" }
 
 [context.staging]
   environment = { CONTEXT = "staging" }
+
+[[redirects]]
+  from = "/api/send-chaos-scan-overview"
+  to = "/.netlify/functions/send-chaos-scan-overview"
+  status = 200
