@@ -13,3 +13,8 @@
   from = "/api/send-chaos-scan-overview"
   to = "/.netlify/functions/send-chaos-scan-overview"
   status = 200
+
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/send-contact"
+  status = 200

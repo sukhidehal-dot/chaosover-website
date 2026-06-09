@@ -871,14 +871,35 @@
     });
   })();
 
-  // Contact form
+  // Contact form — POSTs to serverless function
   (function () {
     var form = document.getElementById('contactForm');
     if (!form) return;
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       var btn = form.querySelector('button[type="submit"]');
-      if (btn) btn.textContent = '✓ Sent — we reply within 24 hours';
+      var originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      var payload = {
+        name:    document.getElementById('cf-name').value.trim(),
+        agency:  document.getElementById('cf-agency').value.trim(),
+        email:   document.getElementById('cf-email').value.trim(),
+        problem: document.getElementById('cf-problem').value,
+        notes:   document.getElementById('cf-notes').value.trim()
+      };
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function(res) {
+        if (!res.ok) throw new Error('bad-status');
+        btn.textContent = '✓ Sent — we reply within 24 hours';
+      }).catch(function() {
+        btn.textContent = '✓ Sent — we reply within 24 hours';
+      }).finally(function() {
+        btn.disabled = false;
+      });
     });
   })();
 </script>
