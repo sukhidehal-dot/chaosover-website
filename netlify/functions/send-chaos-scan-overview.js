@@ -63,46 +63,28 @@ function overviewEmailHtml() {
       Chaos<span style="color:#9bcf2e;">/</span>Over<span style="color:#9bcf2e;">.</span>
     </div>
 
-    <div style="display:inline-block;background:#c8ff3d;color:#1c1822;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:7px 12px;margin:28px 0 18px;">
-      Chaos Scan
+    <div style="height:32px;"></div>
+
+    <p style="font-size:17px;line-height:1.7;color:#1c1822;margin:0 0 20px;">
+      Hey — thanks for getting in touch.
+    </p>
+
+    <p style="font-size:17px;line-height:1.7;color:#1c1822;margin:0 0 20px;">
+      Here's all the details for the Chaos Scan. Take a look and if you've got any questions,
+      you can book 15 minutes in my calendar and we can go through it together.
+    </p>
+
+    <div style="margin:32px 0;">
+      <a href="https://docs.google.com/document/d/1Fq3foOzkKTqP73NU1HFhD0hUGBClzM0chuK3vDAQ8D4/edit?tab=t.0"
+         style="display:inline-block;background:#c8ff3d;color:#1c1822;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:15px 26px;border-radius:999px;">
+        View the Chaos Scan overview &rarr;
+      </a>
     </div>
 
-    <h1 style="font-size:30px;line-height:1.1;margin:0 0 18px;letter-spacing:-0.5px;">
-      Find what's actually broken — before you spend time fixing the wrong thing.
-    </h1>
-
-    <p style="font-size:16px;line-height:1.6;color:#3a3640;margin:0 0 16px;">
-      Thanks for asking for the overview. Here's what the Chaos Scan is and what it does for you.
-    </p>
-
-    <h2 style="font-size:18px;margin:28px 0 8px;">What it is</h2>
-    <p style="font-size:16px;line-height:1.6;color:#3a3640;margin:0 0 16px;">
-      A half-day to full-day working session — structured, practical and honest. We go through your
-      proposition, your pipeline, your positioning, your proof, and how demand really happens in your
-      business. You come out with a Chaos Score, a clear view of where the friction is, and a
-      prioritised set of things to fix.
-    </p>
-
-    <h2 style="font-size:18px;margin:28px 0 8px;">What's included</h2>
-    <ul style="font-size:16px;line-height:1.7;color:#3a3640;margin:0 0 16px;padding-left:20px;">
-      <li>Commercial health diagnostic across 8 key areas</li>
-      <li>Client &amp; lost-client interviews — why they chose you, or didn't</li>
-      <li>Pipeline and founder-dependency mapping</li>
-      <li>Signal Score rating, with score bands</li>
-      <li>Priority action plan for the next 90 days</li>
-      <li>Written summary and recommended next step</li>
-    </ul>
-
-    <h2 style="font-size:18px;margin:28px 0 8px;">What it does for you</h2>
-    <p style="font-size:16px;line-height:1.6;color:#3a3640;margin:0 0 24px;">
-      It's the one thing that makes everything after it faster and more accurate. Instead of guessing,
-      you get a clear, honest picture of where growth is leaking — and exactly what to do about it next.
-    </p>
-
-    <div style="margin:28px 0;">
-      <a href="https://chaosover.co.uk/#contact"
+    <div style="margin:16px 0 32px;">
+      <a href="https://www.cal.eu/sukhi-dehal-nsd3n9/15min?"
          style="display:inline-block;background:#1c1822;color:#f9f3ea;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:15px 26px;border-radius:999px;">
-        Book a 15-min call &rarr;
+        Book 15 minutes &rarr;
       </a>
     </div>
 
@@ -118,25 +100,17 @@ function overviewEmailHtml() {
 
 function overviewEmailText() {
   return [
-    'CHAOS OVER. — Chaos Scan overview',
+    'Chaos Over. — Chaos Scan overview',
     '',
-    "Find what's actually broken — before you spend time fixing the wrong thing.",
+    'Hey — thanks for getting in touch.',
     '',
-    'WHAT IT IS',
-    'A half-day to full-day working session — structured, practical and honest. We go through your proposition, pipeline, positioning, proof, and how demand really happens in your business. You come out with a Chaos Score, a clear view of where the friction is, and a prioritised set of things to fix.',
+    "Here's all the details for the Chaos Scan. Take a look and if you've got any questions, you can book 15 minutes in my calendar and we can go through it together.",
     '',
-    "WHAT'S INCLUDED",
-    '- Commercial health diagnostic across 8 key areas',
-    "- Client & lost-client interviews — why they chose you, or didn't",
-    '- Pipeline and founder-dependency mapping',
-    '- Signal Score rating, with score bands',
-    '- Priority action plan for the next 90 days',
-    '- Written summary and recommended next step',
+    'View the Chaos Scan overview:',
+    'https://docs.google.com/document/d/1Fq3foOzkKTqP73NU1HFhD0hUGBClzM0chuK3vDAQ8D4/edit?tab=t.0',
     '',
-    'WHAT IT DOES FOR YOU',
-    "It's the one thing that makes everything after it faster and more accurate. Instead of guessing, you get a clear, honest picture of where growth is leaking — and exactly what to do about it next.",
-    '',
-    'Book a 15-min call: https://chaosover.co.uk/#contact',
+    'Book 15 minutes:',
+    'https://www.cal.eu/sukhi-dehal-nsd3n9/15min?',
     '',
     'Chaos Over · Commercial strategy for agency founders · London, UK',
   ].join('\n');
