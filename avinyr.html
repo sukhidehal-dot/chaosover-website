@@ -52,7 +52,7 @@
     backdrop-filter: blur(18px) saturate(160%);
     border-bottom: 1px solid var(--line);
   }
-  .nav-inner { display: -webkit-flex; display: flex; -webkit-justify-content: space-between; justify-content: space-between; -webkit-align-items: center; align-items: center; padding: 14px 40px; gap: 32px; }
+  .nav-inner { display: -webkit-flex; display: flex; -webkit-justify-content: space-between; justify-content: space-between; -webkit-align-items: center; align-items: center; padding: 14px 40px; gap: 32px; max-width: 1400px; margin: 0 auto; }
   .nav .logo { font-family: 'Big Shoulders Display'; font-weight: 900; font-size: 20px; letter-spacing: -0.02em; }
   .nav .logo .dot { color: var(--lime); }
   .nav ul { list-style: none; display: -webkit-flex; display: flex; gap: 26px; }
@@ -113,6 +113,8 @@
   .hero {
     padding: 60px 40px 80px;
     min-height: 92vh;
+    max-width: 1400px;
+    margin-left: auto; margin-right: auto;
     display: -webkit-flex; display: flex;
     -webkit-flex-direction: column; flex-direction: column;
     -webkit-justify-content: space-between; justify-content: space-between;
