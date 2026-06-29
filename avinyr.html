@@ -86,6 +86,39 @@
 
   .cards-icon { width: 20px; height: 18px; flex: none; }
 
+  /* Chaos Cards button shimmer — one sweep every 17 seconds */
+  a[href="https://cards.chaosover.co.uk"] {
+    position: relative;
+    overflow: hidden;
+  }
+  a[href="https://cards.chaosover.co.uk"]::after {
+    content: '';
+    position: absolute;
+    top: -10%; left: 0;
+    width: 45%; height: 120%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    -webkit-transform: skewX(-15deg) translateX(-300%);
+    transform: skewX(-15deg) translateX(-300%);
+    -webkit-animation: chaos-cards-shimmer 17s linear infinite;
+    animation: chaos-cards-shimmer 17s linear infinite;
+    pointer-events: none;
+  }
+  @-webkit-keyframes chaos-cards-shimmer {
+    0%, 0.1% { -webkit-transform: skewX(-15deg) translateX(-300%); transform: skewX(-15deg) translateX(-300%); }
+    5%        { -webkit-transform: skewX(-15deg) translateX(450%);  transform: skewX(-15deg) translateX(450%); }
+    100%      { -webkit-transform: skewX(-15deg) translateX(450%);  transform: skewX(-15deg) translateX(450%); }
+  }
+  @keyframes chaos-cards-shimmer {
+    0%, 0.1% { transform: skewX(-15deg) translateX(-300%); }
+    5%        { transform: skewX(-15deg) translateX(450%); }
+    100%      { transform: skewX(-15deg) translateX(450%); }
+  }
+
   /* Chaos Scan — inline email capture */
   .scan-overview-form { width: 100%; max-width: 440px; }
   .scan-overview-row { display: -webkit-flex; display: flex; gap: 8px; -webkit-align-items: stretch; align-items: stretch; -webkit-flex-wrap: wrap; flex-wrap: wrap; }
