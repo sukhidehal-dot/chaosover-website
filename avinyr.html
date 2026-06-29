@@ -104,18 +104,18 @@
     );
     -webkit-transform: skewX(-15deg) translateX(-300%);
     transform: skewX(-15deg) translateX(-300%);
-    -webkit-animation: chaos-cards-shimmer 17s linear infinite;
-    animation: chaos-cards-shimmer 17s linear infinite;
+    -webkit-animation: chaos-cards-shimmer 8s linear infinite;
+    animation: chaos-cards-shimmer 8s linear infinite;
     pointer-events: none;
   }
   @-webkit-keyframes chaos-cards-shimmer {
     0%, 0.1% { -webkit-transform: skewX(-15deg) translateX(-300%); transform: skewX(-15deg) translateX(-300%); }
-    5%        { -webkit-transform: skewX(-15deg) translateX(450%);  transform: skewX(-15deg) translateX(450%); }
+    10%       { -webkit-transform: skewX(-15deg) translateX(450%);  transform: skewX(-15deg) translateX(450%); }
     100%      { -webkit-transform: skewX(-15deg) translateX(450%);  transform: skewX(-15deg) translateX(450%); }
   }
   @keyframes chaos-cards-shimmer {
     0%, 0.1% { transform: skewX(-15deg) translateX(-300%); }
-    5%        { transform: skewX(-15deg) translateX(450%); }
+    10%       { transform: skewX(-15deg) translateX(450%); }
     100%      { transform: skewX(-15deg) translateX(450%); }
   }
 
