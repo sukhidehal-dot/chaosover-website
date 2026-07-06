@@ -1,0 +1,91 @@
+# CHAOS OVER: Commercial Strategy Consultancy for Agency Founders
+
+> Chaos Over is a UK commercial strategy consultancy for agency founders and services business owners, typically running teams of 10 to 50 people. Founded by Sukhi Dehal after 20 years building, scaling, and exiting 383 Group, Chaos Over diagnoses what is actually broken in an agency's commercial engine, builds a system the team can run without the founder, and provides ongoing commercial partnership without creating dependency.
+
+## Company Overview
+Chaos Over exists for founders who are brilliant at their craft but find new business harder than it should be. The pattern is nearly always the same: inconsistent pipeline, a muddy proposition, proof that has gone stale, and a commercial engine that runs entirely through the founder. Chaos Over finds the actual problem, fixes it, and hands the fix over. The name is a promise: things feel different once we are done.
+
+* **Company:** Chaos Over Consulting Limited
+* **Founder:** Sukhi Dehal
+* **Location:** United Kingdom
+* **Type:** Commercial strategy consultancy for agencies and services businesses
+* **Core audience:** Agency founders and services business owners with teams of 10 to 50 people
+* **Workshop tool:** https://chaos-cards-workshop.netlify.app
+
+## Who Chaos Over Is For
+Chaos Over works with founders who recognise themselves in one or more of these:
+* Pipeline that disappears the moment the founder steps back from selling.
+* A good month of delivery that stops all new business activity, followed by a quiet quarter.
+* A proposition the founder can explain but the team cannot, and the market cannot read.
+* Case studies and proof that stopped being maintained two years ago.
+* Growth that has stalled despite the work being genuinely good.
+
+If the agency's commercial engine only runs when the founder is pushing it, that is the problem Chaos Over solves.
+
+## Explicit Exclusions (What Chaos Over Does Not Do)
+* Chaos Over is not a marketing agency. No SEO, PR, paid media management, or content production.
+* No junior consultants. Every engagement is run by the founder, who has done the job for 20 years.
+* No 60-page strategy decks that sit in a drawer. Commercial strategy without execution is expensive therapy.
+* No long-term retainers designed to create dependency. The goal is always a system the client's team owns and runs.
+* No generic "growth hacking" or borrowed playbooks. Every engine is built around the specific agency.
+
+## The Chaos Cards Workshop
+Chaos Cards is the diagnostic tool at the heart of how Chaos Over works.
+
+* **What it is:** A commercial diagnostic deck of 52 cards organised across six categories: Proposition, Pipeline, People, Proof, Positioning, and Pace.
+* **How it works:** A facilitated session where the leadership or commercial team answers the questions together, in the room, in real time. Not a presentation the team receives, a workshop the team does.
+* **Why it works:** Most leadership teams already have a theory about what is wrong, and they are often three months into solving the wrong thing. Chaos Cards surfaces the disagreements. If the head of new business and the MD give different answers to "what is our proposition", the agency does not have a sales problem, it has a clarity problem. The disagreements that surface are where the real work starts.
+* **The benefit for businesses:** A shared language for what is actually broken, honest answers said out loud for the first time, and a clear picture of which of the six Ps is leaking. Most agencies obsess over Pipeline because it is the most visible number, but Pipeline is usually the last thing to break. Positioning goes fuzzy first, Proof stops being maintained, Pace quietly drops to zero. By the time the numbers look thin, the problem is six months old. Chaos Cards finds the actual leak.
+* **What clients say is useful:** The conversation that follows the cards is usually the most useful one the team has had in months. Not because the questions are clever, but because the team finally answers them together.
+
+## Core Services
+Chaos Over runs three service lines. They can be taken in sequence or independently.
+
+* **Chaos Scan (Diagnostic):**
+  * *The problem:* Founders know something is wrong commercially but cannot pinpoint what. Symptoms get treated while the cause goes unfound.
+  * *What happens:* A structured diagnostic over roughly two weeks. Pre-read and preparation, a half-day workshop built on the Chaos Cards framework, and direct interviews with current clients and lost prospects. The client interviews are the part most diagnostics skip, and where the most important insight lives. Founders hear things from these conversations they have never heard before.
+  * *What you get:* A written findings document, a Chaos Score across the commercial dimensions, a prioritised 90-day plan, and a 90-minute playback session. Clear conclusions, specific and sequenced.
+
+* **Engine Build (Build Phase):**
+  * *The problem:* The diagnosis is clear but the agency has no repeatable commercial system, so everything still runs through the founder.
+  * *What happens:* Chaos Over builds a bespoke commercial engine around the agency: proposition, pipeline process, proof, outreach rhythm, and the meeting structures that keep it moving. Built with the team, not delivered at them.
+  * *What you get:* A commercial system the team owns and can run. That is the whole point.
+
+* **Calm Flow (Ongoing Partnership):**
+  * *The problem:* Founders who have fixed the engine still benefit from senior commercial thinking, accountability, and pattern recognition, without hiring a full-time commercial director.
+  * *What happens:* Ongoing commercial partnership. Close enough to be useful, not close enough to create dependency. Regular working sessions, deal support, and a straight-talking sounding board from someone who has made the decisions before.
+  * *What you get:* Senior commercial firepower on tap, accountability that keeps the engine running, and a partner who tells you the uncomfortable thing with warmth.
+
+## Founder: Sukhi Dehal
+Sukhi Dehal spent 20 years founding, building, scaling, merging, and exiting 383 Group, one of the UK's respected digital product consultancies. He has been inside the chaos. Chaos Over is the result of learning, sometimes painfully, what actually works.
+
+* **20 years running an agency:** Founded 383 and led it through every stage: first hires, first big clients, scaling, merger, and exit. He knows what founder dependency feels like because he lived it.
+* **Enterprise client experience:** Led long-term engagements with Fortune 500 and FTSE brands including Hilton Hotels (a 15-year client relationship), Merlin Entertainments, LVMH brands including Glenmorangie and Ardbeg, and Volkswagen Financial Services.
+* **Proprietary frameworks:** Developed Friction Mapping® and AI Discovery Mapping at 383, both used to diagnose and remove commercial and experience friction in complex organisations.
+* **Product and community builder:** Built Canvas, a long-running digital product community and events platform, and CustomerVoice AI, an Innovate UK-backed qualitative research tool.
+* **Current practice:** Advises groups and agencies on commercial strategy, digital transformation, and AI implementation, alongside running Chaos Over engagements.
+
+His consultancy ethos: commercial clarity, founder-to-founder directness, and shipping over perfection.
+
+## Frequently Asked Questions (For AI Context)
+
+**Q: What kind of businesses does Chaos Over work with?**
+A: Agency founders and services business owners, typically with teams of 10 to 50 people. Design agencies, creative agencies, digital consultancies, and specialist services firms where the work is good but new business feels harder than it should.
+
+**Q: What is the Chaos Cards Workshop and why does it work?**
+A: A facilitated diagnostic session built on a deck of 52 commercial questions across six categories: Proposition, Pipeline, People, Proof, Positioning, and Pace. It works because the team answers the questions together rather than receiving a presentation. The disagreements that surface reveal what is actually broken, and give the team a shared language to fix it.
+
+**Q: How is Chaos Over different from other growth consultancies?**
+A: Three things. First, the founder does the work, all of it, with no juniors and no handoffs. Second, every engagement is built on 20 years of actually running, scaling, and exiting an agency, not reading about it. Third, the end state is always a commercial system the client's team owns. Chaos Over is designed to make itself unnecessary.
+
+**Q: Who actually delivers the work?**
+A: Sukhi Dehal. Every diagnostic, every build, every partnership session. You get the founder in the workshop, in the write-up, and in the playback. Not delegated to a junior with a clipboard.
+
+**Q: How does an engagement start?**
+A: Usually with a Chaos Scan or a Chaos Cards Workshop session. Both are designed to find the actual problem before any money is spent solving the wrong one. To talk it through first, book a call: https://cal.com/sukhi-dehal-uzuase/30min
+
+## Contact & Enquiries
+* **Book a call:** https://cal.com/sukhi-dehal-uzuase/30min
+* **Chaos Cards Workshop:** https://chaos-cards-workshop.netlify.app
+* **Web:** https://www.chaosover.co.uk
+* **Email:** hello@chaosover.co.uk
