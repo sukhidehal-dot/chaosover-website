@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      .pivot {
+        transform-origin: 16px 16px;
+        transform-box: fill-box;
+        animation: pivot 3.2s ease-in-out infinite;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pivot {
+        transform-origin: 16px 16px;
+        transform-box: fill-box;
+        transform: rotate(22.5deg);
+      }
+    }
+    @keyframes pivot {
+      0%   { transform: rotate(0deg); }
+      15%  { transform: rotate(0deg); }
+      45%  { transform: rotate(45deg); }
+      65%  { transform: rotate(45deg); }
+      85%  { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+  </style>
+  <rect width="32" height="32" fill="#23232A"/>
+  <g class="pivot">
+    <rect x="14" y="5" width="4" height="22" fill="#C8FF3D"/>
+    <rect x="5" y="14" width="22" height="4" fill="#C8FF3D"/>
+  </g>
+</svg>
