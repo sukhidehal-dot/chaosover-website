@@ -18,3 +18,8 @@
   from = "/api/contact"
   to = "/.netlify/functions/send-contact"
   status = 200
+
+[[redirects]]
+  from = "/referral"
+  to = "/referral.html"
+  status = 200
